@@ -20,7 +20,7 @@ private JButton btnQuintetos;
 	
 public frmAdministrador()
 {
-	this.pack();
+//	this.pack();
 	this.setVisible(true);
 	createAndShowGUI();
 }
