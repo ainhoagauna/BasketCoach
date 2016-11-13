@@ -1,7 +1,9 @@
 package defaultpackage;
 
 import LP.frmAdministrador;
+import LP.frmGestionEquipo;
 import LP.frmPrincipal;
+import LP.frmUsuario;
 
 public class clsMain {
 
@@ -11,9 +13,12 @@ public class clsMain {
 //		frmPrincipal objPrincipal=new frmPrincipal();
 //		objPrincipal.setVisible(true);
 		
-		frmAdministrador admin=new frmAdministrador();
-		admin.setVisible(true);
+//		frmAdministrador admin=new frmAdministrador();
+//		admin.setVisible(true);
 		
+		frmUsuario usuario=new frmUsuario();
+		usuario.setVisible(true);
+
 	}
 
 }
