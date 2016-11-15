@@ -33,7 +33,7 @@ public class frmUsuarioMinutos extends JFrame implements ActionListener {
 		
 		
 		
-		setTitle("Gestión de equipos");	
+		setTitle("Gestión de minutos");	
 		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);	
 		setBounds(500, 200, 600, 300);
 		
@@ -48,8 +48,6 @@ public class frmUsuarioMinutos extends JFrame implements ActionListener {
 		case "Salir":
 			
 			this.dispose();
-			frmUsuario usuario=new frmUsuario();
-			usuario.setVisible(true);
 		}
 		
 	}

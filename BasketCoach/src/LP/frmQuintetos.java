@@ -51,8 +51,7 @@ public void actionPerformed(ActionEvent e) {
 	case "Salir":
 		
 		this.dispose();
-		frmAdministrador admin=new frmAdministrador();
-		admin.setVisible(true);
+		
 	}
 	
 }

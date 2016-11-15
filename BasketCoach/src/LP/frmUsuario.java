@@ -1,5 +1,6 @@
 package LP;
 
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -51,6 +52,7 @@ public class frmUsuario extends JFrame implements ActionListener{
 		btnSalir.setIcon(new ImageIcon(frmAdministrador.class.getResource("/Image/LogoutIcon.jpg")));
 		
 		
+		
 				
 		btnAsistencia = new JButton("Asistencias");
 		btnAsistencia.setBounds(220, 150, 110, 23);
@@ -60,7 +62,9 @@ public class frmUsuario extends JFrame implements ActionListener{
 		
 
 		lblAsistencia= new JLabel("");
-		lblAsistencia.setIcon(new ImageIcon(frmAdministrador.class.getResource("/Image/Asistencia.jpg")));
+	//	lblAsistencia.setIcon(new ImageIcon(frmAdministrador.class.getResource("/Image/Asistencia.jpg")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(frmUsuario.class.getResource("/Image/Asistencia.jpg")));
+		
 		lblAsistencia.setBounds(220, 60, 110,90);
 		lblAsistencia.setVisible(true);
 		getContentPane().add(lblAsistencia);

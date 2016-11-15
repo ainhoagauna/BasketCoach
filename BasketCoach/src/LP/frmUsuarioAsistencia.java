@@ -34,7 +34,7 @@ private JButton btnSalir;
 		
 		
 		
-		setTitle("Gestión de equipos");	
+		setTitle("Asistencias");	
 		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);	
 		setBounds(500, 200, 600, 300);
 		
@@ -49,8 +49,7 @@ private JButton btnSalir;
 		case "Salir":
 			
 			this.dispose();
-			frmUsuario usuario=new frmUsuario();
-			usuario.setVisible(true);
+			
 		}
 		
 	}	

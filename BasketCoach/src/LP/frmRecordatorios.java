@@ -17,6 +17,7 @@ private JButton btnSalir;
 		this.pack();
 		this.setVisible(true);
 		setResizable(true);
+		
 	
 		
 		createAndShowGUI();
@@ -24,14 +25,14 @@ private JButton btnSalir;
 
 	public void createAndShowGUI()
 	{
-		getContentPane().setLayout(null);		
+		getContentPane().setLayout(null);	
+		
 		
 		JButton btnSalir=new JButton("Salir");
 		btnSalir.setBounds(400,210,100,30);
 		btnSalir.addActionListener(this);
 		btnSalir.setActionCommand("Salir");
-		getContentPane().add(btnSalir);
-		
+		getContentPane().add(btnSalir);		
 		
 		
 		setTitle("Gestión de equipos");	
@@ -49,8 +50,7 @@ private JButton btnSalir;
 		case "Salir":
 			
 			this.dispose();
-			frmAdministrador admin=new frmAdministrador();
-			admin.setVisible(true);
+			
 		}
 		
 	}

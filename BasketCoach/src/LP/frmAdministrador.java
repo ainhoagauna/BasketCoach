@@ -56,7 +56,7 @@ public void createAndShowGUI()
 	//getContentPane().setLayout(null);
 	
 	btnSalir= new JButton("Salir");
-	btnSalir.setBounds(500,10,80,64);
+	btnSalir.setBounds(500,10,80,56);
 	getContentPane().add(btnSalir);
 	btnSalir.addActionListener(this);
 	btnSalir.setActionCommand("Salir");
