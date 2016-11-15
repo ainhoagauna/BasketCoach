@@ -25,14 +25,11 @@ public class clsMain {
 			}	
 		// TODO Auto-generated method stub
 
-//		frmPrincipal objPrincipal=new frmPrincipal();
-//		objPrincipal.setVisible(true);
+		frmPrincipal objPrincipal=new frmPrincipal();
+		objPrincipal.setVisible(true);
 		
 //		frmAdministrador admin=new frmAdministrador();
 //		admin.setVisible(true);
-		
-		frmUsuario usuario=new frmUsuario();
-		usuario.setVisible(true);
 
 	}
 

@@ -37,6 +37,7 @@ public class frmUsuario extends JFrame implements ActionListener{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		
 		createAndShowGUI();
 	}
 
@@ -62,9 +63,7 @@ public class frmUsuario extends JFrame implements ActionListener{
 		
 
 		lblAsistencia= new JLabel("");
-	//	lblAsistencia.setIcon(new ImageIcon(frmAdministrador.class.getResource("/Image/Asistencia.jpg")));
-		setIconImage(Toolkit.getDefaultToolkit().getImage(frmUsuario.class.getResource("/Image/Asistencia.jpg")));
-		
+		lblAsistencia.setIcon(new ImageIcon(frmAdministrador.class.getResource("/Image/Asistencia.jpg")));
 		lblAsistencia.setBounds(220, 60, 110,90);
 		lblAsistencia.setVisible(true);
 		getContentPane().add(lblAsistencia);
@@ -77,6 +76,10 @@ public class frmUsuario extends JFrame implements ActionListener{
 		btnMinutos.addActionListener(this);
 		btnMinutos.setActionCommand("Minutos");
 		
+		
+		lblMinutos= new JLabel("");
+		
+		
 		btnRecordatorios = new JButton("Recordatorios");
 		btnRecordatorios.setBounds(300, 300, 130, 23);
 		getContentPane().add(btnRecordatorios);
@@ -86,7 +89,7 @@ public class frmUsuario extends JFrame implements ActionListener{
 		setTitle("Usuario");	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		this.setExtendedState(frmPrincipal.MAXIMIZED_BOTH);
-		//setBounds(600, 300, 600, 400);
+		setBounds(700, 200, 700, 400);
 		
 	}
 

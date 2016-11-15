@@ -36,7 +36,7 @@ private JPanel contentPane;
 	
 public frmAdministrador()
 {
-	this.pack();
+//	this.pack();
 	this.setVisible(true);
 	setResizable(true);
 	
