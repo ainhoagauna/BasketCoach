@@ -1,57 +1,77 @@
 package LP;
 
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
-import java.awt.Toolkit;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JButton;
 
 public class frmAdministrador extends JFrame {
 
-private JButton btnGestionDeEquipos;
-private JButton btnAsistencia;
-private JButton btnMinutos;
-private JButton btnRecordatorios;
-private JButton btnQuintetos;
-
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
-public frmAdministrador()
-{
-//	this.pack();
-	this.setVisible(true);
-	createAndShowGUI();
-}
-
-public void createAndShowGUI()
-{
-	getContentPane().setLayout(null);
+	private JButton btnGestionDeEquipos;
+	private JButton btnAsistencia;
+	private JButton btnMinutos;
+	private JButton btnRecordatorios;
+	private JButton btnQuintetos;
 	
-	btnGestionDeEquipos = new JButton("Gestion de equipos");
-	btnGestionDeEquipos.setBounds(29, 107, 145, 23);
-	getContentPane().add(btnGestionDeEquipos);
 	
-	btnAsistencia = new JButton("Asistencias");
-	btnAsistencia.setBounds(183, 107, 110, 23);
-	getContentPane().add(btnAsistencia);
+		
+	public frmAdministrador()
+	{
+	//	this.pack();
+		this.setVisible(true);
+		createAndShowGUI();
+	}
 	
-	btnQuintetos = new JButton("Quintetos");
-	btnQuintetos.setBounds(306, 107, 100, 23);
-	getContentPane().add(btnQuintetos);
-	
-	btnMinutos = new JButton("Gestion de minutos");
-	btnMinutos.setBounds(74, 236, 150, 23);
-	getContentPane().add(btnMinutos);
-	
-	btnRecordatorios = new JButton("Recordatorios");
-	btnRecordatorios.setBounds(247, 236, 130, 23);
-	getContentPane().add(btnRecordatorios);
-	
-	setTitle("Administrador");	
-	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-	setBounds(450, 200, 450, 300);
-	
-}
+	public void createAndShowGUI()
+	{
+		getContentPane().setLayout(null);
+		
+		setTitle("BasketCoach - Administrador");	
+		setBounds(450, 200, 450, 300);
+		
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() 
+		{
+		    @Override
+		    public void windowClosing(WindowEvent we)
+		    { 
+		        String ObjButtons[] = {"Si","Cancelar"};
+		        int PromptResult = JOptionPane.showOptionDialog(null,"¿Seguro que deseas salir?","BasketCoach - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        if(PromptResult==JOptionPane.YES_OPTION)
+		        {
+		            System.exit(0);
+		        }
+		    }
+		});
+		
+		btnGestionDeEquipos = new JButton("Gestion de equipos");
+		btnGestionDeEquipos.setBounds(29, 107, 145, 23);
+		getContentPane().add(btnGestionDeEquipos);
+		
+		btnAsistencia = new JButton("Asistencias");
+		btnAsistencia.setBounds(183, 107, 110, 23);
+		getContentPane().add(btnAsistencia);
+		
+		btnQuintetos = new JButton("Quintetos");
+		btnQuintetos.setBounds(306, 107, 100, 23);
+		getContentPane().add(btnQuintetos);
+		
+		btnMinutos = new JButton("Gestion de minutos");
+		btnMinutos.setBounds(74, 236, 150, 23);
+		getContentPane().add(btnMinutos);
+		
+		btnRecordatorios = new JButton("Recordatorios");
+		btnRecordatorios.setBounds(247, 236, 130, 23);
+		getContentPane().add(btnRecordatorios);
+		
+				
+	}
 }

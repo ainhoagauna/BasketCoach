@@ -1,6 +1,5 @@
 package defaultpackage;
 
-import LP.frmAdministrador;
 import LP.frmPrincipal;
 
 public class clsMain {
