@@ -14,6 +14,9 @@ public class clsDefiniciones extends Exception
 	 */
 	public static final String usuAdmin = "admin";
 	public static final String passAdmin = "admin";
+	
+	
+
 
 	
 	
