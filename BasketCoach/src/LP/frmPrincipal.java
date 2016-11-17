@@ -6,6 +6,7 @@ import LN.clsGestorAdministrador;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.sql.*;
 
 import javax.swing.*;
@@ -38,6 +39,13 @@ public class frmPrincipal extends JFrame
 	public void createAndShowGUI()
 	{
 		getContentPane().setLayout(null);
+		
+		String path = "/Image/airjordan.png";  
+		URL url = this.getClass().getResource(path);  
+		ImageIcon icon = new ImageIcon(url);  
+		  
+		JLabel label = new JLabel(" ");  
+		label.setIcon(icon); 
 				
 		lblLogin = new JLabel("LOGIN");
 		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 18));
