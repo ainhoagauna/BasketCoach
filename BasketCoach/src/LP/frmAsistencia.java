@@ -34,7 +34,7 @@ private JButton btnSalir;
 		
 		
 		
-		setTitle("Gestión de equipos");	
+		setTitle("Asistencia");	
 		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);	
 		setBounds(500, 200, 600, 300);
 		

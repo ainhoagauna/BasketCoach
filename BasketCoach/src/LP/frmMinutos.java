@@ -34,7 +34,7 @@ public class frmMinutos extends JFrame implements ActionListener{
 		
 		
 		
-		setTitle("Gestión de equipos");	
+		setTitle("Minutos");	
 		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);	
 		setBounds(500, 200, 600, 300);
 		

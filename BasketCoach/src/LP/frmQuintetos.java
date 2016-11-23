@@ -36,7 +36,7 @@ public void createAndShowGUI()
 	
 	
 	
-	setTitle("Gestión de equipos");	
+	setTitle("Quintetos");	
 	setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);	
 	setBounds(500, 200, 600, 300);
 	
