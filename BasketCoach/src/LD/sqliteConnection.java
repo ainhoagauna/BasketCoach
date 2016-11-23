@@ -14,10 +14,10 @@ public class sqliteConnection
 		{
 			Class.forName("org.sqlite.JDBC");
 
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\ALUMNO\\Documents\\Git\\BasketCoach\\BasketCoach\\BasketCoach(Database).s3db");
+//			Connection conn = DriverManager.getConnection("jdbc:sqlite:C:\\Users\\ALUMNO\\Documents\\Git\\BasketCoach\\BasketCoach\\BasketCoach(Database).s3db");
 
-		//	File fichero = new File("BasketCoach(Database).s3db");
-		//	Connection conn = DriverManager.getConnection("jdbc:sqlite:" + fichero.getAbsolutePath());
+			File fichero = new File("BasketCoach(Database).s3db");
+			Connection conn = DriverManager.getConnection("jdbc:sqlite:" + fichero.getAbsolutePath());
 
 			JOptionPane.showMessageDialog(null, "Connection Successful");
 			return conn;
@@ -30,13 +30,13 @@ public class sqliteConnection
 	
 
 
-//	public static String DirectorioActual()
-//	{
-//	    String directorio = System.getProperty("java.class.path");
-//	    File dir = new File(directorio);
-//	    String directorioPadre = dir.getParent();
-//	    return directorioPadre;
-//	}
+	public static String DirectorioActual()
+	{
+	    String directorio = System.getProperty("java.class.path");
+	    File dir = new File(directorio);
+	    String directorioPadre = dir.getParent();
+	    return directorioPadre;
+	}
 	
 }
 
