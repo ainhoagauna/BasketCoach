@@ -8,14 +8,21 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
+
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.JButton;
 
 
 public class frmAdministrador extends JFrame implements ActionListener {
@@ -42,22 +49,21 @@ private JPanel contentPane;
 	 */
 	private static final long serialVersionUID = 1L;
 
-public frmAdministrador()
-{
-//	this.pack();
-	this.setVisible(true);
-	setResizable(true);
-	
-	
-	contentPane = new JPanel();
-	setContentPane(contentPane);
-	contentPane.setLayout(null);
-	
-	
-	
-
-	createAndShowGUI();
-}
+//public frmAdministrador()
+//{
+//
+//	
+//
+//	
+//	contentPane = new JPanel();
+//	setContentPane(contentPane);
+//	contentPane.setLayout(null);
+//	
+//	
+//	
+//
+//	createAndShowGUI();
+//}
 
 
 @Override
@@ -67,7 +73,11 @@ public void actionPerformed(ActionEvent e) {
 	switch(e.getActionCommand()){
 	
 	case "Equipo":
+
+//	private Dimension tamañoPantalla;
+//	private Rectangle pantalla;
 		
+
 		this.dispose();
 		this.equipo();		
 		break;
@@ -96,11 +106,19 @@ public void actionPerformed(ActionEvent e) {
 		this.salir();
 //		this.dispose();			
 //		JOptionPane.showMessageDialog(this, "Has cerrado sesión");
-		
 		break;
 	}
+	}
+public frmAdministrador()
+	{
+		this.pack();
+		this.setVisible(true);
+		                
+		createAndShowGUI();
+
+	}
 	
-}
+	
 
 public void salir()
 {
@@ -157,9 +175,9 @@ public void recordatorios()
 
 	public void createAndShowGUI()
 	{
-		getContentPane().setLayout(null);
 		
 		setTitle("BasketCoach - Administrador");	
+
 		setBounds(600, 200, 600, 300);
 		
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -176,6 +194,9 @@ public void recordatorios()
 		        }
 		    }
 		});
+
+		setBounds(450, 200, 450, 300);
+
 		
 		btnGestionDeEquipos = new JButton("Gestion de equipos");
 		btnGestionDeEquipos.setBounds(29, 107, 145, 23);
@@ -211,6 +232,7 @@ public void recordatorios()
 		btnRecordatorios = new JButton("Recordatorios");
 		btnRecordatorios.setBounds(247, 236, 130, 23);
 		getContentPane().add(btnRecordatorios);
+
 		btnRecordatorios.addActionListener(this);
 		btnRecordatorios.setActionCommand("Recordatorios");
 				
@@ -220,7 +242,25 @@ public void recordatorios()
 		btnSalir.addActionListener(this);
 		btnSalir.setActionCommand("Salir");
 		btnSalir.setIcon(new ImageIcon(frmAdministrador.class.getResource("/Image/LogoutIcon.jpg")));		
-				
-	}
 
+		
+		this.getContentPane().setLayout(null);		
+		
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() 
+		{
+		    @Override
+		    public void windowClosing(WindowEvent we)
+		    { 
+		        String ObjButtons[] = {"Si","Cancelar"};
+		        int PromptResult = JOptionPane.showOptionDialog(null,"¿Seguro que deseas salir?","BasketCoach - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        if(PromptResult==JOptionPane.YES_OPTION)
+		        {
+		            System.exit(0);
+		        }
+		    }
+		});
+		
+
+	}
 }
