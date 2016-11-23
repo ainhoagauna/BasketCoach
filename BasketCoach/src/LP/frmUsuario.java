@@ -50,7 +50,7 @@ public class frmUsuario extends JFrame implements ActionListener{
 		getContentPane().add(btnSalir);
 		btnSalir.addActionListener(this);
 		btnSalir.setActionCommand("Salir");
-		btnSalir.setIcon(new ImageIcon(frmAdministrador.class.getResource("/Image/LogoutIcon.jpg")));
+		btnSalir.setIcon(new ImageIcon(frmAdministrador1.class.getResource("/Image/LogoutIcon.jpg")));
 		
 		
 		
@@ -63,7 +63,7 @@ public class frmUsuario extends JFrame implements ActionListener{
 		
 
 		lblAsistencia= new JLabel("");
-		lblAsistencia.setIcon(new ImageIcon(frmAdministrador.class.getResource("/Image/Asistencia.jpg")));
+		lblAsistencia.setIcon(new ImageIcon(frmAdministrador1.class.getResource("/Image/Asistencia.jpg")));
 		lblAsistencia.setBounds(220, 60, 110,90);
 		lblAsistencia.setVisible(true);
 		getContentPane().add(lblAsistencia);

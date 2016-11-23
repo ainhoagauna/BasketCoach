@@ -60,7 +60,7 @@ private JButton btnSalir;
 		case "Salir":
 			
 			this.dispose();
-			frmAdministrador admin=new frmAdministrador();
+			frmAdministrador1 admin=new frmAdministrador1();
 			admin.setVisible(true);
 		}
 		
