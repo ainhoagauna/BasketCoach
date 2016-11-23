@@ -49,21 +49,6 @@ private JPanel contentPane;
 	 */
 	private static final long serialVersionUID = 1L;
 
-//public frmAdministrador()
-//{
-//
-//	
-//
-//	
-//	contentPane = new JPanel();
-//	setContentPane(contentPane);
-//	contentPane.setLayout(null);
-//	
-//	
-//	
-//
-//	createAndShowGUI();
-//}
 
 
 @Override

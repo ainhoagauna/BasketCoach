@@ -22,6 +22,7 @@ private JButton btnSalir;
 	{
 		getContentPane().setLayout(null);
 		
+		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 333, 21);
 		getContentPane().add(menuBar);

@@ -17,6 +17,7 @@ private JButton btnSalir;
 		this.pack();
 		this.setVisible(true);
 		setResizable(true);
+		
 	
 		
 		createAndShowGUI();
