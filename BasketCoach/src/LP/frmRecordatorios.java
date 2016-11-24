@@ -7,10 +7,17 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import com.toedter.calendar.JCalendar;
+import javax.swing.JTextPane;
+import javax.swing.JTextArea;
 
 public class frmRecordatorios extends JFrame implements ActionListener {
 	
-private JButton btnSalir;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private JButton btnSalir;
 
 	
 	public frmRecordatorios()
@@ -31,19 +38,23 @@ private JButton btnSalir;
 		
 		
 		JButton btnSalir=new JButton("Salir");
-		btnSalir.setBounds(545,334,100,30);
+		btnSalir.setBounds(1000,664,100,30);
 		btnSalir.addActionListener(this);
 		btnSalir.setActionCommand("Salir");
 		getContentPane().add(btnSalir);		
 		
 		JCalendar calendar = new JCalendar();
-		calendar.setBounds(109, 25, 439, 267);
+		calendar.setBounds(106, 208, 439, 267);
 		getContentPane().add(calendar);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(629, 36, 393, 577);
+		getContentPane().add(textArea);
 		
 		
 		setTitle("Recordatorios");	
 		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);	
-		setBounds(500, 200, 671, 414);
+		setBounds(500, 200, 1145, 744);
 		
 	}
 

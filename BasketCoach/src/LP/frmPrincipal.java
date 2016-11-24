@@ -6,6 +6,7 @@ import LN.clsGestorAdministrador;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.sql.*;
 
@@ -141,11 +142,11 @@ public class frmPrincipal extends JFrame
 		btnEntrar.setBounds(574, 272, 100, 23);
 		getContentPane().add(btnEntrar);
 		
-		JLabel label_1 = new JLabel("");
-		label_1.setHorizontalAlignment(SwingConstants.LEFT);
-		label_1.setIcon(new ImageIcon(frmPrincipal.class.getResource("/Image/fondoPrincipal.jpg")));
-		label_1.setBounds(0, 0, 807, 469);
-		getContentPane().add(label_1);
+		JLabel lblFondo = new JLabel("");
+		lblFondo.setHorizontalAlignment(SwingConstants.LEFT);
+		lblFondo.setIcon(new ImageIcon(frmPrincipal.class.getResource("/Image/fondoPrincipal.jpg")));
+		lblFondo.setBounds(0, 0, 807, 469);
+		getContentPane().add(lblFondo);
 		
 		
 		setTitle("Basket Coach");	
