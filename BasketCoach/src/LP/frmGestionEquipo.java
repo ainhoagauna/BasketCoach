@@ -55,7 +55,7 @@ private JTextField textFieldContraseña;
 	public frmGestionEquipo()
 	{
 		getContentPane().setLayout(null);
-		getContentPane().setBackground(Color.DARK_GRAY);
+		getContentPane().setBackground(new Color(128, 128, 128));
 	
 		setTitle("Gestion de equipo");	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
