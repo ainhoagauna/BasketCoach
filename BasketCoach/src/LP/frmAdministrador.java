@@ -10,7 +10,6 @@
  */
 package LP;
 
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
@@ -18,7 +17,6 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import org.edisoncor.gui.util.Avatar;
 
@@ -29,7 +27,12 @@ import org.edisoncor.gui.util.Avatar;
  */
 public class frmAdministrador extends javax.swing.JFrame {
 
-    /** Creates new form ventanaMenu */
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	/** Creates new form ventanaMenu */
     public frmAdministrador() {
         initComponents();
         llenarMenu();
