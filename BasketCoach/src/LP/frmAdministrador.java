@@ -19,6 +19,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import org.edisoncor.gui.util.Avatar;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -108,9 +109,10 @@ public class frmAdministrador extends javax.swing.JFrame {
     	
     	setTitle("BasketCoach - Administrador");	
 
-		setBounds(750, 200, 600, 600);
+		setBounds(750, 200, 662, 383);
 
         menu = new org.edisoncor.gui.panel.PanelAvatarChooser();
+        menu.setIcon(new ImageIcon(frmAdministrador.class.getResource("/Image/basketball.jpg")));
         buttonIpod1 = new org.edisoncor.gui.button.ButtonIpod();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);

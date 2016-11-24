@@ -9,5 +9,6 @@
 	<classpathentry kind="lib" path="E:/Downloads/jcalendar-1.4/lib/junit-4.6.jar"/>
 	<classpathentry kind="lib" path="E:/Downloads/librerias/Librerias para interfaces/edisoncorSX.jar"/>
 	<classpathentry kind="lib" path="E:/Downloads/librerias/Librerias para interfaces/swingx-1.6.1.jar"/>
+	<classpathentry kind="lib" path="swingx-1.6.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
