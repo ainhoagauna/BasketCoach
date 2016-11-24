@@ -3,6 +3,7 @@ package LP;
 import LD.sqliteConnection;
 import LN.clsGestorAdministrador;
 
+import java.awt.Event;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -71,6 +72,8 @@ public class frmPrincipal extends JFrame
 		pfContraseña.setBounds(234, 122, 141, 32);
 		getContentPane().add(pfContraseña);
 		pfContraseña.setColumns(10);
+		
+		
 		
 		btnEntrar = new JButton("ENTRAR");
 		btnEntrar.addActionListener(new ActionListener()
