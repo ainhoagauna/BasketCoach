@@ -10,6 +10,7 @@ import java.net.URL;
 import java.sql.*;
 
 import javax.swing.*;
+import java.awt.Color;
 
 public class frmPrincipal extends JFrame
 
@@ -48,28 +49,31 @@ public class frmPrincipal extends JFrame
 		JLabel label = new JLabel(" ");  
 		label.setIcon(icon); 
 				
-		lblLogin = new JLabel("LOGIN");
-		lblLogin.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblLogin.setBounds(188, 27, 66, 32);
+		lblLogin = new JLabel("Basket Coach");
+		lblLogin.setForeground(Color.WHITE);
+		lblLogin.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 54));
+		lblLogin.setBounds(474, 62, 321, 80);
 		getContentPane().add(lblLogin);
 			
-		lblUsuario = new JLabel("Usuario");
-		lblUsuario.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblUsuario.setBounds(102, 93, 66, 32);
+		lblUsuario = new JLabel("USUARIO");
+		lblUsuario.setForeground(Color.WHITE);
+		lblUsuario.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		lblUsuario.setBounds(497, 172, 100, 32);
 		getContentPane().add(lblUsuario);
 		
 		textField_usuario = new JTextField();
-		textField_usuario.setBounds(67, 123, 141, 30);
+		textField_usuario.setBounds(474, 213, 141, 30);
 		getContentPane().add(textField_usuario);
 		textField_usuario.setColumns(10);
 		
-		lblContraseña = new JLabel("Contrase\u00F1a");
-		lblContraseña.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblContraseña.setBounds(264, 102, 87, 14);
+		lblContraseña = new JLabel("CONTRASE\u00D1A");
+		lblContraseña.setForeground(Color.WHITE);
+		lblContraseña.setFont(new Font("Times New Roman", Font.BOLD, 20));
+		lblContraseña.setBounds(641, 177, 141, 23);
 		getContentPane().add(lblContraseña);
 		
 		pfContraseña = new JPasswordField();
-		pfContraseña.setBounds(234, 122, 141, 32);
+		pfContraseña.setBounds(641, 212, 141, 32);
 		getContentPane().add(pfContraseña);
 		pfContraseña.setColumns(10);
 		
@@ -134,18 +138,20 @@ public class frmPrincipal extends JFrame
 			}
 		});
 		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 14));
-		btnEntrar.setBounds(168, 189, 100, 23);
+		btnEntrar.setBounds(574, 272, 100, 23);
 		getContentPane().add(btnEntrar);
+		
+		JLabel label_1 = new JLabel("");
+		label_1.setHorizontalAlignment(SwingConstants.LEFT);
+		label_1.setIcon(new ImageIcon(frmPrincipal.class.getResource("/Image/fondoPrincipal.jpg")));
+		label_1.setBounds(0, 0, 807, 469);
+		getContentPane().add(label_1);
 		
 		
 		setTitle("Basket Coach");	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		setBounds(450, 200, 450, 300);
+		setBounds(450, 200, 823, 508);
 		
 		
 	}
-	
-
-
-
 }
