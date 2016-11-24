@@ -20,6 +20,9 @@ import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import org.edisoncor.gui.util.Avatar;
 import javax.swing.ImageIcon;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout;
+import org.edisoncor.gui.button.ButtonIcon;
 
 
 /**
@@ -36,6 +39,7 @@ public class frmAdministrador extends javax.swing.JFrame {
 	/** Creates new form ventanaMenu */
     public frmAdministrador() {
         initComponents();
+        this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
         llenarMenu();
     }
     
@@ -109,11 +113,12 @@ public class frmAdministrador extends javax.swing.JFrame {
     	
     	setTitle("BasketCoach - Administrador");	
 
-		setBounds(750, 200, 662, 383);
+		setBounds(750, 200, 463, 338);
 
         menu = new org.edisoncor.gui.panel.PanelAvatarChooser();
         menu.setIcon(new ImageIcon(frmAdministrador.class.getResource("/Image/basketball.jpg")));
         buttonIpod1 = new org.edisoncor.gui.button.ButtonIpod();
+        buttonIpod1.setBounds(409, 220, 79, 76);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         
@@ -145,33 +150,33 @@ public class frmAdministrador extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout menuLayout = new javax.swing.GroupLayout(menu);
-        menu.setLayout(menuLayout);
-        menuLayout.setHorizontalGroup(
-            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuLayout.createSequentialGroup()
-                .addContainerGap(364, Short.MAX_VALUE)
-                .addComponent(buttonIpod1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(365, Short.MAX_VALUE))
-        );
-        menuLayout.setVerticalGroup(
-            menuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(menuLayout.createSequentialGroup()
-                .addContainerGap(237, Short.MAX_VALUE)
-                .addComponent(buttonIpod1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(238, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(menu, GroupLayout.DEFAULT_SIZE, 901, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        	layout.createParallelGroup(Alignment.LEADING)
+        		.addComponent(menu, GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
         );
+        getContentPane().setLayout(layout);
+        menu.setLayout(null);
+        menu.add(buttonIpod1);
+        
+        ButtonIcon btnLogOut = new ButtonIcon();
+        btnLogOut.setIcon(new ImageIcon(frmAdministrador.class.getResource("/Image/logout.png")));
+        btnLogOut.setBounds(852, 11, 39, 36);
+        btnLogOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                frmPrincipal frm = new frmPrincipal();
+                frm.setVisible(true);
+                frm.toFront();
+                dispose();
+                
+            }
+        });
+        
+        menu.add(btnLogOut);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -224,5 +229,4 @@ private void menuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_menu
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.edisoncor.gui.button.ButtonIpod buttonIpod1;
     private org.edisoncor.gui.panel.PanelAvatarChooser menu;
-    // End of variables declaration//GEN-END:variables
 }

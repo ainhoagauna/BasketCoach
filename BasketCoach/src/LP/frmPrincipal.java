@@ -31,6 +31,7 @@ public class frmPrincipal extends JFrame
 	public frmPrincipal()
 	{
 		createAndShowGUI();
+		this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
 		
 		connection = sqliteConnection.dbConnector();
 		

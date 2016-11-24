@@ -22,6 +22,7 @@ private JButton btnSalir;
 	
 		
 		createAndShowGUI();
+		this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
 	}
 
 	public void createAndShowGUI()
