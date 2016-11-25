@@ -168,11 +168,15 @@ public class frmAdministrador extends javax.swing.JFrame {
         btnLogOut.setBounds(852, 11, 39, 36);
         btnLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                frmPrincipal frm = new frmPrincipal();
-                frm.setVisible(true);
-                frm.toFront();
-                dispose();
-                
+            	String ObjButtons[] = {"Si","Cancelar"};
+		        int PromptResult = JOptionPane.showOptionDialog(null,"¿Quieres cerrar sesión?","BasketCoach - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
+		        if(PromptResult==JOptionPane.YES_OPTION)
+		        {
+		        	frmPrincipal frm = new frmPrincipal();
+	                frm.setVisible(true);
+	                frm.toFront();
+	                dispose();
+		        }                 
             }
         });
         
