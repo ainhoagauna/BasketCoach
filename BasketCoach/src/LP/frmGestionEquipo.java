@@ -4,47 +4,177 @@ package LP;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.ScrollPane;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.JDesktopPane;
+
+import java.awt.Color;
+
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JTabbedPane;
+import javax.swing.JList;
+
+import org.edisoncor.gui.button.ButtonIcon;
+
 
 
 public class frmGestionEquipo extends JFrame implements ActionListener{
+	
+	private JSplitPane splitPane;
+	private ScrollPane listScrollPane;
+	private ScrollPane playerScrollPane;
 
 private JButton btnSalir;
+private JTextField textFieldNombre;
+private JTextField textFieldApe1;
+private JTextField textFieldApe2;
+private JTextField textFieldNumJug;
+private JTextField textFieldDNI;
+private JTextField textFieldAsistencia;
+private JTextField textFieldContraseña;
 
 	
 	public frmGestionEquipo()
 	{
 		getContentPane().setLayout(null);
-		
-		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 333, 21);
-		getContentPane().add(menuBar);
-		
-		JMenu mnEquipo = new JMenu("Equipo");
-		menuBar.add(mnEquipo);
-		
-		JMenuItem mntmNuevoEquipo = new JMenuItem("Nuevo equipo");
-		mnEquipo.add(mntmNuevoEquipo);
-		
-		JMenuItem mntmBorraEquipo = new JMenuItem("Borra equipo");
-		mnEquipo.add(mntmBorraEquipo);
-		
-		JMenu mnJugador = new JMenu("Jugador");
-		menuBar.add(mnJugador);
-		
-		JMenuItem mntmNuevoJugador = new JMenuItem("Nuevo jugador");
-		mnJugador.add(mntmNuevoJugador);
+		getContentPane().setBackground(Color.LIGHT_GRAY);
 	
+		setTitle("Gestion de equipo");	
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		setBounds(300, 100, 800, 600);
 		
+		JLabel lblNombre = new JLabel("Nombre");
+		lblNombre.setForeground(Color.BLACK);
+		lblNombre.setBounds(537, 49, 46, 18);
+		getContentPane().add(lblNombre);
+		
+		textFieldNombre = new JTextField();
+		textFieldNombre.setBounds(537, 78, 86, 33);
+		getContentPane().add(textFieldNombre);
+		textFieldNombre.setColumns(10);
+		
+		JLabel lblApellidos = new JLabel("Apellidos");
+		lblApellidos.setForeground(Color.BLACK);
+		lblApellidos.setBounds(537, 122, 86, 23);
+		getContentPane().add(lblApellidos);
+		
+		textFieldApe1 = new JTextField();
+		textFieldApe1.setBounds(537, 156, 104, 32);
+		getContentPane().add(textFieldApe1);
+		textFieldApe1.setColumns(10);
+		
+		textFieldApe2 = new JTextField();
+		textFieldApe2.setBounds(659, 156, 115, 32);
+		getContentPane().add(textFieldApe2);
+		textFieldApe2.setColumns(10);
+		
+		JLabel lblNmeroJugador = new JLabel("N\u00FAmero jugador");
+		lblNmeroJugador.setForeground(Color.BLACK);
+		lblNmeroJugador.setBounds(649, 49, 125, 18);
+		getContentPane().add(lblNmeroJugador);
+		
+		textFieldNumJug = new JTextField();
+		textFieldNumJug.setBounds(646, 78, 34, 33);
+		getContentPane().add(textFieldNumJug);
+		textFieldNumJug.setColumns(10);
+		
+		JLabel lblDNI = new JLabel("DNI");
+		lblDNI.setForeground(Color.BLACK);
+		lblDNI.setBounds(537, 199, 46, 23);
+		getContentPane().add(lblDNI);
+		
+		textFieldDNI = new JTextField();
+		textFieldDNI.setBounds(537, 233, 115, 33);
+		getContentPane().add(textFieldDNI);
+		textFieldDNI.setColumns(10);
+		
+		JLabel lblAsistencia = new JLabel("Asistencia");
+		lblAsistencia.setForeground(Color.BLACK);
+		lblAsistencia.setBounds(537, 277, 86, 20);
+		getContentPane().add(lblAsistencia);
+		
+		textFieldAsistencia = new JTextField();
+		textFieldAsistencia.setBounds(537, 308, 161, 30);
+		getContentPane().add(textFieldAsistencia);
+		textFieldAsistencia.setColumns(10);
+		
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
+		lblContrasea.setForeground(Color.BLACK);
+		lblContrasea.setBounds(537, 349, 86, 20);
+		getContentPane().add(lblContrasea);
+		
+		textFieldContraseña = new JTextField();
+		textFieldContraseña.setBounds(537, 380, 161, 30);
+		getContentPane().add(textFieldContraseña);
+		textFieldContraseña.setColumns(10);
+		
+		JLabel lblEquipo = new JLabel("Equipo");
+		lblEquipo.setForeground(Color.BLACK);
+		lblEquipo.setBounds(29, 35, 46, 14);
+		getContentPane().add(lblEquipo);
+		
+		JLabel lblJugador = new JLabel("Jugador");
+		lblJugador.setForeground(Color.BLACK);
+		lblJugador.setBounds(204, 35, 46, 14);
+		getContentPane().add(lblJugador);
+				
+		ButtonIcon btnAñadirEquipo=new ButtonIcon();
+		btnAñadirEquipo.setBounds(29, 64, 46, 47);	
+		btnAñadirEquipo.setIcon(new ImageIcon(frmGestionEquipo.class.getResource("/Image/equipo añadir.png")));
+		btnAñadirEquipo.addActionListener(this);
+		btnAñadirEquipo.setActionCommand("Añadir equipo");
+		getContentPane().add(btnAñadirEquipo);
+		
+		
+		ButtonIcon btnEliminEquipo = new ButtonIcon();
+		btnEliminEquipo.setBounds(85, 64, 44, 47);
+		btnEliminEquipo.setIcon(new ImageIcon(frmGestionEquipo.class.getResource("/Image/eliminar equipo.png")));
+		btnEliminEquipo.addActionListener(this);
+		btnEliminEquipo.setActionCommand("Eliminar equipo");
+		getContentPane().add(btnEliminEquipo);
+		
+		ButtonIcon btnAñadirJug = new ButtonIcon();
+		btnAñadirJug.setBounds(185, 64, 46, 47);
+		btnAñadirJug.addActionListener(this);
+		btnAñadirJug.setActionCommand("Añadir jugador");
+		btnAñadirJug.setIcon(new ImageIcon(frmGestionEquipo.class.getResource("/Image/añadir jugador.png")));
+		getContentPane().add(btnAñadirJug);
+		
+		ButtonIcon btnEliminJug = new ButtonIcon();
+		btnEliminJug.setBounds(242, 64, 44, 47);
+		btnEliminJug.addActionListener(this);	
+		btnEliminJug.setActionCommand("Eliminar jugador");	
+		btnEliminJug.setIcon(new ImageIcon(frmGestionEquipo.class.getResource("/Image/eliminar jugador.png")));
+		getContentPane().add(btnEliminJug);
+		
+		JList list = new JList();
+		list.setBounds(10, 156, 131, 317);
+		getContentPane().add(list);
+		
+		JButton btnSalir = new JButton("SALIR");
+		btnSalir.setBounds(534, 502, 89, 23);
+		btnSalir.addActionListener(this);
+		btnSalir.setActionCommand("Salir");
+		getContentPane().add(btnSalir);
+		
+				
 		createAndShowGUI();
-		this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
 	}
 
 	public void createAndShowGUI()
@@ -58,12 +188,17 @@ private JButton btnSalir;
 		
 		switch(e.getActionCommand()){
 		
+		case "Añadir equipo":
+			
+			frmAñadirEquipo objAña=new frmAñadirEquipo();
+			objAña.setVisible(true);
+			break;
 		case "Salir":
 			
 			this.dispose();
-			frmAdministrador1 admin=new frmAdministrador1();
-			admin.setVisible(true);
+			
 		}
 		
 	}
+	
 }
