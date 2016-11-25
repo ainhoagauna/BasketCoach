@@ -39,7 +39,7 @@ public class frmAdministrador extends javax.swing.JFrame {
 	/** Creates new form ventanaMenu */
     public frmAdministrador() {
         initComponents();
-        this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
+        this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla.
         llenarMenu();
     }
     
