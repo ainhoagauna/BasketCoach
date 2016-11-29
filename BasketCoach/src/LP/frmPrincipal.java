@@ -33,6 +33,7 @@ public class frmPrincipal extends JFrame
 		
 	public frmPrincipal()
 	{
+		setResizable(false);
 		createAndShowGUI();
 		this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
 		
@@ -148,7 +149,7 @@ public class frmPrincipal extends JFrame
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setHorizontalAlignment(SwingConstants.LEFT);
 		lblFondo.setIcon(new ImageIcon(frmPrincipal.class.getResource("/Image/fondoPrincipal.jpg")));
-		lblFondo.setBounds(0, 0, 807, 469);
+		lblFondo.setBounds(0, 0, 817, 469);
 		getContentPane().add(lblFondo);
 		
 		

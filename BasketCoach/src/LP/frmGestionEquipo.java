@@ -281,9 +281,15 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 			frmAñadirEquipo objAña=new frmAñadirEquipo();
 			objAña.setVisible(true);
 			break;
+			
 		case "Salir":
 			
 			this.dispose();
+
+			frmAdministrador admin = new frmAdministrador();
+			admin.setVisible(true);
+			admin.toFront();
+			
 			
 		}
 		

@@ -65,9 +65,9 @@ public class frmAdministrador extends javax.swing.JFrame {
     public void llamarMenu(){
         if(menu.getSelectedtitulo().equals("Gestión de Equipo")){
         	frmGestionEquipo frame=new frmGestionEquipo();
-        	frame.setVisible(true);
-        	
+        	frame.setVisible(true);        	
         	frame.toFront();
+        	this.setVisible(false);
         }
         if(menu.getSelectedtitulo().equals("Asistencia")){
         	frmAsistencia frame=new frmAsistencia();
