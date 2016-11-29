@@ -19,6 +19,7 @@ public class frmUsuarioMinutos extends JFrame implements ActionListener {
 	
 		
 		createAndShowGUI();
+		this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
 	}
 
 	public void createAndShowGUI()

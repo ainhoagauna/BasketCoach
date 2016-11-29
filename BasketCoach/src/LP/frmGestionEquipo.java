@@ -27,6 +27,7 @@ import java.awt.Color;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+<<<<<<< HEAD
 
 import com.jgoodies.forms.factories.DefaultComponentFactory;
 
@@ -34,6 +35,13 @@ import javax.swing.JTabbedPane;
 import javax.swing.JList;
 
 import java.awt.Button;
+=======
+import javax.swing.JTabbedPane;
+import javax.swing.JList;
+
+import org.edisoncor.gui.button.ButtonIcon;
+
+>>>>>>> branch 'master' of https://github.com/ainhoagauna/BasketCoach.git
 
 
 public class frmGestionEquipo extends JFrame implements ActionListener{
@@ -55,13 +63,18 @@ private JTextField textFieldContraseña;
 	public frmGestionEquipo()
 	{
 		getContentPane().setLayout(null);
+<<<<<<< HEAD
 		getContentPane().setBackground(new Color(128, 128, 128));
+=======
+		getContentPane().setBackground(Color.LIGHT_GRAY);
+>>>>>>> branch 'master' of https://github.com/ainhoagauna/BasketCoach.git
 	
 		setTitle("Gestion de equipo");	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		setBounds(300, 100, 800, 600);
 		
 		JLabel lblNombre = new JLabel("Nombre");
+<<<<<<< HEAD
 		lblNombre.setForeground(Color.WHITE);
 		lblNombre.setBounds(537, 49, 46, 18);
 		getContentPane().add(lblNombre);
@@ -167,6 +180,120 @@ private JTextField textFieldContraseña;
 		JList list = new JList();
 		list.setBounds(10, 156, 131, 317);
 		getContentPane().add(list);
+=======
+		lblNombre.setForeground(Color.BLACK);
+		lblNombre.setBounds(537, 49, 46, 18);
+		getContentPane().add(lblNombre);
+		
+		textFieldNombre = new JTextField();
+		textFieldNombre.setBounds(537, 78, 86, 33);
+		getContentPane().add(textFieldNombre);
+		textFieldNombre.setColumns(10);
+		
+		JLabel lblApellidos = new JLabel("Apellidos");
+		lblApellidos.setForeground(Color.BLACK);
+		lblApellidos.setBounds(537, 122, 86, 23);
+		getContentPane().add(lblApellidos);
+		
+		textFieldApe1 = new JTextField();
+		textFieldApe1.setBounds(537, 156, 104, 32);
+		getContentPane().add(textFieldApe1);
+		textFieldApe1.setColumns(10);
+		
+		textFieldApe2 = new JTextField();
+		textFieldApe2.setBounds(659, 156, 115, 32);
+		getContentPane().add(textFieldApe2);
+		textFieldApe2.setColumns(10);
+		
+		JLabel lblNmeroJugador = new JLabel("N\u00FAmero jugador");
+		lblNmeroJugador.setForeground(Color.BLACK);
+		lblNmeroJugador.setBounds(649, 49, 125, 18);
+		getContentPane().add(lblNmeroJugador);
+		
+		textFieldNumJug = new JTextField();
+		textFieldNumJug.setBounds(646, 78, 34, 33);
+		getContentPane().add(textFieldNumJug);
+		textFieldNumJug.setColumns(10);
+		
+		JLabel lblDNI = new JLabel("DNI");
+		lblDNI.setForeground(Color.BLACK);
+		lblDNI.setBounds(537, 199, 46, 23);
+		getContentPane().add(lblDNI);
+		
+		textFieldDNI = new JTextField();
+		textFieldDNI.setBounds(537, 233, 115, 33);
+		getContentPane().add(textFieldDNI);
+		textFieldDNI.setColumns(10);
+		
+		JLabel lblAsistencia = new JLabel("Asistencia");
+		lblAsistencia.setForeground(Color.BLACK);
+		lblAsistencia.setBounds(537, 277, 86, 20);
+		getContentPane().add(lblAsistencia);
+		
+		textFieldAsistencia = new JTextField();
+		textFieldAsistencia.setBounds(537, 308, 161, 30);
+		getContentPane().add(textFieldAsistencia);
+		textFieldAsistencia.setColumns(10);
+		
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
+		lblContrasea.setForeground(Color.BLACK);
+		lblContrasea.setBounds(537, 349, 86, 20);
+		getContentPane().add(lblContrasea);
+		
+		textFieldContraseña = new JTextField();
+		textFieldContraseña.setBounds(537, 380, 161, 30);
+		getContentPane().add(textFieldContraseña);
+		textFieldContraseña.setColumns(10);
+		
+		JLabel lblEquipo = new JLabel("Equipo");
+		lblEquipo.setForeground(Color.BLACK);
+		lblEquipo.setBounds(29, 35, 46, 14);
+		getContentPane().add(lblEquipo);
+		
+		JLabel lblJugador = new JLabel("Jugador");
+		lblJugador.setForeground(Color.BLACK);
+		lblJugador.setBounds(204, 35, 46, 14);
+		getContentPane().add(lblJugador);
+				
+		ButtonIcon btnAñadirEquipo=new ButtonIcon();
+		btnAñadirEquipo.setBounds(29, 64, 46, 47);	
+		btnAñadirEquipo.setIcon(new ImageIcon(frmGestionEquipo.class.getResource("/Image/equipo añadir.png")));
+		btnAñadirEquipo.addActionListener(this);
+		btnAñadirEquipo.setActionCommand("Añadir equipo");
+		getContentPane().add(btnAñadirEquipo);
+		
+		
+		ButtonIcon btnEliminEquipo = new ButtonIcon();
+		btnEliminEquipo.setBounds(85, 64, 44, 47);
+		btnEliminEquipo.setIcon(new ImageIcon(frmGestionEquipo.class.getResource("/Image/eliminar equipo.png")));
+		btnEliminEquipo.addActionListener(this);
+		btnEliminEquipo.setActionCommand("Eliminar equipo");
+		getContentPane().add(btnEliminEquipo);
+		
+		ButtonIcon btnAñadirJug = new ButtonIcon();
+		btnAñadirJug.setBounds(185, 64, 46, 47);
+		btnAñadirJug.addActionListener(this);
+		btnAñadirJug.setActionCommand("Añadir jugador");
+		btnAñadirJug.setIcon(new ImageIcon(frmGestionEquipo.class.getResource("/Image/añadir jugador.png")));
+		getContentPane().add(btnAñadirJug);
+		
+		ButtonIcon btnEliminJug = new ButtonIcon();
+		btnEliminJug.setBounds(242, 64, 44, 47);
+		btnEliminJug.addActionListener(this);	
+		btnEliminJug.setActionCommand("Eliminar jugador");	
+		btnEliminJug.setIcon(new ImageIcon(frmGestionEquipo.class.getResource("/Image/eliminar jugador.png")));
+		getContentPane().add(btnEliminJug);
+		
+		JList list = new JList();
+		list.setBounds(10, 156, 131, 317);
+		getContentPane().add(list);
+		
+		JButton btnSalir = new JButton("SALIR");
+		btnSalir.setBounds(534, 502, 89, 23);
+		btnSalir.addActionListener(this);
+		btnSalir.setActionCommand("Salir");
+		getContentPane().add(btnSalir);
+>>>>>>> branch 'master' of https://github.com/ainhoagauna/BasketCoach.git
 		
 				
 		createAndShowGUI();
@@ -183,11 +310,15 @@ private JTextField textFieldContraseña;
 		
 		switch(e.getActionCommand()){
 		
+		case "Añadir equipo":
+			
+			frmAñadirEquipo objAña=new frmAñadirEquipo();
+			objAña.setVisible(true);
+			break;
 		case "Salir":
 			
 			this.dispose();
-			frmAdministrador1 admin=new frmAdministrador1();
-			admin.setVisible(true);
+			
 		}
 		
 	}
