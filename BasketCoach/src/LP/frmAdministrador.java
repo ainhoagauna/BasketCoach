@@ -72,26 +72,26 @@ public class frmAdministrador extends javax.swing.JFrame {
         if(menu.getSelectedtitulo().equals("Asistencia")){
         	frmAsistencia frame=new frmAsistencia();
         	frame.setVisible(true);
-
         	frame.toFront();
+        	this.setVisible(false);
         }
         if(menu.getSelectedtitulo().equals("Quintetos")){
         	frmQuintetos frame=new frmQuintetos();
-        	frame.setVisible(true);
-        	
+        	frame.setVisible(true);        	
         	frame.toFront();
+        	this.setVisible(false);
         }
         if(menu.getSelectedtitulo().equals("Gestión de Minutos")){
         	frmMinutos frame=new frmMinutos();
-        	frame.setVisible(true);
-        	
+        	frame.setVisible(true);        	
         	frame.toFront();
+        	this.setVisible(false);
         }
         if(menu.getSelectedtitulo().equals("Recordatorios")){
         	frmRecordatorios frame=new frmRecordatorios();
-        	frame.setVisible(true);
-        	
+        	frame.setVisible(true);        	
         	frame.toFront();
+        	this.setVisible(false);
         }
     }
     
