@@ -38,15 +38,15 @@ public class frmUsuario extends javax.swing.JFrame {
 	
 	/** Creates new form ventanaMenu */
     public frmUsuario() {
-        initComponents();
+    	initComponents();
         this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla.
         llenarMenu();
     }
     
     public void llenarMenu(){
-        List<Avatar> avatars=new ArrayList<Avatar>();
-        avatars.add(new Avatar("Asistencia", loadImage("/Image/assist.png")));
-        avatars.add(new Avatar("Gestión de Minutos", loadImage("/Image/minutos.png")));
+        ArrayList<Avatar> avatars=new ArrayList<Avatar>();
+        avatars.add(new Avatar("Asistencia", loadImage("/Image/assit.png")));
+        avatars.add(new Avatar("Gestion de minutos", loadImage("/Image/minutos.png")));
         avatars.add(new Avatar("Recordatorios", loadImage("/Image/recordatorio.png")));
         menu.setAvatars(avatars);
     }
@@ -64,20 +64,20 @@ public class frmUsuario extends javax.swing.JFrame {
         if(menu.getSelectedtitulo().equals("Asistencia")){
         	frmAsistencia frame=new frmAsistencia();
         	frame.setVisible(true);
-
         	frame.toFront();
+        	this.setVisible(false);
         }
         if(menu.getSelectedtitulo().equals("Gestión de Minutos")){
         	frmMinutos frame=new frmMinutos();
-        	frame.setVisible(true);
-        	
+        	frame.setVisible(true);        	
         	frame.toFront();
+        	this.setVisible(false);
         }
         if(menu.getSelectedtitulo().equals("Recordatorios")){
         	frmRecordatorios frame=new frmRecordatorios();
-        	frame.setVisible(true);
-        	
+        	frame.setVisible(true);        	
         	frame.toFront();
+        	this.setVisible(false);
         }
     }
     
@@ -97,7 +97,7 @@ public class frmUsuario extends javax.swing.JFrame {
 //        this.setResizable(false);
 //        this.setVisible(true);
     	
-    	setTitle("BasketCoach - Administrador");	
+    	setTitle("BasketCoach - Usuario");	
 
 		setBounds(750, 200, 463, 338);
 
@@ -198,13 +198,13 @@ private void menuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_menu
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -212,7 +212,7 @@ private void menuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_menu
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new frmAdministrador().setVisible(true);
+                new frmUsuario().setVisible(true);
             }
         });
     }

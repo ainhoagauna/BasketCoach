@@ -120,7 +120,8 @@ public class frmPrincipal extends JFrame
 						}
 						else
 						{		
-							
+							frmUsuario objUsu = new frmUsuario();
+							objUsu.setVisible(true);
 						}
 					}
 					else if(count>1)

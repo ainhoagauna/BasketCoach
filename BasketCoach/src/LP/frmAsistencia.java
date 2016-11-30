@@ -16,12 +16,12 @@ import javax.swing.table.AbstractTableModel;
 
 public class frmAsistencia extends JFrame implements ActionListener{
 
-/**
+	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-private JButton btnSalir;
-private boolean DEBUG = false;
+	private JButton btnSalir;
+	private boolean DEBUG = false;
 	
 	public frmAsistencia()
 	{
