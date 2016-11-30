@@ -83,27 +83,15 @@ public class frmAñadirEquipo extends JFrame implements ActionListener{
 	
 	public void añadir()
 	{
-//		Class.forName("org.sqlite.JDBC");
+
 		Connection conn=sqliteConnection.dbConnector();
 		Statement stmt;
 		try {
 			stmt = conn.createStatement();
+						
+			stmt.executeUpdate("insert into equipo values('"+textFieldNombre.getText()+"', '"+textFieldCiudad.getText()+"', '"+textFieldCategoria.getText()+"')");
 			
-			stmt.executeUpdate("drop table if exists equipo");
-			stmt.executeUpdate("create table equipo (nombre_e String, ciudad_e String, categoria_e String)");
 			
-			stmt.executeUpdate("insert into equipo values("+textFieldNombre.getText()+", "+textFieldCiudad.getText()+", "+textFieldCategoria.getText()+")");
-			
-			ResultSet rs = stmt.executeQuery("select * from equipo");
-		     
-		      while(rs.next())
-		      { 
-		    	  // Leer el resultset
-		        System.out.println("nombre = " + rs.getString("nombre_e"));
-		        System.out.println("ciudad = " + rs.getString("ciudad_e"));
-		        System.out.println("categoria = " + rs.getString("categoria_e"));
-
-		      }
 			
 			
 			
@@ -111,6 +99,16 @@ public class frmAñadirEquipo extends JFrame implements ActionListener{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		finally {
+			  if (conn != null) {
+			    try {
+			      conn.close(); // <-- This is important
+			    } catch (SQLException e) {
+			      /* handle exception */
+			    }
+			  }
+			}
 	}	
 	
 	
