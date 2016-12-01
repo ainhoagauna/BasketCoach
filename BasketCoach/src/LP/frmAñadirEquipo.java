@@ -6,15 +6,19 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import LD.sqliteConnection;
+import LN.clsGestorAdministrador;
 
 public class frmAñadirEquipo extends JFrame implements ActionListener{
 	private JTextField textFieldNombre;
 	private JTextField textFieldCiudad;
 	private JTextField textFieldCategoria;
+	
+	private boolean retorno = false;
 	
 	
 	public frmAñadirEquipo() {
@@ -70,6 +74,7 @@ public class frmAñadirEquipo extends JFrame implements ActionListener{
 		switch(e.getActionCommand()){
 		case "AÑADIR":
 			this.añadir();
+			
 			break;
 			
 		case "ATRAS":
@@ -82,34 +87,97 @@ public class frmAñadirEquipo extends JFrame implements ActionListener{
 	}
 	
 	public void añadir()
-	{
+  	{
+ 
+ 
+  		Connection conn=sqliteConnection.dbConnector();
+  		Statement stmt;
+  		try {
+  			stmt = conn.createStatement();
 
-		Connection conn=sqliteConnection.dbConnector();
-		Statement stmt;
-		try {
-			stmt = conn.createStatement();
-						
-			stmt.executeUpdate("insert into equipo values('"+textFieldNombre.getText()+"', '"+textFieldCiudad.getText()+"', '"+textFieldCategoria.getText()+"')");
-			
-			
-			
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		finally {
-			  if (conn != null) {
+ 			
+// 			String query = "select * from equipo where nombre_e=?";
+//			PreparedStatement pst = conn.prepareStatement(query);
+//			pst.setString(1, textFieldNombre.getText());
+//			
+//			
+//			ResultSet rs = pst.executeQuery();
+//			int count = 0;
+//			while(rs.next())
+//			{
+//				count = count +1;
+//			}
+//			if(count == 1)
+//			{
+
+									
+				
+				String nombre_e = textFieldNombre.getText();
+				
+				
+				this.LeerContraseña(nombre_e);
+				
+				if(LeerContraseña(nombre_e)==false)
+				{
+					stmt.executeUpdate("insert into equipo values('"+textFieldNombre.getText()+"', '"+textFieldCiudad.getText()+"', '"+textFieldCategoria.getText()+"')");
+				}
+					JOptionPane.showMessageDialog(null, "¡Equipo añadido correctamente!");	
+					
+//				else
+//				{
+//						JOptionPane.showMessageDialog(null, "Este equipo ya existe");
+//				}
+		//}
+				
+				
+				
+//			rs.close();
+//			pst.close();		
+				
+  			
+  		} catch (SQLException e) {
+  			// TODO Auto-generated catch block
+  			e.printStackTrace();
+  		}
+ 		
+ 		finally {
+ 			  if (conn != null) {
 			    try {
-			      conn.close(); // <-- This is important
-			    } catch (SQLException e) {
-			      /* handle exception */
-			    }
-			  }
+ 			      conn.close(); // <-- This is important
+ 			    } catch (SQLException e) {
+ 			      /* handle exception */
+ 			    }
+ 			  }
+ 			}
+  		}
+ 		
+  		
+  public boolean LeerContraseña(String nombre_e)
+		{		
+	  
+ 			
+ 			if(nombre_e.equals("select nombre_e from equipo"))
+			{
+				retorno=true;
 			}
-	}	
+			else
+			{
+				retorno=false;
+				JOptionPane.showMessageDialog(null, "Este equipo ya existe");
+			}
+			
+			return retorno;
+		}
+
+		public boolean isRetorno()
+		{
+			return retorno;
+		}
+
+		public void setRetorno(boolean retorno) 
+		{
+			this.retorno = retorno;
+		}
 	
 	
 }

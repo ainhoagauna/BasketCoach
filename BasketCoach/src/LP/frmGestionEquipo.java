@@ -8,6 +8,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 import java.awt.Color;
@@ -21,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.JList;
 
 import LD.sqliteConnection;
+
 import java.awt.Font;
 
 
@@ -217,19 +219,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		}
 		
 		
-		
-//		finally {
-//			  if (conn != null) {
-//			    try {
-//			      conn.close(); // <-- This is important
-//			    } catch (SQLException e) {
-//			      /* handle exception */
-//			    }
-//			  }
-//			}
-//		
-		
-	}
+}
 	
 	
 		
@@ -247,6 +237,12 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 			objAña.setVisible(true);
 			break;
 			
+		case "Eliminar equipo":
+			
+//			eliminarEquipo objElim=new eliminarEquipo();
+//			objElim.actionPerformed(null);
+			break;
+			
 		case "Salir":
 			
 			this.dispose();
@@ -259,4 +255,6 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		}
 		
 	}
+	
+	
 }
