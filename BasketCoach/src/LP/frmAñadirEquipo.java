@@ -20,6 +20,9 @@ public class frmAñadirEquipo extends JFrame implements ActionListener{
 	
 	private boolean retorno = false;
 	
+	Connection conn=sqliteConnection.dbConnector();
+	Statement stmt;
+	
 	
 	public frmAñadirEquipo() {
 		getContentPane().setLayout(null);
@@ -90,94 +93,67 @@ public class frmAñadirEquipo extends JFrame implements ActionListener{
   	{
  
  
-  		Connection conn=sqliteConnection.dbConnector();
-  		Statement stmt;
-  		try {
-  			stmt = conn.createStatement();
-
- 			
-// 			String query = "select * from equipo where nombre_e=?";
-//			PreparedStatement pst = conn.prepareStatement(query);
-//			pst.setString(1, textFieldNombre.getText());
-//			
-//			
-//			ResultSet rs = pst.executeQuery();
-//			int count = 0;
-//			while(rs.next())
-//			{
-//				count = count +1;
-//			}
-//			if(count == 1)
-//			{
-
-									
+  		
+  		
+  			try {
+				stmt = conn.createStatement();
 				
 				String nombre_e = textFieldNombre.getText();
 				
-				
-				this.LeerContraseña(nombre_e);
-				
-				if(LeerContraseña(nombre_e)==false)
+				if(nombre_e.equals("select nombre_e from equipo"))
 				{
-					stmt.executeUpdate("insert into equipo values('"+textFieldNombre.getText()+"', '"+textFieldCiudad.getText()+"', '"+textFieldCategoria.getText()+"')");
+	 				JOptionPane.showMessageDialog(null, "Este equipo ya existe");
 				}
+				
+				else
+				{
+				
+					stmt.executeUpdate("insert into equipo values('"+textFieldNombre.getText()+"', '"+textFieldCiudad.getText()+"', '"+textFieldCategoria.getText()+"')");
+					
+					textFieldCategoria.setText("");
+					textFieldCiudad.setText("");
+					textFieldNombre.setText("");
+					
+					
 					JOptionPane.showMessageDialog(null, "¡Equipo añadido correctamente!");	
 					
-//				else
-//				{
-//						JOptionPane.showMessageDialog(null, "Este equipo ya existe");
-//				}
-		//}
+				}
 				
-				
-				
-//			rs.close();
-//			pst.close();		
-				
-  			
-  		} catch (SQLException e) {
-  			// TODO Auto-generated catch block
-  			e.printStackTrace();
-  		}
- 		
- 		finally {
- 			  if (conn != null) {
-			    try {
- 			      conn.close(); // <-- This is important
- 			    } catch (SQLException e) {
- 			      /* handle exception */
- 			    }
- 			  }
- 			}
-  		}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+		
+  	}
  		
   		
-  public boolean LeerContraseña(String nombre_e)
-		{		
-	  
- 			
- 			if(nombre_e.equals("select nombre_e from equipo"))
-			{
-				retorno=true;
-			}
-			else
-			{
-				retorno=false;
-				JOptionPane.showMessageDialog(null, "Este equipo ya existe");
-			}
-			
-			return retorno;
-		}
-
-		public boolean isRetorno()
-		{
-			return retorno;
-		}
-
-		public void setRetorno(boolean retorno) 
-		{
-			this.retorno = retorno;
-		}
+//  public boolean LeerContraseña(String nombre_e)
+//		{		
+//	  
+// 			
+// 			if(nombre_e.equals("select nombre_e from equipo"))
+//			{
+// 				retorno=true;
+//			}
+//			else
+//			{
+//				retorno=false;
+//				
+//			}
+//			
+//			return retorno;
+//		}
+//
+//		public boolean isRetorno()
+//		{
+//			return retorno;
+//		}
+//
+//		public void setRetorno(boolean retorno) 
+//		{
+//			this.retorno = retorno;
+//		}
 	
 	
 }

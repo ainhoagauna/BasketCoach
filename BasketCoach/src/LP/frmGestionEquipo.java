@@ -56,7 +56,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		setBounds(300, 100, 800, 600);
 		
 		JLabel lblNombre = new JLabel("Nombre");
-		lblNombre.setForeground(Color.WHITE);
+		lblNombre.setForeground(Color.BLACK);
 		lblNombre.setBounds(537, 49, 46, 18);
 		getContentPane().add(lblNombre);
 		
@@ -66,7 +66,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		textFieldNombre.setColumns(10);
 		
 		JLabel lblApellidos = new JLabel("Apellidos");
-		lblApellidos.setForeground(Color.WHITE);
+		lblApellidos.setForeground(Color.BLACK);
 		lblApellidos.setBounds(537, 122, 86, 23);
 		getContentPane().add(lblApellidos);
 		
@@ -81,7 +81,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		textFieldApe2.setColumns(10);
 		
 		JLabel lblNmeroJugador = new JLabel("N\u00FAmero jugador");
-		lblNmeroJugador.setForeground(Color.WHITE);
+		lblNmeroJugador.setForeground(Color.BLACK);
 		lblNmeroJugador.setBounds(649, 49, 125, 18);
 		getContentPane().add(lblNmeroJugador);
 		
@@ -91,7 +91,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		textFieldNumJug.setColumns(10);
 		
 		JLabel lblDNI = new JLabel("DNI");
-		lblDNI.setForeground(Color.WHITE);
+		lblDNI.setForeground(Color.BLACK);
 		lblDNI.setBounds(537, 199, 46, 23);
 		getContentPane().add(lblDNI);
 		
@@ -101,7 +101,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		textFieldDNI.setColumns(10);
 		
 		JLabel lblAsistencia = new JLabel("Asistencia");
-		lblAsistencia.setForeground(Color.WHITE);
+		lblAsistencia.setForeground(Color.BLACK);
 		lblAsistencia.setBounds(537, 277, 86, 20);
 		getContentPane().add(lblAsistencia);
 		
@@ -111,7 +111,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		textFieldAsistencia.setColumns(10);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setForeground(Color.WHITE);
+		lblContrasea.setForeground(Color.BLACK);
 		lblContrasea.setBounds(537, 349, 86, 20);
 		getContentPane().add(lblContrasea);
 		
@@ -121,12 +121,12 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		textFieldContraseña.setColumns(10);
 		
 		JLabel lblEquipo = new JLabel("Equipo");
-		lblEquipo.setForeground(Color.WHITE);
+		lblEquipo.setForeground(Color.BLACK);
 		lblEquipo.setBounds(29, 35, 46, 14);
 		getContentPane().add(lblEquipo);
 		
 		JLabel lblJugador = new JLabel("Jugador");
-		lblJugador.setForeground(Color.WHITE);
+		lblJugador.setForeground(Color.BLACK);
 		lblJugador.setBounds(204, 35, 46, 14);
 		getContentPane().add(lblJugador);
 		
@@ -241,6 +241,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 			
 //			eliminarEquipo objElim=new eliminarEquipo();
 //			objElim.actionPerformed(null);
+			this.eliminarEquipo();
 			break;
 			
 		case "Salir":
@@ -254,7 +255,16 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 			
 		}
 		
+		
 	}
 	
-	
+	public void eliminarEquipo()
+	{
+		System.out.println("ok");
+		int i=0;
+		modeloLista.getElementAt(i);
+		eliminarEquipo objElim=new eliminarEquipo();
+		
+		
+	}
 }
