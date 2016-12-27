@@ -21,6 +21,7 @@ public class frmAsistencia extends JFrame implements ActionListener{
 	 */
 	private static final long serialVersionUID = 1L;
 	private JButton btnSalir;
+	private static MyTableModel datos;
 	private boolean DEBUG = false;
 	
 	public frmAsistencia()
@@ -71,6 +72,9 @@ public class frmAsistencia extends JFrame implements ActionListener{
 		setTitle("Asistencia");	
 		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);	
 		setBounds(500, 200, 1145, 744);
+		
+		//final frmAsistencia tabla=new frmAsistencia (datos);
+		
 		
 	}
 	
