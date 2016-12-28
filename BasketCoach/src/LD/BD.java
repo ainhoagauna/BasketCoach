@@ -4,6 +4,7 @@ import java.io.File;
 import java.sql.*;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class BD 
 {
@@ -54,6 +55,8 @@ public class BD
 							
 				String sentencia="insert into jugador values('"+nombre+"', '"+ape1+"', '"+ape2+"','"+asistencia+"', '"+num_j+"', '"+num_licen_j+"','"+num_licen_e+"', '"+equipo+"', '"+contraseña+"')";
 				stmt.executeUpdate(sentencia);
+				
+				
 				
 				JOptionPane.showMessageDialog(null, "¡Jugador añadido correctamente!");	
 			
@@ -129,7 +132,34 @@ public class BD
 		}
 		return modeloLista2;
 	}
-
+	
+	
+	
+	public DefaultTableModel cargarQuintetos(int numero, String nombre, String uno,String dos, String tres, String cuatro, DefaultTableModel modelo)
+	
+	{
+		
+            
+            try {
+            	ResultSet rs = stmt.executeQuery("select * from quinteto");
+            	 while(rs.next() == true) {
+            		 numero = rs.getInt("num_j");
+            		 nombre = rs.getString("nombre_j");
+            		 uno = rs.getString("primer_cuarto");
+            		 dos= rs.getString("segundo_cuarto");
+            		 tres = rs.getString("tercer_cuarto");
+            		 cuatro = rs.getString("cuarto_cuarto");
+            	 }    
+            	 modelo.addRow( new Object[] {numero,nombre,uno,dos,tres,cuatro} );
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+           
+            
+            return modelo;
+        
+	}
 }
 
 

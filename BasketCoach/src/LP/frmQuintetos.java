@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -32,8 +33,12 @@ public class frmQuintetos extends JFrame{
         tabla = new JTable();
         modelo = new DefaultTableModel();
         desplazamiento = new JScrollPane(tabla);
-        int numero;
-        String nombre,uno,dos,tres,cuatro;
+        int numero=0;
+        String nombre=null;
+        String uno=null;
+        String dos=null;
+        String tres=null;
+        String cuatro=null;
         
         
         // Parametros de la ventana
@@ -59,36 +64,13 @@ public class frmQuintetos extends JFrame{
         this.pack();
         
         // Ponemos los datos en la tabla
-        Connection conn=BD.dbConnector();
-		Statement stmt;
-        try {
-            // Obtener datos de la tabla
-        	
-    		
-    		stmt = conn.createStatement();
-    		
-    		
-    		ResultSet rs = stmt.executeQuery("select * from quinteto");
-            
-            while(rs.next() == true) {
-                
-                numero = rs.getInt("num_j");
-                nombre = rs.getString("nombre_j");
-                uno = rs.getString("primer_cuarto");
-                dos= rs.getString("segundo_cuarto");
-                tres = rs.getString("tercer_cuarto");
-                cuatro = rs.getString("cuarto_cuarto");
-                
-                modelo.addRow( new Object[] {numero,nombre,uno,dos,tres,cuatro} );                
-            }
-            
-           
-            
-        } catch (SQLException e) {
-            System.out.println("Error de lectura de BD\n\n");
-            
-            e.printStackTrace();
-        } 
+        
+        BD base=new BD();
+        base.cargarQuintetos(numero,nombre,uno,dos,tres,cuatro,modelo);
+        
+        
+        modelo.addRow( new Object[] {numero,nombre,uno,dos,tres,cuatro} );
+       
     }
 }
 

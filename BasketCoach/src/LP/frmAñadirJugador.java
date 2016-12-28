@@ -31,15 +31,6 @@ public class frmAñadirJugador extends JFrame implements ActionListener{
 	
 	
 	
-	private boolean retorno = false;
-	
-	Connection conn=BD.dbConnector();
-	Statement stmt;
-	
-	
-	
-	
-	
 	public frmAñadirJugador() {
 		
 		getContentPane().setLayout(null);
@@ -175,6 +166,8 @@ public class frmAñadirJugador extends JFrame implements ActionListener{
 		
 		BD base=new BD();
 		base.añadirJugador(nombre,ape1,ape2,asistencia,num_j,num_licen_j,num_licen_e,equipo,contraseña);
+		
+		
 		
 		textFieldNombre.setText("");
 		textFieldApe.setText("");

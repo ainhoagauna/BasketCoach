@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 import java.awt.Color;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,8 +25,10 @@ import javax.swing.JList;
 import LD.BD;
 
 import java.awt.Font;
+
 import javax.swing.UIManager;
 import javax.swing.JScrollBar;
+import javax.swing.event.ListDataListener;
 
 
 
@@ -54,13 +57,12 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 	public frmGestionEquipo()
 	{
 		getContentPane().setLayout(null);
-
-		getContentPane().setBackground(UIManager.getColor("Button.background"));
+			
 	
 		setTitle("Gestion de equipo");	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
 		setBounds(300, 100, 917, 600);
-		
+					
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setForeground(Color.BLACK);
 		lblNombre.setBounds(537, 49, 46, 18);
@@ -219,7 +221,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		getContentPane().add(textField_num_licen_e);
 		textField_num_licen_e.setColumns(10);
 		
-				
+	
 		
 	}
 	
@@ -242,14 +244,18 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 	@SuppressWarnings("unchecked")
 	public void cargarListaJugador()
 		{
+		
+		
+		
 		BD base=new BD();
 		base.cargarJugador(modeloLista2);
 		   	 
-	    jugador.setModel(modeloLista2);		    
-
+	    jugador.setModel(modeloLista2);
+	    
+	   
+}
+	    
 		
-		
-		}
 	
 	
 
