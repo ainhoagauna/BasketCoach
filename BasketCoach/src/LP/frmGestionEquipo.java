@@ -24,6 +24,8 @@ import javax.swing.JList;
 import LD.sqliteConnection;
 
 import java.awt.Font;
+import javax.swing.UIManager;
+import javax.swing.JScrollBar;
 
 
 
@@ -41,19 +43,23 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 	private JTextField textFieldAsistencia;
 	private JTextField textFieldContraseña;
 	private JList list;
+	private JList jugador;
 	private DefaultListModel modeloLista=new DefaultListModel();
+	private DefaultListModel modeloLista2=new DefaultListModel();
 	JScrollPane scrollPaneLista;
+	private JTextField textField;
+	private JTextField textField_num_licen_e;
 
 	
 	public frmGestionEquipo()
 	{
 		getContentPane().setLayout(null);
 
-		getContentPane().setBackground(Color.LIGHT_GRAY);
+		getContentPane().setBackground(UIManager.getColor("Button.background"));
 	
 		setTitle("Gestion de equipo");	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		setBounds(300, 100, 800, 600);
+		setBounds(300, 100, 917, 600);
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setForeground(Color.BLACK);
@@ -71,12 +77,12 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		getContentPane().add(lblApellidos);
 		
 		textFieldApe1 = new JTextField();
-		textFieldApe1.setBounds(537, 156, 104, 32);
+		textFieldApe1.setBounds(537, 156, 130, 32);
 		getContentPane().add(textFieldApe1);
 		textFieldApe1.setColumns(10);
 		
 		textFieldApe2 = new JTextField();
-		textFieldApe2.setBounds(659, 156, 115, 32);
+		textFieldApe2.setBounds(694, 156, 115, 32);
 		getContentPane().add(textFieldApe2);
 		textFieldApe2.setColumns(10);
 		
@@ -90,7 +96,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		getContentPane().add(textFieldNumJug);
 		textFieldNumJug.setColumns(10);
 		
-		JLabel lblDNI = new JLabel("DNI");
+		JLabel lblDNI = new JLabel("Equipo");
 		lblDNI.setForeground(Color.BLACK);
 		lblDNI.setBounds(537, 199, 46, 23);
 		getContentPane().add(lblDNI);
@@ -144,7 +150,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		btnEliminEquipo.setActionCommand("Eliminar equipo");
 		getContentPane().add(btnEliminEquipo);
 		
-		JButton btnAñadirJug = new JButton("New button");
+		JButton btnAñadirJug = new JButton("");
 		btnAñadirJug.setBounds(185, 64, 46, 47);
 		btnAñadirJug.addActionListener(this);
 		btnAñadirJug.setActionCommand("Añadir jugador");
@@ -162,8 +168,16 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		list.setBounds(10, 156, 86, 141);
 		getContentPane().add(list);
 		
-
 		cargarLista();
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(135, 163, 178, 269);
+		getContentPane().add(scrollPane);
+		
+		jugador=new JList();
+		scrollPane.setViewportView(jugador);
+		
+		cargarListaJugador();
 
 		lblNombre.setForeground(Color.BLACK);
 		lblNombre.setBounds(537, 49, 46, 18);
@@ -185,6 +199,25 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		lblEquipoList.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblEquipoList.setBounds(10, 131, 86, 14);
 		getContentPane().add(lblEquipoList);
+		
+		JLabel lblLicenciaJugador = new JLabel("Licencia jugador");
+		lblLicenciaJugador.setBounds(773, 49, 114, 17);
+		getContentPane().add(lblLicenciaJugador);
+		
+		textField = new JTextField();
+		textField.setText("                      ");
+		textField.setBounds(773, 78, 96, 33);
+		getContentPane().add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblEntrenador = new JLabel("Licencia entrenador");
+		lblEntrenador.setBounds(694, 200, 103, 21);
+		getContentPane().add(lblEntrenador);
+		
+		textField_num_licen_e = new JTextField();
+		textField_num_licen_e.setBounds(694, 233, 145, 33);
+		getContentPane().add(textField_num_licen_e);
+		textField_num_licen_e.setColumns(10);
 		
 				
 		
@@ -218,6 +251,33 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 			e.printStackTrace();
 		}
 		
+	}	
+		
+		@SuppressWarnings("unchecked")
+		public void cargarListaJugador()
+		{
+					
+			Connection conn=sqliteConnection.dbConnector();
+			Statement stmt;
+			try {
+				stmt = conn.createStatement();
+				
+							
+				ResultSet rs = stmt.executeQuery("select * from jugador");
+						     
+			      while(rs.next())
+			      { 
+			    	  // Leer el resultset
+			    	 
+			    	 modeloLista2.addElement(rs.getString("num_j") + " " + rs.getString("nombre_j") + " " + rs.getString("ape1_j")); 	
+			    	 jugador.setModel(modeloLista2);		    
+
+			      }
+			   
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 }
 	
@@ -242,6 +302,12 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 //			eliminarEquipo objElim=new eliminarEquipo();
 //			objElim.actionPerformed(null);
 			this.eliminarEquipo();
+			break;
+			
+		case "Añadir jugador":
+			
+			frmAñadirJugador objAñadir=new frmAñadirJugador();
+			objAñadir.setVisible(true);
 			break;
 			
 		case "Salir":

@@ -28,7 +28,7 @@ public class frmQuintetos extends JFrame{
     	
     	
         // Nombre de las columnas como apareceran en la tabla
-        String[] columnas = {"MÚMERO JUGADOR", "NOMBRE", "PRIMER CUARTO","SEGUNDO CUARTO", "TERCER CUARTO", "CUARTO CUARTO"};
+        String[] columnas = {"NÚMERO JUGADOR", "NOMBRE", "PRIMER CUARTO","SEGUNDO CUARTO", "TERCER CUARTO", "CUARTO CUARTO"};
         tabla = new JTable();
         modelo = new DefaultTableModel();
         desplazamiento = new JScrollPane(tabla);

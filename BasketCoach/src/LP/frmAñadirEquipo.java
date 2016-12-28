@@ -89,6 +89,7 @@ public class frmAñadirEquipo extends JFrame implements ActionListener{
 		}
 	}
 	
+	@SuppressWarnings("null")
 	public void añadir()
   	{
  
@@ -99,25 +100,36 @@ public class frmAñadirEquipo extends JFrame implements ActionListener{
 				stmt = conn.createStatement();
 				
 				String nombre_e = textFieldNombre.getText();
+				ResultSet busqueda = null;
+			
 				
-				if(nombre_e.equals("select nombre_e from equipo"))
+				while(busqueda.next())
 				{
-	 				JOptionPane.showMessageDialog(null, "Este equipo ya existe");
+					if(nombre_e.equals("select nombre_e from equipo"))
+					{
+						JOptionPane.showMessageDialog(null, "Este equipo ya existe");
+					}
+					
+					else
+					{
+					
+						stmt.executeUpdate("insert into equipo values('"+textFieldNombre.getText()+"', '"+textFieldCiudad.getText()+"', '"+textFieldCategoria.getText()+"')");
+						
+						textFieldCategoria.setText("");
+						textFieldCiudad.setText("");
+						textFieldNombre.setText("");
+						
+						
+						JOptionPane.showMessageDialog(null, "¡Equipo añadido correctamente!");	
+						
+					}
 				}
+//				if(nombre_e.equals("select nombre_e from equipo"))
+//				{
+//	 				JOptionPane.showMessageDialog(null, "Este equipo ya existe");
+//				}
 				
-				else
-				{
 				
-					stmt.executeUpdate("insert into equipo values('"+textFieldNombre.getText()+"', '"+textFieldCiudad.getText()+"', '"+textFieldCategoria.getText()+"')");
-					
-					textFieldCategoria.setText("");
-					textFieldCiudad.setText("");
-					textFieldNombre.setText("");
-					
-					
-					JOptionPane.showMessageDialog(null, "¡Equipo añadido correctamente!");	
-					
-				}
 				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
