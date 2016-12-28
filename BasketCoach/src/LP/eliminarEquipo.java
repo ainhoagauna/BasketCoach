@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 import javax.swing.JOptionPane;
 
-import LD.sqliteConnection;
+import LD.BD;
 
 public class eliminarEquipo implements ActionListener {
 
@@ -22,7 +22,7 @@ public class eliminarEquipo implements ActionListener {
 	        int PromptResult = JOptionPane.showOptionDialog(null,"¿Quieres eliminar este equipo","BasketCoach - Aviso",JOptionPane.DEFAULT_OPTION,JOptionPane.WARNING_MESSAGE,null,ObjButtons,ObjButtons[1]);
 	        if(PromptResult==JOptionPane.YES_OPTION)
 	        {
-	        	Connection conn=sqliteConnection.dbConnector();
+	        	Connection conn=BD.dbConnector();
 	      		Statement stmt;
 	      		try {
 	      			stmt = conn.createStatement();

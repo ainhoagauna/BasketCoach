@@ -21,7 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JList;
 
-import LD.sqliteConnection;
+import LD.BD;
 
 import java.awt.Font;
 import javax.swing.UIManager;
@@ -228,61 +228,29 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 	@SuppressWarnings("unchecked")
 	public void cargarLista()
 	{
-				
-		Connection conn=sqliteConnection.dbConnector();
-		Statement stmt;
-		try {
-			stmt = conn.createStatement();
-			
-						
-			ResultSet rs = stmt.executeQuery("select nombre_e from equipo");
-					     
-		      while(rs.next())
-		      { 
-		    	  // Leer el resultset
-		    	 
-		    	  modeloLista.addElement(rs.getString("nombre_e"));
-		    	  list.setModel(modeloLista);		    
+		BD base=new BD();
+		base.cargarLista(modeloLista);
+		   	 
+	    list.setModel(modeloLista);		    
 
-		      }
+		
 		   
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		
 	}	
 		
-		@SuppressWarnings("unchecked")
-		public void cargarListaJugador()
+	@SuppressWarnings("unchecked")
+	public void cargarListaJugador()
 		{
-					
-			Connection conn=sqliteConnection.dbConnector();
-			Statement stmt;
-			try {
-				stmt = conn.createStatement();
-				
-							
-				ResultSet rs = stmt.executeQuery("select * from jugador");
-						     
-			      while(rs.next())
-			      { 
-			    	  // Leer el resultset
-			    	 
-			    	 modeloLista2.addElement(rs.getString("num_j") + " " + rs.getString("nombre_j") + " " + rs.getString("ape1_j")); 	
-			    	 jugador.setModel(modeloLista2);		    
+		BD base=new BD();
+		base.cargarJugador(modeloLista2);
+		   	 
+	    jugador.setModel(modeloLista2);		    
 
-			      }
-			   
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		
-}
-	
-	
 		
+		}
+	
 	
 
 	@Override

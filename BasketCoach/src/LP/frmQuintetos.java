@@ -10,7 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import LD.sqliteConnection;
+import LD.BD;
 
 public class frmQuintetos extends JFrame{
     /**
@@ -59,7 +59,7 @@ public class frmQuintetos extends JFrame{
         this.pack();
         
         // Ponemos los datos en la tabla
-        Connection conn=sqliteConnection.dbConnector();
+        Connection conn=BD.dbConnector();
 		Statement stmt;
         try {
             // Obtener datos de la tabla

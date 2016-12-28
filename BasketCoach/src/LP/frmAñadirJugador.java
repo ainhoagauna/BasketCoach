@@ -1,5 +1,6 @@
 package LP;
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -13,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-import LD.sqliteConnection;
+import LD.BD;
 import java.awt.Color;
 
 public class frmAñadirJugador extends JFrame implements ActionListener{
@@ -28,11 +29,11 @@ public class frmAñadirJugador extends JFrame implements ActionListener{
 	private JTextField textField_num_licen_j;
 	private JTextField textField_ape2;
 	
-
+	
 	
 	private boolean retorno = false;
 	
-	Connection conn=sqliteConnection.dbConnector();
+	Connection conn=BD.dbConnector();
 	Statement stmt;
 	
 	
@@ -40,6 +41,7 @@ public class frmAñadirJugador extends JFrame implements ActionListener{
 	
 	
 	public frmAñadirJugador() {
+		
 		getContentPane().setLayout(null);
 		setTitle("Añadir jugador");	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
@@ -160,38 +162,33 @@ public class frmAñadirJugador extends JFrame implements ActionListener{
 	
 	public void añadir()
   	{
+		String nombre=textFieldNombre.getText();	
+		String ape1=textFieldApe.getText();
+		String ape2=textField_ape2.getText();
+		String asistencia=textField_asistencia.getText();
+		String num_j=textField_num_j.getText();
+		String num_licen_j=textField_num_licen_j.getText();
+		String num_licen_e=textField_num_licen_e.getText();
+		String equipo=textField_equipo.getText();
+		String contraseña=textField_contraseina.getText();
 		
 		
+		BD base=new BD();
+		base.añadirJugador(nombre,ape1,ape2,asistencia,num_j,num_licen_j,num_licen_e,equipo,contraseña);
 		
- 
-  			try {
-				stmt = conn.createStatement();
-				
-				
-					
-						stmt.executeUpdate("insert into jugador values('"+textFieldNombre.getText()+"', '"+textFieldApe.getText()+"', '"+textField_ape2.getText()+"','"+textField_asistencia.getText()+"', '"+textField_equipo.getText()+"', '"+textField_num_j.getText()+"','"+textField_num_licen_j.getText()+"', '"+textField_contraseina.getText()+"', '"+textField_num_licen_e.getText()+"')");
-						
-						textFieldNombre.setText("");	
-						textFieldApe.setText("");
-						textField_ape2.setText("");
-						textField_asistencia.setText("");
-						textField_num_j.setText("");
-						textField_num_licen_j.setText("");
-						textField_num_licen_e.setText("");
-						textField_equipo.setText("");
-						textField_contraseina.setText("");
+		textFieldNombre.setText("");
+		textFieldApe.setText("");
+		textField_ape2.setText("");
+		textField_asistencia.setText("");
+		textField_num_j.setText("");
+		textField_num_licen_j.setText("");
+		textField_num_licen_e.setText("");
+		textField_equipo.setText("");
+		textField_contraseina.setText("");
 						
 						
 						
-						
-						JOptionPane.showMessageDialog(null, "¡Jugador añadido correctamente!");	
 
-				
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 	
 		
   	}

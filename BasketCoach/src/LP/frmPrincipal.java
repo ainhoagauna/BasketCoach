@@ -1,6 +1,6 @@
 package LP;
 
-import LD.sqliteConnection;
+import LD.BD;
 import LN.clsGestorAdministrador;
 
 import java.awt.Event;
@@ -37,7 +37,7 @@ public class frmPrincipal extends JFrame
 		createAndShowGUI();
 		this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
 		
-		connection = sqliteConnection.dbConnector();
+		connection = BD.dbConnector();
 		
 	}
 

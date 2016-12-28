@@ -10,25 +10,23 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import LD.sqliteConnection;
+import LD.BD;
 import LN.clsGestorAdministrador;
 
 public class frmAñadirEquipo extends JFrame implements ActionListener{
 	private JTextField textFieldNombre;
 	private JTextField textFieldCiudad;
 	private JTextField textFieldCategoria;
+	private JTextField textField;
 	
-	private boolean retorno = false;
 	
-	Connection conn=sqliteConnection.dbConnector();
-	Statement stmt;
 	
 	
 	public frmAñadirEquipo() {
 		getContentPane().setLayout(null);
 		setTitle("Añadir equipo");	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		setBounds(300, 100, 350, 300);
+		setBounds(300, 100, 350, 384);
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setBounds(30, 19, 46, 23);
@@ -58,16 +56,25 @@ public class frmAñadirEquipo extends JFrame implements ActionListener{
 		textFieldCategoria.setColumns(10);
 		
 		JButton btnAñadir = new JButton("A\u00D1ADIR");
-		btnAñadir.setBounds(50, 188, 89, 23);
+		btnAñadir.setBounds(53, 272, 89, 23);
 		btnAñadir.addActionListener(this);
 		btnAñadir.setActionCommand("AÑADIR");		
 		getContentPane().add(btnAñadir);
 		
 		JButton btnSalir = new JButton("ATRAS");
-		btnSalir.setBounds(166, 188, 89, 23);
+		btnSalir.setBounds(166, 272, 89, 23);
 		btnSalir.addActionListener(this);
 		btnSalir.setActionCommand("ATRAS");
 		getContentPane().add(btnSalir);
+		
+		JLabel lblLicenciaEntrenador = new JLabel("Licencia entrenador");
+		lblLicenciaEntrenador.setBounds(30, 178, 112, 23);
+		getContentPane().add(lblLicenciaEntrenador);
+		
+		textField = new JTextField();
+		textField.setBounds(30, 214, 112, 26);
+		getContentPane().add(textField);
+		textField.setColumns(10);
 	}
 
 
@@ -89,83 +96,28 @@ public class frmAñadirEquipo extends JFrame implements ActionListener{
 		}
 	}
 	
-	@SuppressWarnings("null")
+	
 	public void añadir()
   	{
+		
+		String nombre= textFieldNombre.getText();
+		String ciudad= textFieldCiudad.getText();
+		String categoria=textFieldCategoria.getText();
+		String licencia=textField.getText();
+		BD base=new BD();
+		base.añadirEquipo(nombre,ciudad,categoria,licencia);
  
- 
-  		
-  		
-  			try {
-				stmt = conn.createStatement();
-				
-				String nombre_e = textFieldNombre.getText();
-				ResultSet busqueda = null;
-			
-				
-				while(busqueda.next())
-				{
-					if(nombre_e.equals("select nombre_e from equipo"))
-					{
-						JOptionPane.showMessageDialog(null, "Este equipo ya existe");
-					}
-					
-					else
-					{
-					
-						stmt.executeUpdate("insert into equipo values('"+textFieldNombre.getText()+"', '"+textFieldCiudad.getText()+"', '"+textFieldCategoria.getText()+"')");
+  		textFieldCategoria.setText("");
+		textFieldCiudad.setText("");
+		textFieldNombre.setText("");
+		textField.setText("");
 						
-						textFieldCategoria.setText("");
-						textFieldCiudad.setText("");
-						textFieldNombre.setText("");
-						
-						
-						JOptionPane.showMessageDialog(null, "¡Equipo añadido correctamente!");	
-						
-					}
-				}
-//				if(nombre_e.equals("select nombre_e from equipo"))
-//				{
-//	 				JOptionPane.showMessageDialog(null, "Este equipo ya existe");
-//				}
 				
-				
-				
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	
 		
   	}
  		
   		
-//  public boolean LeerContraseña(String nombre_e)
-//		{		
-//	  
-// 			
-// 			if(nombre_e.equals("select nombre_e from equipo"))
-//			{
-// 				retorno=true;
-//			}
-//			else
-//			{
-//				retorno=false;
-//				
-//			}
-//			
-//			return retorno;
-//		}
-//
-//		public boolean isRetorno()
-//		{
-//			return retorno;
-//		}
-//
-//		public void setRetorno(boolean retorno) 
-//		{
-//			this.retorno = retorno;
-//		}
+
 	
 	
 }
