@@ -1,11 +1,14 @@
 package LP;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -13,7 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 import LD.BD;
 
-public class frmQuintetos extends JFrame{
+public class frmQuintetos extends JFrame implements ActionListener{
     /**
      * 
      */
@@ -22,6 +25,7 @@ public class frmQuintetos extends JFrame{
     private JTable tabla = null;
     DefaultTableModel modelo = null;
     JScrollPane desplazamiento = null;
+    private JButton salir;
     
  
   
@@ -70,10 +74,34 @@ public class frmQuintetos extends JFrame{
         
         
         modelo.addRow( new Object[] {numero,nombre,uno,dos,tres,cuatro} );
+        
+        JButton btnSalir = new JButton("ATRAS");
+		btnSalir.setBounds(72, 40, 89, 23);
+		btnSalir.addActionListener(this);
+		btnSalir.setActionCommand("ATRAS");
+		getContentPane().add(btnSalir);
+		
+		
        
     }
-}
 
+    
+   	
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+		switch(e.getActionCommand()){
+		case "ATRAS":
+				
+			this.dispose();
+			
+			break;
+			
+	}
+}
+}
 
 
 

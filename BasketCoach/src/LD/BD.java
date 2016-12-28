@@ -149,14 +149,16 @@ public class BD
             		 dos= rs.getString("segundo_cuarto");
             		 tres = rs.getString("tercer_cuarto");
             		 cuatro = rs.getString("cuarto_cuarto");
+            		 
+            		  modelo.addRow( new Object[] {numero,nombre,uno,dos,tres,cuatro} );
             	 }    
-            	 modelo.addRow( new Object[] {numero,nombre,uno,dos,tres,cuatro} );
+            	
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
            
-            
+          
             return modelo;
         
 	}
