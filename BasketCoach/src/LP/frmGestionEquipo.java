@@ -11,7 +11,9 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -29,6 +31,10 @@ import java.awt.Font;
 import javax.swing.UIManager;
 import javax.swing.JScrollBar;
 import javax.swing.event.ListDataListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
+import javax.swing.border.BevelBorder;
+import java.awt.Point;
 
 
 
@@ -46,12 +52,19 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 	private JTextField textFieldAsistencia;
 	private JTextField textFieldContraseña;
 	private JList list;
-	private JList jugador;
 	private DefaultListModel modeloLista=new DefaultListModel();
 	private DefaultListModel modeloLista2=new DefaultListModel();
 	JScrollPane scrollPaneLista;
 	private JTextField textField;
 	private JTextField textField_num_licen_e;
+	
+	private JTable table;
+	
+	 
+ 
+    DefaultTableModel modelo = null;
+    JScrollPane desplazamiento = null;
+   
 
 	
 	public frmGestionEquipo()
@@ -172,14 +185,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		
 		cargarLista();
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(135, 163, 178, 269);
-		getContentPane().add(scrollPane);
-		
-		jugador=new JList();
-		scrollPane.setViewportView(jugador);
-		
-		cargarListaJugador();
+		//cargarListaJugador();
 
 		lblNombre.setForeground(Color.BLACK);
 		lblNombre.setBounds(537, 49, 46, 18);
@@ -213,13 +219,16 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		textField.setColumns(10);
 		
 		JLabel lblEntrenador = new JLabel("Licencia entrenador");
-		lblEntrenador.setBounds(694, 200, 103, 21);
+		lblEntrenador.setBounds(694, 200, 130, 21);
 		getContentPane().add(lblEntrenador);
 		
 		textField_num_licen_e = new JTextField();
 		textField_num_licen_e.setBounds(694, 233, 145, 33);
 		getContentPane().add(textField_num_licen_e);
 		textField_num_licen_e.setColumns(10);
+		
+
+		crearTabla();
 		
 	
 		
@@ -240,20 +249,20 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		
 		
 	}	
-		
-	@SuppressWarnings("unchecked")
-	public void cargarListaJugador()
-		{
-		
-		
-		
-		BD base=new BD();
-		base.cargarJugador(modeloLista2);
-		   	 
-	    jugador.setModel(modeloLista2);
-	    
-	   
-}
+//		
+//	@SuppressWarnings("unchecked")
+//	public void cargarListaJugador()
+//		{
+//		
+//		
+//		
+//		BD base=new BD();
+//		base.cargarJugador(modeloLista2);
+//		   	 
+//	    jugador.setModel(modeloLista2);
+//	    
+//	   
+//}
 	    
 		
 	
@@ -292,6 +301,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 			admin.setVisible(true);
 			admin.toFront();
 			
+			break;
 			
 		}
 		
@@ -306,5 +316,74 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		eliminarEquipo objElim=new eliminarEquipo();
 		
 		
+	}
+	
+	public void crearTabla()
+	
+	{
+
+        // Nombre de las columnas como apareceran en la tabla
+        String[] columnas = {"NÚMERO JUGADOR", "NOMBRE", "APELLIDO"};
+        table = new JTable();
+        
+     
+      
+        
+        table.setPreferredSize(new Dimension(200,150));
+        table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        
+        getContentPane().add(table);
+       
+        modelo = new DefaultTableModel();
+        
+        
+     
+        desplazamiento = new JScrollPane(table);
+        int numero=0;
+        String nombre=null;
+        String apellido=null;
+        
+        
+        // Parametros de la ventana
+      //  this.setTitle("Tabla quintetos");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new BorderLayout()); 
+        
+        // Modelo de la tabla
+        modelo.setColumnIdentifiers(columnas);
+        modelo.fireTableDataChanged();
+        
+        // Barras de desplazamiento
+        desplazamiento.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        desplazamiento.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        
+        
+        
+        table.setModel(modelo);
+        
+        // Agregando elementos a la ventana
+        this.getContentPane().add(desplazamiento, BorderLayout.CENTER);    
+        
+       
+        
+        // Ponemos los datos en la tabla
+        
+        BD base=new BD();
+        base.cargarJugador2(numero,nombre,apellido,modelo);
+        
+        
+        modelo.addRow( new Object[] {numero,nombre,apellido} );
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 	}
 }

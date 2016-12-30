@@ -50,6 +50,12 @@ public class frmMinutos extends JFrame implements ActionListener{
 		case "Salir":
 			
 			this.dispose();
+
+			frmAdministrador admin = new frmAdministrador();
+			admin.setVisible(true);
+			admin.toFront();
+			
+			break;
 		
 		}
 		

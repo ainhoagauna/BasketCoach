@@ -179,8 +179,7 @@ public class frmAñadirJugador extends JFrame implements ActionListener{
 		textField_equipo.setText("");
 		textField_contraseina.setText("");
 		
-		frmGestionEquipo gestion=new frmGestionEquipo();
-		gestion.cargarListaJugador();
+		
 						
 		
 		

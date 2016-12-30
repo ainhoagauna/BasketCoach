@@ -38,22 +38,23 @@ public class frmUsuario extends javax.swing.JFrame {
 	
 	/** Creates new form ventanaMenu */
     public frmUsuario() {
-    	initComponents();
+        initComponents();
         this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla.
         llenarMenu();
     }
     
     public void llenarMenu(){
-        ArrayList<Avatar> avatars=new ArrayList<Avatar>();
-        avatars.add(new Avatar("Asistencia", loadImage("/Image/assit.png")));
-        avatars.add(new Avatar("Gestion de minutos", loadImage("/Image/minutos.png")));
+        List<Avatar> avatars=new ArrayList<Avatar>();
+        
+        avatars.add(new Avatar("Asistencia", loadImage("/Image/assist.png")));       
+        avatars.add(new Avatar("Gestión de Minutos", loadImage("/Image/minutos.png")));
         avatars.add(new Avatar("Recordatorios", loadImage("/Image/recordatorio.png")));
         menu.setAvatars(avatars);
     }
     
     public static Image loadImage(String fileName){
         try {
-            return ImageIO.read(frmAdministrador.class.getResource(fileName));
+            return ImageIO.read(frmUsuario.class.getResource(fileName));
         }
         catch (Exception e) {
             return null;
@@ -61,20 +62,22 @@ public class frmUsuario extends javax.swing.JFrame {
     }
     
     public void llamarMenu(){
+        
         if(menu.getSelectedtitulo().equals("Asistencia")){
-        	frmAsistencia frame=new frmAsistencia();
+        	frmUsuarioAsistencia frame=new frmUsuarioAsistencia();
         	frame.setVisible(true);
         	frame.toFront();
         	this.setVisible(false);
         }
+      
         if(menu.getSelectedtitulo().equals("Gestión de Minutos")){
-        	frmMinutos frame=new frmMinutos();
+        	frmUsuarioMinutos frame=new frmUsuarioMinutos();
         	frame.setVisible(true);        	
         	frame.toFront();
         	this.setVisible(false);
         }
         if(menu.getSelectedtitulo().equals("Recordatorios")){
-        	frmRecordatorios frame=new frmRecordatorios();
+        	frmUsuarioRecordatorios frame=new frmUsuarioRecordatorios();
         	frame.setVisible(true);        	
         	frame.toFront();
         	this.setVisible(false);
@@ -102,7 +105,7 @@ public class frmUsuario extends javax.swing.JFrame {
 		setBounds(750, 200, 463, 338);
 
         menu = new org.edisoncor.gui.panel.PanelAvatarChooser();
-        menu.setIcon(new ImageIcon(frmAdministrador.class.getResource("/Image/basketball.jpg")));
+        menu.setIcon(new ImageIcon(frmUsuario.class.getResource("/Image/basketball.jpg")));
         buttonIpod1 = new org.edisoncor.gui.button.ButtonIpod();
         buttonIpod1.setBounds(409, 220, 79, 76);
 
@@ -150,7 +153,7 @@ public class frmUsuario extends javax.swing.JFrame {
         menu.add(buttonIpod1);
         
         ButtonIcon btnLogOut = new ButtonIcon();
-        btnLogOut.setIcon(new ImageIcon(frmAdministrador.class.getResource("/Image/logout.png")));
+        btnLogOut.setIcon(new ImageIcon(frmUsuario.class.getResource("/Image/logout.png")));
         btnLogOut.setBounds(852, 11, 39, 36);
         btnLogOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -220,4 +223,6 @@ private void menuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_menu
     private org.edisoncor.gui.button.ButtonIpod buttonIpod1;
     private org.edisoncor.gui.panel.PanelAvatarChooser menu;
 }
+
+
 

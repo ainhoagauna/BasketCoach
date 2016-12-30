@@ -3,6 +3,7 @@ package LP;
 import LD.BD;
 import LN.clsGestorAdministrador;
 
+
 import java.awt.Event;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -104,24 +105,32 @@ public class frmPrincipal extends JFrame
 					}
 					if(count == 1)
 					{
-						JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
+						
 											
-						clsGestorAdministrador objA = new clsGestorAdministrador();		
+						clsGestorAdministrador objA = new clsGestorAdministrador();	
+						
 	
 						String nombre = textField_usuario.getText();
 						String contraseña = pfContraseña.getText();
-						
-						objA.LeerContraseña(nombre, contraseña);
+				
+						BD base=new BD();
 						
 						if(objA.LeerContraseña(nombre, contraseña)==true)
 						{
+							JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
 							frmAdministrador objAdmin = new frmAdministrador();
 							objAdmin.setVisible(true);						
 						}
-						else
-						{		
+						else if (base.contraseña(nombre,contraseña)==true)
+						{	
+							JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
 							frmUsuario objUsu = new frmUsuario();
 							objUsu.setVisible(true);
+								
+						}
+						else if(base.contraseña(nombre,contraseña)==false)
+						{
+							System.out.println("nada");
 						}
 					}
 					else if(count>1)
@@ -138,7 +147,7 @@ public class frmPrincipal extends JFrame
 					
 				}catch(Exception e1)
 				{
-					JOptionPane.showMessageDialog(null, e1);				
+					//JOptionPane.showMessageDialog(null, e1);				
 				}
 							
 			}

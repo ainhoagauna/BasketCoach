@@ -82,6 +82,8 @@ public class frmQuintetos extends JFrame implements ActionListener{
 		getContentPane().add(btnSalir);
 		
 		
+		
+		
        
     }
 
@@ -96,6 +98,10 @@ public class frmQuintetos extends JFrame implements ActionListener{
 		case "ATRAS":
 				
 			this.dispose();
+
+			frmAdministrador admin = new frmAdministrador();
+			admin.setVisible(true);
+			admin.toFront();
 			
 			break;
 			

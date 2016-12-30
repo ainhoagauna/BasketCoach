@@ -5,6 +5,7 @@ import java.sql.*;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class BD 
 {
@@ -110,7 +111,7 @@ public class BD
 	
 	public DefaultListModel cargarJugador(DefaultListModel modeloLista2)
 	{
-		String equipo;
+		
 		
 	     
 	      try {
@@ -162,6 +163,103 @@ public class BD
             return modelo;
         
 	}
+
+	public DefaultTableModel cargarAsistencia(int numero, String nombre, int bonus,int asistencia,int meritos, int desconvocado, DefaultTableModel modelo)
+	{
+		try {
+        	ResultSet rs = stmt.executeQuery("select * from asistencia");
+        	 while(rs.next() == true) {
+        		 numero = rs.getInt("num_j");
+        		 nombre = rs.getString("nombre_j");
+        		 bonus = rs.getInt("bonus_a");
+        		 asistencia= rs.getInt("tot_asis_a");
+        		 meritos = rs.getInt("meritos_a");
+        		 desconvocado = rs.getInt("desconv_a");
+        		 
+        		  modelo.addRow( new Object[] {numero,nombre,bonus,asistencia,meritos,desconvocado} );
+        	 }    
+        	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+       
+      
+        return modelo;
+	}
+	
+	public DefaultTableModel cargarJugador2(int numero,String nombre, String apellido, DefaultTableModel modelo)
+	{
+		  
+        try {
+        	ResultSet rs = stmt.executeQuery("select * from jugador");
+        	 while(rs.next() == true) {
+        		 numero = rs.getInt("num_j");
+        		 nombre = rs.getString("nombre_j");
+        		 apellido= rs.getString("ape1_j");
+        		
+        		 
+        		  ((DefaultTableModel) modelo).addRow( new Object[] {numero,nombre,apellido} );
+        	 }    
+        	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+       
+		
+		
+		
+		
+		return modelo;
+		
+	}
+
+
+
+	
+	
+	public boolean contraseña(String nombre, String contraseña) {
+		// TODO Auto-generated method stub
+		
+		boolean retorno = true;
+		try {
+        	ResultSet rs = stmt.executeQuery("select username,password from login where username='nombre' and password='contraseña'");
+        	 while(rs.next() == true) {
+        		 
+        		 if(rs!=null)
+        		 {
+        			 retorno=true;
+        		 }
+        		 
+//        		 else
+//        		 {
+//        			 retorno=false;
+//        		 }
+        		 
+//        		 nombre = rs.getString("username");
+//        		 contraseña=rs.getString("password");
+        		
+        	 }
+        	 
+        	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return retorno; 
+	}
+
+
+
+
+
+
+
+
+
+
 }
 
 
