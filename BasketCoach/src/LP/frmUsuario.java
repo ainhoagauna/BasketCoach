@@ -44,7 +44,8 @@ public class frmUsuario extends javax.swing.JFrame {
     }
     
     public void llenarMenu(){
-        List<Avatar> avatars=new ArrayList<Avatar>();
+    	
+        ArrayList<Avatar> avatars=new ArrayList<Avatar>();
         
         avatars.add(new Avatar("Asistencia", loadImage("/Image/assist.png")));       
         avatars.add(new Avatar("Gestión de Minutos", loadImage("/Image/minutos.png")));

@@ -54,8 +54,11 @@ public class BD
 			try {
 				
 							
-				String sentencia="insert into jugador values('"+nombre+"', '"+ape1+"', '"+ape2+"','"+asistencia+"', '"+num_j+"', '"+num_licen_j+"','"+num_licen_e+"', '"+equipo+"', '"+contraseña+"')";
+				String sentencia="insert into jugador values('"+nombre+"', '"+ape1+"', '"+ape2+"','"+equipo+"','"+num_licen_j+"','"+asistencia+"', '"+num_j+"',  '"+contraseña+"', '"+num_licen_e+"')";
 				stmt.executeUpdate(sentencia);
+				
+				String sentencia2="insert into login values('"+nombre+" , '"+ape1+"')";
+				stmt.executeUpdate(sentencia2);
 				
 				
 				
