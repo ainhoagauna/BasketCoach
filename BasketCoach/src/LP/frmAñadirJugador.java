@@ -21,13 +21,11 @@ public class frmAñadirJugador extends JFrame implements ActionListener{
 
 	private JTextField textFieldNombre;	
 	private JTextField textFieldApe;
-	private JTextField textField_asistencia;
 	private JTextField textField_contraseina;
 	private JTextField textField_num_j;
 	private JTextField textField_equipo;
 	private JTextField textField_num_licen_e;
 	private JTextField textField_num_licen_j;
-	private JTextField textField_ape2;
 	
 	
 	
@@ -48,16 +46,16 @@ public class frmAñadirJugador extends JFrame implements ActionListener{
 		textFieldNombre.setColumns(10);
 		
 		JLabel ape1 = new JLabel("Apellido");
-		ape1.setBounds(30, 92, 71, 23);
+		ape1.setBounds(182, 19, 71, 23);
 		getContentPane().add(ape1);
 		
 		textFieldApe = new JTextField();
-		textFieldApe.setBounds(30, 117, 170, 30);
+		textFieldApe.setBounds(182, 50, 170, 30);
 		getContentPane().add(textFieldApe);
 		textFieldApe.setColumns(10);
 		
 		JLabel lblLicen_j = new JLabel("Licencia jugador");
-		lblLicen_j.setBounds(311, 18, 129, 24);
+		lblLicen_j.setBounds(182, 165, 129, 24);
 		getContentPane().add(lblLicen_j);
 		
 		
@@ -74,61 +72,46 @@ public class frmAñadirJugador extends JFrame implements ActionListener{
 		getContentPane().add(btnSalir);
 		
 		JLabel lblNmero = new JLabel("N\u00FAmero jugador");
-		lblNmero.setBounds(166, 22, 101, 16);
+		lblNmero.setBounds(30, 159, 101, 16);
 		getContentPane().add(lblNmero);
-		
-		JLabel Jlabel_asistencia = new JLabel("Asistencia");
-		Jlabel_asistencia.setForeground(Color.BLACK);
-		Jlabel_asistencia.setBounds(29, 241, 86, 20);
-		getContentPane().add(Jlabel_asistencia);
-		
-		textField_asistencia = new JTextField();
-		textField_asistencia.setColumns(10);
-		textField_asistencia.setBounds(29, 272, 161, 30);
-		getContentPane().add(textField_asistencia);
 		
 		JLabel JLabel_asistencia = new JLabel("Contrase\u00F1a");
 		JLabel_asistencia.setForeground(Color.BLACK);
-		JLabel_asistencia.setBounds(29, 313, 86, 20);
+		JLabel_asistencia.setBounds(30, 258, 86, 20);
 		getContentPane().add(JLabel_asistencia);
 		
 		textField_contraseina = new JTextField();
 		textField_contraseina.setColumns(10);
-		textField_contraseina.setBounds(29, 344, 161, 30);
+		textField_contraseina.setBounds(30, 290, 161, 30);
 		getContentPane().add(textField_contraseina);
 		
 		textField_num_j = new JTextField();
 		textField_num_j.setColumns(10);
-		textField_num_j.setBounds(166, 50, 34, 33);
+		textField_num_j.setBounds(30, 186, 34, 33);
 		getContentPane().add(textField_num_j);
 		
 		JLabel lblEquipo = new JLabel("Equipo");
-		lblEquipo.setBounds(30, 160, 86, 15);
+		lblEquipo.setBounds(30, 96, 86, 15);
 		getContentPane().add(lblEquipo);
 		
 		textField_equipo = new JTextField();
-		textField_equipo.setBounds(30, 189, 122, 30);
+		textField_equipo.setBounds(30, 117, 122, 30);
 		getContentPane().add(textField_equipo);
 		textField_equipo.setColumns(10);
 		
 		JLabel lblLicenciaEntrenador = new JLabel("Licencia entrenador");
-		lblLicenciaEntrenador.setBounds(223, 152, 129, 23);
+		lblLicenciaEntrenador.setBounds(182, 91, 129, 23);
 		getContentPane().add(lblLicenciaEntrenador);
 		
 		textField_num_licen_e = new JTextField();
-		textField_num_licen_e.setBounds(223, 189, 138, 30);
+		textField_num_licen_e.setBounds(182, 117, 138, 30);
 		getContentPane().add(textField_num_licen_e);
 		textField_num_licen_e.setColumns(10);
 		
 		textField_num_licen_j = new JTextField();
-		textField_num_licen_j.setBounds(311, 54, 109, 26);
+		textField_num_licen_j.setBounds(182, 200, 109, 26);
 		getContentPane().add(textField_num_licen_j);
 		textField_num_licen_j.setColumns(10);
-		
-		textField_ape2 = new JTextField();
-		textField_ape2.setBounds(242, 113, 138, 30);
-		getContentPane().add(textField_ape2);
-		textField_ape2.setColumns(10);
 	}
 
 
@@ -155,29 +138,40 @@ public class frmAñadirJugador extends JFrame implements ActionListener{
   	{
 		String nombre=textFieldNombre.getText();	
 		String ape1=textFieldApe.getText();
-		String ape2=textField_ape2.getText();
-		String asistencia=textField_asistencia.getText();
-		String num_j=textField_num_j.getText();
+		
+		//int asistencia=Integer.parseInt(textField_asistencia.getText());
+		int num_j=Integer.parseInt(textField_num_j.getText());
 		String num_licen_j=textField_num_licen_j.getText();
 		String num_licen_e=textField_num_licen_e.getText();
 		String equipo=textField_equipo.getText();
 		String contraseña=textField_contraseina.getText();
 		
 		
-		BD base=new BD();
-		base.añadirJugador(nombre,ape1,ape2,asistencia,num_j,num_licen_j,num_licen_e,equipo,contraseña);
+		if(textField_num_j.getText().isEmpty() || textFieldNombre.getText().isEmpty() ||textFieldApe.getText().isEmpty() ||textField_num_licen_j.getText().isEmpty() ||textField_num_licen_e.getText().isEmpty() ||textField_contraseina.getText().isEmpty() ||textField_equipo.getText().isEmpty()  )
+		{
+			JOptionPane.showMessageDialog(null, "Rellene todos los campos");
+		}
+		
+		else
+		{
+			BD base=new BD();
+			base.añadirJugador(nombre,ape1,equipo,num_licen_j,num_j,contraseña, num_licen_e);
+			
+			JOptionPane.showMessageDialog(null, "¡Jugador añadido correctamente!");	
+			
+			textFieldNombre.setText("");
+			textFieldApe.setText("");
+			textField_num_j.setText("");
+			textField_num_licen_j.setText("");
+			textField_num_licen_e.setText("");
+			textField_equipo.setText("");
+			textField_contraseina.setText("");
+		}
 		
 		
 		
-		textFieldNombre.setText("");
-		textFieldApe.setText("");
-		textField_ape2.setText("");
-		textField_asistencia.setText("");
-		textField_num_j.setText("");
-		textField_num_licen_j.setText("");
-		textField_num_licen_e.setText("");
-		textField_equipo.setText("");
-		textField_contraseina.setText("");
+		
+		
 		
 		
 						

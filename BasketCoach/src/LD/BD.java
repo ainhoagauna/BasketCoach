@@ -47,22 +47,31 @@ public class BD
 
 
 	
-	public void añadirJugador(String nombre, String ape1, String ape2,String asistencia, String num_j, String num_licen_j,String num_licen_e, String equipo, String contraseña)
+	public void añadirJugador(String nombre, String ape1, String equipo,String num_licen_j, int num_j,  String contraseña, String num_licen_e )
 	{	
 		
 		
 			try {
 				
 							
-				String sentencia="insert into jugador values('"+nombre+"', '"+ape1+"', '"+ape2+"','"+equipo+"','"+num_licen_j+"','"+asistencia+"', '"+num_j+"',  '"+contraseña+"', '"+num_licen_e+"')";
+				String sentencia="insert into jugador values('"+nombre+"', '"+ape1+"', '"+equipo+"','"+num_licen_j+"','0', '"+num_j+"',  '"+contraseña+"', '"+num_licen_e+"')";
 				stmt.executeUpdate(sentencia);
 				
-				String sentencia2="insert into login values('"+nombre+" , '"+ape1+"')";
+				String sentencia2="insert into login values('"+nombre+"' , '"+contraseña+"')";
 				stmt.executeUpdate(sentencia2);
 				
+				String sentencia3="insert into asistencia ('num_j', 'apellido_j') values('"+num_j+"', '"+ape1+"')";
+				stmt.executeUpdate(sentencia3);
+				
+				String sentencia4="insert into minutos ('num_j', 'apellido_j') values('"+num_j+"', '"+ape1+"')";
+				stmt.executeUpdate(sentencia4);
+				
+				String sentencia5="insert into quinteto ('num_j', 'apellido_j') values('"+num_j+"', '"+ape1+"')";
+				stmt.executeUpdate(sentencia5);
 				
 				
-				JOptionPane.showMessageDialog(null, "¡Jugador añadido correctamente!");	
+				
+				
 			
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -137,9 +146,7 @@ public class BD
 		return modeloLista2;
 	}
 	
-	
-	
-	public DefaultTableModel cargarQuintetos(int numero, String nombre, String uno,String dos, String tres, String cuatro, DefaultTableModel modelo)
+	public DefaultTableModel cargarQuintetos(int numero, String apellido, String uno,String dos, String tres, String cuatro, DefaultTableModel modelo)
 	
 	{
 		
@@ -148,13 +155,13 @@ public class BD
             	ResultSet rs = stmt.executeQuery("select * from quinteto");
             	 while(rs.next() == true) {
             		 numero = rs.getInt("num_j");
-            		 nombre = rs.getString("nombre_j");
+            		 apellido = rs.getString("apellido_j");
             		 uno = rs.getString("primer_cuarto");
             		 dos= rs.getString("segundo_cuarto");
             		 tres = rs.getString("tercer_cuarto");
             		 cuatro = rs.getString("cuarto_cuarto");
             		 
-            		  modelo.addRow( new Object[] {numero,nombre,uno,dos,tres,cuatro} );
+            		  modelo.addRow( new Object[] {numero,apellido,uno,dos,tres,cuatro} );
             	 }    
             	
 			} catch (SQLException e) {
@@ -167,19 +174,19 @@ public class BD
         
 	}
 
-	public DefaultTableModel cargarAsistencia(int numero, String nombre, int bonus,int asistencia,int meritos, int desconvocado, DefaultTableModel modelo)
+	public DefaultTableModel cargarAsistencia(int numero, String apellido, int bonus,int asistencia,int meritos, int desconvocado, DefaultTableModel modelo)
 	{
 		try {
         	ResultSet rs = stmt.executeQuery("select * from asistencia");
         	 while(rs.next() == true) {
         		 numero = rs.getInt("num_j");
-        		 nombre = rs.getString("nombre_j");
+        		 apellido = rs.getString("apellido_j");
         		 bonus = rs.getInt("bonus_a");
         		 asistencia= rs.getInt("tot_asis_a");
         		 meritos = rs.getInt("meritos_a");
         		 desconvocado = rs.getInt("desconv_a");
         		 
-        		  modelo.addRow( new Object[] {numero,nombre,bonus,asistencia,meritos,desconvocado} );
+        		  modelo.addRow( new Object[] {numero,apellido,bonus,asistencia,meritos,desconvocado} );
         	 }    
         	
 		} catch (SQLException e) {
@@ -218,10 +225,6 @@ public class BD
 		
 	}
 
-
-
-	
-	
 	public boolean contraseña(String nombre, String contraseña) {
 		// TODO Auto-generated method stub
 		
@@ -254,7 +257,23 @@ public class BD
 		return retorno; 
 	}
 
-
+	/* Ejecuta la actualizacion de la tabla persona dado los valores de actualizacion
+	 * y el ID del registro a afectar
+	 */
+	public boolean update(String valores, String num_j)
+	    {
+	        boolean res = false;
+	        String q = " UPDATE quintetos SET " + valores + " WHERE num_j= " + num_j;
+	        try {
+	            PreparedStatement pstm = conn.prepareStatement(q);
+	            pstm.execute();
+	            pstm.close();
+	            res=true;
+	         }catch(SQLException e){
+	            System.out.println(e);
+	        }
+	        return res;
+	    }
 
 
 

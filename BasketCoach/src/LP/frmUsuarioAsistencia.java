@@ -70,7 +70,7 @@ JScrollPane desplazamiento = null;
 	public void crearTabla()
 	{
 		  // Nombre de las columnas como apareceran en la tabla
-        String[] columnas = {"NÚMERO JUGADOR", "NOMBRE", "BONUS","ASISTENCIA", "MERITOS", "DESCONVOCADO"};
+        String[] columnas = {"NÚMERO JUGADOR", "APELLIDO", "BONUS","ASISTENCIA", "MERITOS", "DESCONVOCADO"};
         tabla = new JTable();
         tabla.setColumnSelectionAllowed(true);
         tabla.setCellSelectionEnabled(true);
@@ -83,7 +83,7 @@ JScrollPane desplazamiento = null;
         int meritos=0;
         int desconvocado=0;
         
-        String nombre=null;
+        String apellido=null;
        
         
         // Parametros de la ventana
@@ -110,10 +110,10 @@ JScrollPane desplazamiento = null;
         // Ponemos los datos en la tabla
         
         BD base=new BD();
-        base.cargarAsistencia(numero,nombre,bonus, asistencia, meritos,desconvocado,modelo);
+        base.cargarAsistencia(numero,apellido,bonus, asistencia, meritos,desconvocado,modelo);
         
         
-        modelo.addRow( new Object[] {numero,nombre,bonus, asistencia, meritos,desconvocado} );
+        modelo.addRow( new Object[] {numero,apellido,bonus, asistencia, meritos,desconvocado} );
 	}
 		
 	
