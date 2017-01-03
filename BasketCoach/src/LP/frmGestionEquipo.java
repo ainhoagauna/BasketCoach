@@ -34,6 +34,7 @@ import javax.swing.event.ListDataListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 import javax.swing.border.BevelBorder;
+
 import java.awt.Point;
 
 
@@ -60,9 +61,10 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 	
 	private JTable table;
 	
-	 
+	Statement sent;
+	Connection conn=BD.dbConnector();
  
-    DefaultTableModel modelo = null;
+    DefaultTableModel model = null;
     JScrollPane desplazamiento = null;
    
 
@@ -183,7 +185,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		list.setBounds(10, 156, 86, 141);
 		getContentPane().add(list);
 		
-		cargarLista();
+		//cargarLista();
 		
 		//cargarListaJugador();
 
@@ -228,27 +230,28 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		textField_num_licen_e.setColumns(10);
 		
 
-		crearTabla();
+		//crearTabla();
+		llenar();
 		
 	
 		
 	}
 	
 	
-
-	@SuppressWarnings("unchecked")
-	public void cargarLista()
-	{
-		BD base=new BD();
-		base.cargarLista(modeloLista);
-		   	 
-	    list.setModel(modeloLista);		    
-
-		
-		   
-		
-		
-	}	
+//
+//	@SuppressWarnings("unchecked")
+//	public void cargarLista()
+//	{
+//		BD base=new BD();
+//		base.cargarLista(modeloLista);
+//		   	 
+//	    list.setModel(modeloLista);		    
+//
+//		
+//		   
+//		
+//		
+//	}	
 //		
 //	@SuppressWarnings("unchecked")
 //	public void cargarListaJugador()
@@ -317,7 +320,7 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
 		
 		
 	}
-	
+	/*
 	public void crearTabla()
 	
 	{
@@ -385,5 +388,37 @@ public class frmGestionEquipo extends JFrame implements ActionListener{
         
         
         
+	}
+*/
+
+	public void llenar()
+	{
+		try{
+			table=new JTable();
+	        //Conn=DriveMan.getConnection();
+	        sent=conn.createStatement();
+	        String [] titulos ={"NÚMERO","APELLIDO","NUMERO"};
+	        String sql="select * from jugador";
+	        model=new DefaultTableModel(null, titulos);
+	        //sent=conn.createStatement();
+	        ResultSet rs=sent.executeQuery(sql);
+
+	        String fila []= new String [5];
+
+	        while(rs.next()){
+	            fila [0]=rs.getString("nombre_j");
+	            fila [1]=rs.getString("ape1_j");
+	            fila [2]=rs.getString("num_j");
+	            
+
+	            model.addRow(fila);
+
+	        }
+	        table.setModel(model);
+	        getContentPane().add(table);
+	       
+	    }catch(Exception e){
+	e.printStackTrace();
+	    }
 	}
 }

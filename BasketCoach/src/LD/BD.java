@@ -198,18 +198,26 @@ public class BD
         return modelo;
 	}
 	
-	public DefaultTableModel cargarJugador2(int numero,String nombre, String apellido, DefaultTableModel modelo)
+	public DefaultTableModel cargarJugador2(String nombre,String apellido, String equipo, String licen_j, int asistencia,int numero, String contraseña, String licen_e, DefaultTableModel modelo)
 	{
 		  
         try {
         	ResultSet rs = stmt.executeQuery("select * from jugador");
         	 while(rs.next() == true) {
-        		 numero = rs.getInt("num_j");
+        		 
+        		 
         		 nombre = rs.getString("nombre_j");
         		 apellido= rs.getString("ape1_j");
+        		 equipo= rs.getString("equipo_j");
+        		 licen_j= rs.getString("num_licen_j");
+        		 asistencia=rs.getInt("asistencia_j");
+        		 numero = rs.getInt("num_j");
+        		 contraseña= rs.getString("contraseina_j");
+        		 licen_e= rs.getString("num_licen_ent");
+        		 
         		
         		 
-        		  ((DefaultTableModel) modelo).addRow( new Object[] {numero,nombre,apellido} );
+        		  modelo.addRow( new Object[] {nombre,apellido,equipo,licen_j,asistencia,numero,contraseña,licen_e} );
         	 }    
         	
 		} catch (SQLException e) {
@@ -238,14 +246,7 @@ public class BD
         			 retorno=true;
         		 }
         		 
-//        		 else
-//        		 {
-//        			 retorno=false;
-//        		 }
-        		 
-//        		 nombre = rs.getString("username");
-//        		 contraseña=rs.getString("password");
-        		
+   		
         	 }
         	 
         	
