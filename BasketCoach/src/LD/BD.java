@@ -224,14 +224,38 @@ public class BD
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-       
+		return modelo;
+	}   
+   
+    public DefaultTableModel cargarMinutos(int minutos, int numPartido, String fecha,int numJugador, String apellido, DefaultTableModel modelo)
+	{
 		
-		
-		
+
+  	  try {
+        	ResultSet rs = stmt.executeQuery("select * from minutos");
+        	 while(rs.next() == true) 
+        	 {
+        		 minutos = rs.getInt("minutos_m");
+        		 numPartido = rs.getInt("num_part_m");
+        		 fecha= rs.getString("fecha_part_m");
+        		 numJugador=rs.getInt("num_j");
+        		 apellido = rs.getString("apellido_j");
+        		
+        		 modelo.addRow( new Object[] {minutos,numPartido,fecha,numJugador,apellido} );
+        	 }    
+        	 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return modelo;
 		
-	}
+		
+	}	
+
+		
+	
 
 	public boolean contraseña(String nombre, String contraseña) {
 		// TODO Auto-generated method stub
@@ -275,6 +299,14 @@ public class BD
 	        }
 	        return res;
 	    }
+
+
+
+	
+
+
+
+	
 
 
 
