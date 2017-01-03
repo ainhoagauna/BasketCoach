@@ -118,7 +118,7 @@ public void salir()
 
 public void equipo()
 {
-	frmGestionEquipo frame=new frmGestionEquipo();
+	frmEquipoGestion frame=new frmEquipoGestion();
 	frame.setVisible(true);
 	
 	frame.toFront();
@@ -134,7 +134,7 @@ public void asistencia()
 
 public void quintetos()
 {
-	frmQuintetos frame=new frmQuintetos();
+	frmQuinteto frame=new frmQuinteto();
 	frame.setVisible(true);
 	
 	frame.toFront();

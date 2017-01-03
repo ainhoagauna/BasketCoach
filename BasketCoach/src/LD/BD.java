@@ -81,6 +81,87 @@ public class BD
 	
 	}
 	
+	public void eliminarJugador(JTable table, int fila, int columna)
+	{
+		columna=0;
+		try {
+			String sentencia="delete from jugador where num_j='"+table.getValueAt(fila,columna)+"'";
+			stmt.executeUpdate(sentencia);
+			
+//			String sentencia2="delete from asistencia where num_j= '"+table.getValueAt(fila,columna)+"'";
+//			stmt.executeUpdate(sentencia2);
+//			
+//			String sentencia3="insert into minutos where num_j= '"+table.getValueAt(fila,columna)+"'";
+//			stmt.executeUpdate(sentencia3);
+//			
+//			String sentencia4="insert into quinteto where num_j= '"+table.getValueAt(fila,columna)+"'";
+//			stmt.executeUpdate(sentencia4);
+	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void mostrarJugador(JTextField textFieldNombre,JTextField textFieldApellido, JTextField textFieldEquipo, JTextField textFieldLicen_j, JTextField textFieldAsistencia, JTextField textFieldNumero,JTextField textFieldContraseña, JTextField textFieldLicen_ent,JTable table, int fila, int columna)
+	{
+		
+		columna=0;
+		try {
+			
+			ResultSet rs = stmt.executeQuery("select * from jugador where num_="+table.getValueAt(fila, 0));
+       	 while(rs.next() == true) {
+       		 
+       		 
+       		 textFieldNombre.setText(rs.getString("nombre_j"));
+       		 textFieldApellido.setText( rs.getString("ape1_j"));
+       		 textFieldEquipo.setText(rs.getString("equipo_j"));
+       		 textFieldLicen_j.setText(rs.getString("num_licen_j"));
+       		// textFieldAsistencia.setInt(rs.getInt("asistencia_j"));
+//       		 textFieldNumero.setText( rs.getInt("num_j"));
+       		 textFieldContraseña.setText (rs.getString("contraseina_j"));
+       		 textFieldLicen_ent.setText(rs.getString("num_licen_ent"));
+       		 
+       		
+       		 
+       		 
+       	 } 
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
+	
+	public void modificarJugador(String nombre, String ape1, String equipo,String num_licen_j, int num_j,  String contraseña, String num_licen_e,JTable table, int fila, int columna)
+	{
+		//columna=0;
+		try {
+			String sentencia="update jugador set nombre_j='"+nombre+"', ape1_j='"+ape1+"', equipo_j='"+equipo+"', num_licen_j='"+num_licen_j+"',asistencia_j='"+0+"',num_j='"+num_j+"', contraseina_j='"+contraseña+"',num_lincen_ent='"+num_licen_e+"' where num_j= '"+table.getValueAt(fila,columna)+"'";			
+			stmt.executeUpdate(sentencia);
+			
+		
+//			
+//			String sentencia2="delete from asistencia where num_j= '"+table.getValueAt(fila,columna)+"'";
+//			stmt.executeUpdate(sentencia2);
+//			
+//			String sentencia3="insert into minutos where num_j= '"+table.getValueAt(fila,columna)+"'";
+//			stmt.executeUpdate(sentencia3);
+//			
+//			String sentencia4="insert into quinteto where num_j= '"+table.getValueAt(fila,columna)+"'";
+//			stmt.executeUpdate(sentencia4);
+	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	
+	
+	
 	public void añadirEquipo(String nombre,String ciudad, String categoria, String licencia)
 	{
 		try {
@@ -97,54 +178,7 @@ public class BD
 		}	
 	}
 	
-	public DefaultListModel cargarLista(DefaultListModel modeloLista)
-	{
-		String equipo;
-		
-	     
-	      try {
-	    	
-	    	ResultSet rs = stmt.executeQuery("select nombre_e from equipo");
-			while(rs.next())
-			  { 
-				  // Leer el resultset
-				 
-				  modeloLista.addElement(rs.getString("nombre_e"));
-				  
-				  
-
-			  }
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return modeloLista;
-	}
 	
-	public DefaultListModel cargarJugador(DefaultListModel modeloLista2)
-	{
-		
-		
-	     
-	      try {
-	    	
-	    	ResultSet rs = stmt.executeQuery("select * from jugador");
-			while(rs.next())
-			  { 
-				  // Leer el resultset
-				 
-				  modeloLista2.addElement(rs.getString("num_j") + " " + rs.getString("nombre_j") + " " + rs.getString("ape1_j"));
-				  
-				  
-				      
-
-			  }
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return modeloLista2;
-	}
 	
 	public DefaultTableModel cargarQuintetos(int numero, String apellido, String uno,String dos, String tres, String cuatro, DefaultTableModel modelo)
 	
@@ -198,7 +232,7 @@ public class BD
         return modelo;
 	}
 	
-	public DefaultTableModel cargarJugador2(String nombre,String apellido, String equipo, String licen_j, int asistencia,int numero, String contraseña, String licen_e, DefaultTableModel modelo)
+	public DefaultTableModel cargarJugador2(int numero,String nombre,String apellido, String equipo, String licen_j, int asistencia, String contraseña, String licen_e, DefaultTableModel modelo)
 	{
 		  
         try {
@@ -217,7 +251,7 @@ public class BD
         		 
         		
         		 
-        		  modelo.addRow( new Object[] {nombre,apellido,equipo,licen_j,asistencia,numero,contraseña,licen_e} );
+        		  modelo.addRow( new Object[] {numero,nombre,apellido,equipo,licen_j,asistencia,contraseña,licen_e} );
         	 }    
         	
 		} catch (SQLException e) {

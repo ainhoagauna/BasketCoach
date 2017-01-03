@@ -2,6 +2,9 @@ package LP;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -14,9 +17,14 @@ import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import org.w3c.dom.events.MouseEvent;
+
 import LD.BD;
 
-public class a extends JFrame implements ActionListener {
+public class frmEquipoGestion extends JFrame implements ActionListener, MouseListener{
+	
+	
+	
 	private JTextField textFieldNombre;
 	private JTextField textFieldApellido;
 	private JTextField textFieldEquipo;
@@ -28,10 +36,10 @@ public class a extends JFrame implements ActionListener {
 	private JTable table=null;
 	private DefaultTableModel modelo=null;
 
-	public a()
-	{
+	public frmEquipoGestion()
+	{		
 		getContentPane().setLayout(null);
-		desabilitar();
+
 		
 		JLabel lblNombre = new JLabel("Nombre");
 		lblNombre.setBounds(30, 32, 56, 16);
@@ -88,25 +96,27 @@ public class a extends JFrame implements ActionListener {
 		textFieldNumero.setColumns(10);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setBounds(30, 206, 78, 16);
+		lblContrasea.setBounds(30, 175, 78, 16);
 		getContentPane().add(lblContrasea);
 		
 		textFieldContraseña = new JTextField();
-		textFieldContraseña.setBounds(30, 235, 116, 22);
+		textFieldContraseña.setBounds(30, 204, 116, 22);
 		getContentPane().add(textFieldContraseña);
 		textFieldContraseña.setColumns(10);
 		
 		JLabel lblLicenciaEntrenador = new JLabel("Licencia entrenador");
-		lblLicenciaEntrenador.setBounds(194, 206, 163, 16);
+		lblLicenciaEntrenador.setBounds(194, 175, 163, 16);
 		getContentPane().add(lblLicenciaEntrenador);
 		
 		textFieldLicen_ent = new JTextField();
-		textFieldLicen_ent.setBounds(194, 235, 116, 22);
+		textFieldLicen_ent.setBounds(194, 204, 116, 22);
 		getContentPane().add(textFieldLicen_ent);
 		textFieldLicen_ent.setColumns(10);
 		
 		JButton btnNuevo = new JButton("NUEVO");
 		btnNuevo.setBounds(50, 474, 102, 25);
+		btnNuevo.addActionListener(this);
+		btnNuevo.setActionCommand("NUEVO");
 		getContentPane().add(btnNuevo);
 		
 		JButton btnGuardar = new JButton("GUARDAR");
@@ -146,6 +156,7 @@ public class a extends JFrame implements ActionListener {
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
+		desabilitar();
 		llenar();
 		
 		
@@ -170,7 +181,7 @@ public class a extends JFrame implements ActionListener {
 			
 		case "MODIFICAR":
 			
-
+			this.modificar();
 			break;
 			
 		case "GUARDAR":
@@ -180,7 +191,7 @@ public class a extends JFrame implements ActionListener {
 			
 		case "ELIMINAR":
 			
-						
+			this.eliminar();			
 			break;
 			
 		case "SALIR":
@@ -206,15 +217,15 @@ public class a extends JFrame implements ActionListener {
 		String contraseña=null;
 		String licen_e=null;
 		
-		String[] columnas = {"NOMBRE","APELLIDO","EQUIPO","LICENCIA JUGADOR","NUMERO", "CONTRASEÑA", "LICENCIA ENTRENADOR"};
+		String[] columnas = {"NUMERO","NOMBRE","APELLIDO","EQUIPO","LICENCIA JUGADOR","ASISTENCIA", "CONTRASEÑA", "LICENCIA ENTRENADOR"};
 		
 		modelo = new DefaultTableModel(null,columnas);		
 		table.setModel(modelo);
 		
 		BD base=new BD();
-		base.cargarJugador2(nombre,apellido,equipo,licen_j,asistencia,num_j,contraseña,licen_e,modelo);
+		base.cargarJugador2(num_j,nombre,apellido,equipo,licen_j,asistencia,contraseña,licen_e,modelo);
 		
-		modelo.addRow( new Object[] {nombre,apellido,equipo,licen_j,asistencia,num_j,contraseña,licen_e} );
+		modelo.addRow( new Object[] {num_j,nombre,apellido,equipo,licen_j,asistencia,contraseña,licen_e} );
 	}
 
 	public void guardar()
@@ -241,6 +252,45 @@ public class a extends JFrame implements ActionListener {
 		
 	}
 	
+	public void eliminar()
+	{
+		int fila=table.getSelectedRow();
+		
+		
+		BD base=new BD();
+		base.eliminarJugador(table, fila,0);
+		
+	   
+	        llenar();
+	        JOptionPane.showMessageDialog(null, "Jugador eliminado");
+	        limpiar();
+	   
+	}
+	
+	public void modificar()
+	{
+		int fila=table.getSelectedRow();
+		int columna=table.getSelectedColumn();
+		
+		String nombre=textFieldNombre.getText();	
+		String ape1=textFieldApellido.getText();
+		String equipo=textFieldEquipo.getText();
+		String licen_j=textFieldLicen_j.getText();		
+		int asistencia=Integer.parseInt(textFieldAsistencia.getText());
+		int num_j=Integer.parseInt(textFieldNumero.getText());
+		String contraseña=textFieldContraseña.getText();
+		String licen_e=textFieldLicen_ent.getText();
+		
+		BD base=new BD();
+		base.modificarJugador(nombre,ape1,equipo,licen_j,num_j,contraseña,licen_e,table, fila,columna);
+		
+	   
+	        llenar();
+	        JOptionPane.showMessageDialog(null, "Jugador modificado");
+	        limpiar();
+		
+		
+	}
 	public void desabilitar()
 	{
 		textFieldNombre.setEditable(false);
@@ -255,6 +305,7 @@ public class a extends JFrame implements ActionListener {
 	
 	public void habilitar()
 	{
+		textFieldNombre.requestFocus();
 		textFieldNombre.setEditable(true);
 		textFieldApellido.setEditable(true);
 		textFieldEquipo.setEditable(true);
@@ -277,4 +328,53 @@ public class a extends JFrame implements ActionListener {
 		textFieldLicen_ent.setText("");
 	}
 
+	
+	
+	public boolean isCellEditable(int row, int col) 
+    {           
+       return false;           
+    }
+
+	@Override
+	public void mouseClicked(java.awt.event.MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		
+		if(e.getButton()==1){
+			
+			habilitar();
+			int fila=table.getSelectedRow();		   
+			System.out.println("ok");
+			 BD base=new BD();
+			 base.mostrarJugador(textFieldNombre,textFieldApellido, textFieldEquipo, textFieldLicen_j, textFieldAsistencia, textFieldNumero,textFieldContraseña,textFieldLicen_ent,table,fila,0);
+			 
+			 
+		}   
+	}
+
+	@Override
+	public void mouseEntered(java.awt.event.MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(java.awt.event.MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(java.awt.event.MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(java.awt.event.MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }
