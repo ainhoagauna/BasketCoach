@@ -12,111 +12,86 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import LD.BD;
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
 
 public class frmUsuarioAsistencia extends JFrame implements ActionListener{
+	private JTable table=null;
+	
+	private DefaultTableModel modelo=null;
 
-private JButton btnSalir;
-private JTable tabla = null;
-DefaultTableModel modelo = null;
-JScrollPane desplazamiento = null;
 
 	public frmUsuarioAsistencia()
 	{
-		this.pack();
-		this.setVisible(true);
-		setResizable(true);
-	
 		
-		createAndShowGUI();
-		this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
-		setBounds(500, 200, 136, 258);
-	}
-
-	public void createAndShowGUI()
-	{
-		getContentPane().setLayout(null);		
-		
-		JButton btnSalir=new JButton("Salir");
-		btnSalir.setBounds(400,210,100,30);
-		btnSalir.addActionListener(this);
 		getContentPane().setLayout(null);
-		btnSalir.setActionCommand("Salir");
+		
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Tabla asistencia", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 11, 620, 239);
+		getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(6, 16, 608, 212);
+		panel.add(scrollPane);
+		
+		table = new JTable();
+		table.setRowSelectionAllowed(false);
+		scrollPane.setViewportView(table);
+		
+		llenar();
+		
+		JButton btnSalir = new JButton("SALIR");
+		btnSalir.setBounds(281, 284, 89, 23);
+		btnSalir.addActionListener(this);
+		btnSalir.setActionCommand("SALIR");
 		getContentPane().add(btnSalir);
-		
-		
-		
-		setTitle("Asistencias");	
-		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);	
-		setBounds(500, 200, 136, 258);
-		
-		crearTabla();
-		
+
+		setTitle("Asistencia");	
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		setBounds(300, 100, 644, 408);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
-		switch(e.getActionCommand()){
-		
-		case "Salir":
 			
-			this.dispose();
+			
+			switch(e.getActionCommand()){
+				
+			
+			case "SALIR":
+				
+				this.dispose();
+
+				frmUsuario usu = new frmUsuario();
+				usu.setVisible(true);
+				usu.toFront();
+				break;
 			
 		}
-		
 	}
-		
-	public void crearTabla()
+	
+	void llenar()
+	
 	{
-		  // Nombre de las columnas como apareceran en la tabla
-        String[] columnas = {"NÚMERO JUGADOR", "APELLIDO", "BONUS","ASISTENCIA", "MERITOS", "DESCONVOCADO"};
-        tabla = new JTable();
-        tabla.setColumnSelectionAllowed(true);
-        tabla.setCellSelectionEnabled(true);
-        modelo = new DefaultTableModel();
-        desplazamiento = new JScrollPane(tabla);
-        desplazamiento.setBounds(0, 0, 452, 402);
-        int numero=0;
-        int bonus=0;
-        int asistencia=0;
-        int meritos=0;
-        int desconvocado=0;
-        
-        String apellido=null;
-       
-        
-        // Parametros de la ventana
-        this.setTitle("Tabla quintetos");
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        // Modelo de la tabla
-        modelo.setColumnIdentifiers(columnas);
-        
-        // Barras de desplazamiento
-        desplazamiento.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        desplazamiento.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        
-        // Propiedades de la tabla
-        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        tabla.setFillsViewportHeight(true);        
-        
-        tabla.setModel(modelo);
-        
-        // Agregando elementos a la ventana
-        this.getContentPane().add(desplazamiento);    
-        this.pack();
-        
-        // Ponemos los datos en la tabla
-        
-        BD base=new BD();
-        base.cargarAsistencia(numero,apellido,bonus, asistencia, meritos,desconvocado,modelo);
-        
-        
-        modelo.addRow( new Object[] {numero,apellido,bonus, asistencia, meritos,desconvocado} );
-	}
+		int bonus=0;
+		int asistencia=0;
+		int meritos=0;
+		int desconv=0;
+		int num=0;
+		String apellido=null;
 		
-	
-	
-	
+		String[] columnas = {"NUMERO","APELLIDO","BONUS"," ASISTENCIA","MERITOS", "DESCONVOCADO"};
+		
+		modelo = new DefaultTableModel(null,columnas);		
+		table.setModel(modelo);
+		
+		BD base=new BD();
+		base.cargarAsistencia(num,apellido,bonus,asistencia,meritos,desconv,modelo);
+		
+		modelo.addRow( new Object[] {num,apellido,bonus,asistencia,meritos,desconv} );
+	}
 }

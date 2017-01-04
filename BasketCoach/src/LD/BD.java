@@ -263,7 +263,7 @@ public class BD
 		return modelo;
 	}   
    
-    public DefaultTableModel cargarMinutos(int minutos, int numPartido, String fecha,int numJugador, String apellido, DefaultTableModel modelo)
+    public DefaultTableModel cargarMinutos(int numJugador, String apellido,int minutos, int numPartido, Date fecha, DefaultTableModel modelo)
 	{
 		
 
@@ -273,11 +273,11 @@ public class BD
         	 {
         		 minutos = rs.getInt("minutos_m");
         		 numPartido = rs.getInt("num_part_m");
-        		 fecha= rs.getString("fecha_part_m");
+        		 fecha= rs.getDate("fecha_part_m");
         		 numJugador=rs.getInt("num_j");
         		 apellido = rs.getString("apellido_j");
         		
-        		 modelo.addRow( new Object[] {minutos,numPartido,fecha,numJugador,apellido} );
+        		 modelo.addRow( new Object[] {numJugador,apellido,minutos,numPartido,fecha} );
         	 }    
         	 
 		} catch (SQLException e) {

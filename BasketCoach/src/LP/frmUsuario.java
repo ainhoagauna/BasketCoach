@@ -47,9 +47,11 @@ public class frmUsuario extends javax.swing.JFrame {
     	
         ArrayList<Avatar> avatars=new ArrayList<Avatar>();
         
+        
         avatars.add(new Avatar("Asistencia", loadImage("/Image/assist.png")));       
         avatars.add(new Avatar("Gestión de Minutos", loadImage("/Image/minutos.png")));
         avatars.add(new Avatar("Recordatorios", loadImage("/Image/recordatorio.png")));
+       
         menu.setAvatars(avatars);
     }
     

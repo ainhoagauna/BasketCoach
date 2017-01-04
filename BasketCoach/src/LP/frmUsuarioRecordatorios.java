@@ -51,6 +51,11 @@ private JButton btnSalir;
 		case "Salir":
 			
 			this.dispose();
+
+			frmUsuario usu = new frmUsuario();
+			usu.setVisible(true);
+			usu.toFront();
+			break;
 			
 		}
 		
