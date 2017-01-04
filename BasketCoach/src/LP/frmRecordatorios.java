@@ -2,6 +2,7 @@ package LP;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,6 +16,9 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import com.toedter.calendar.JDateChooser;
 
+import LD.BD;
+
+
 public class frmRecordatorios extends JFrame implements ActionListener {
 	
 	/**
@@ -24,6 +28,8 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 	
 	private JButton btnSalir;
 	private JTextArea txtComent;
+	@SuppressWarnings("unused")
+	private String txtComent2;
 	private	JButton btnGuardar;
 	private JButton btnBorrar;
 	private JLabel lblFechaSeleccionada;
@@ -36,10 +42,10 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 //		this.pack();
 		this.setVisible(true);
 		setResizable(true);
-		
 	
 		
 		createAndShowGUI();
+		BD.cargarRecordatorio(dateChooser, txtComent2);
 		this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
 	}
 
@@ -58,6 +64,8 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 		txtComent.setBounds(323, 210, 393, 267);
 		getContentPane().add(txtComent);
 		
+		txtComent2 = txtComent.getText();
+		
 		btnGuardar = new JButton("GUARDAR");
 		btnGuardar.setBounds(428, 488, 89, 23);
 		btnGuardar.addActionListener(this);
@@ -73,7 +81,7 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 		lblFechaSeleccionada = new JLabel("Fecha seleccionada");
 		lblFechaSeleccionada.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
 		lblFechaSeleccionada.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFechaSeleccionada.setBounds(445, 129, 169, 14);
+		lblFechaSeleccionada.setBounds(445, 123, 169, 14);
 		getContentPane().add(lblFechaSeleccionada);
 		
 		lblRecordatorio = new JLabel("Recordatorio");
@@ -83,7 +91,7 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 		getContentPane().add(lblRecordatorio);
 		
 		dateChooser = new JDateChooser();
-		dateChooser.setBounds(400, 154, 248, 20);
+		dateChooser.setBounds(400, 148, 248, 30);
 		getContentPane().add(dateChooser);
 		
 		
@@ -91,75 +99,7 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 		setDefaultCloseOperation(JInternalFrame.EXIT_ON_CLOSE);	
 		setBounds(500, 200, 1145, 744);
 		
-	}
-	
-	/** Añade un recordatorio a la tabla RECORDATORIOS de BD, 
-	 * que debe estar abierta y tener el formato y los nombres de campos apropiados:
-	 * (FECHA_R Date, COMENT_R String)
-	 * Usa la sentencia INSERT de SQL.
-	 * @param st	Sentencia ya abierta de Base de Datos (con la estructura de tabla correspondiente al usuario)
-	 * @return	true si la inserción es correcta, false en caso contrario
-	 */
-	public boolean anyadirFilaATabla( Statement st ) {
-		
-		if (chequearYaTexto(st)) {  // Si está ya en la tabla
-			return modificarFilaEnTabla(st);
-		}
-		// Inserción normal
-		try {
-			String sentSQL = "insert into RECORDATORIO values(" +
-					"'" + dateChooser + "', " +
-					"'" + txtComent + "', " + "')";
-			int val = st.executeUpdate( sentSQL );
-			if (val!=1) return false;  // Se tiene que añadir 1 - error si no
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
-	/** Comprueba si un texto ya en la tabla RECORDATORIO de BD
-	 * @param st	Sentencia ya abierta de base de datos
-	 * @return	true si el texto ya está en la tabla, false en caso contrario
-	 */
-	public boolean chequearYaTexto( Statement st ) {
-		try {
-			String sentSQL = "select * from RECORDATORIO " +
-					"where (COMENT_R = '" + txtComent.getText() + "')";			
-			ResultSet rs = st.executeQuery( sentSQL );
-			if (rs.next()) {  // Normalmente se recorre con un while, pero aquí solo hay que ver si ya existe
-				rs.close();
-				return true;
-			}
-			return false;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
-	/** Modifica los datos de un recordatorio en la tabla RECORDATORIO de BD, 
-	 * que debe estar abierta y tener el formato y los nombres de campos apropiados:
-	 * (FECHA_R Date, COMENT_R string)
-	 * Usa la sentencia UPDATE de SQL.
-	 * @param st	Sentencia ya abierta de Base de Datos (con la estructura de tabla correspondiente al usuario)
-	 * @return	true si la modificación es correcta, false en caso contrario
-	 */
-	public boolean modificarFilaEnTabla( Statement st ) {
-		try {
-			String sentSQL = "update RECORDATORIO set " +
-					"FECHA_R = '" + dateChooser + "', " +
-					"COMENT_R = '" + txtComent +
-					"where (COMENT_R = '" + txtComent.getText() + "')";			
-			int val = st.executeUpdate( sentSQL );
-			if (val!=1) return false;  // Se tiene que modificar 1, error si no
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
+	}		
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -178,10 +118,19 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 			break;
 			
 		case "Guardar":
+			if(txtComent==null)
+			{
+				BD.añadirRecordatorio(dateChooser,txtComent2);
+			}
+			else
+			{
+				BD.actualizarRecordatorio(dateChooser, txtComent2);
+			}
 			
 			break;
 			
 		case "Borrar":
+			txtComent.setText(null);
 			break;
 			
 		}

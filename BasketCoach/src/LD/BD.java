@@ -7,9 +7,11 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
+import com.toedter.calendar.JDateChooser;
+
 public class BD 
 {
-	Connection conn = null;	
+	static Connection conn = null;	
 	static Statement stmt;
 	
 	public static Connection dbConnector ()
@@ -334,12 +336,64 @@ public class BD
 	        return res;
 	    }
 
-
-
 	
+	public static void añadirRecordatorio(JDateChooser fecha,String comentario)
+	{
+		try {			
+			
+			String sentencia="insert into recordatorio values('"+fecha+"', '"+comentario+"')";
+			stmt.executeUpdate(sentencia);
+			
+			JOptionPane.showMessageDialog(null, "¡Recordatorio añadido correctamente!");	
+		
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
 
+	/* 
+	 * Ejecuta la actualizacion de la tabla recordatorio dado los valores de actualizacion	 *
+	 */
+	public static boolean actualizarRecordatorio(JDateChooser fecha,String comentario)
+	    {
+	        boolean res = false;
+	        String q = " UPDATE recordatorio SET " + fecha + " WHERE coment_r= " + comentario;
+	        try {
+	            PreparedStatement pstm = conn.prepareStatement(q);
+	            pstm.execute();
+	            pstm.close();
+	            res=true;
+	         }catch(SQLException e){
+	            System.out.println(e);
+	        }
+	        return res;
+	    }
 
+	/*
+	 *Cargar el recordatorio que este guardado en una fecha. 
+	 */
+	 public static String cargarRecordatorio(JDateChooser fecha,String comentario)
+		{
+			
 
+	  	  try {
+	        	ResultSet rs = stmt.executeQuery("select * from recordatorio WHERE fecha_r=" + fecha);
+	        	 while(rs.next() == true) 
+	        	 {	        		 
+	        		 comentario = rs.getString("coment_r");      		
+	        		 
+	        	 }    
+	        	 
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	  	  return comentario;
+								
+			
+		}	
 	
 
 
