@@ -161,6 +161,17 @@ public class BD
 		}
 	}
 
+	public void modificarQuinteto(String num, String ape, String uno, String dos,String tres, String cuatro, JTable table, int fila, int columna)
+	{
+		
+		try {
+			String sentencia="update quinteto set num_j='"+num+"', apellido_j='"+ape+"', primer_cuarto='"+uno+"', segundo_cuarto='"+dos+"', tercer_cuarto='"+tres+"', cuarto_cuarto='"+cuatro+"' where num_j='"+table.getValueAt(fila,columna)+"'";
+			stmt.executeUpdate(sentencia);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 	
