@@ -5,7 +5,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import LP.frmAdministrador1;
-import LP.frmGestionEquipo;
+
 
 import LP.frmPrincipal;
 import LP.frmUsuario;

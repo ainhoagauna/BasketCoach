@@ -5,77 +5,93 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
 import javax.swing.table.DefaultTableModel;
 
 import LD.BD;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class frmQuinteto extends JFrame implements ActionListener{
 		
+	private JTable table=null;
+	
 	private DefaultTableModel modelo=null;
-	private JTable table_1=null;
-	
-	
-	public frmQuinteto() {
-	
+
+
+	public frmQuinteto()
+	{
+		
 		getContentPane().setLayout(null);
 		
-		JButton btnSalir = new JButton("SALIR");
-		btnSalir.setBounds(334, 395, 97, 25);
-		btnSalir.addActionListener(this);
-		btnSalir.setActionCommand("SALIR");
-		getContentPane().add(btnSalir);
+		JPanel panel = new JPanel();
+		panel.setBorder(new TitledBorder(null, "Tabla quinteto", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel.setBounds(10, 11, 620, 239);
+		getContentPane().add(panel);
+		panel.setLayout(null);
 		
-		table_1 = new JTable();
-		table_1.setBounds(22, 100, 743, 226);
-		getContentPane().add(table_1);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(6, 16, 608, 212);
+		panel.add(scrollPane);
+		
+		table = new JTable();
+		
+		
+		scrollPane.setViewportView(table);
 		
 		llenar();
 		
-		
-		
-		setTitle("Quinteto");	
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
-		setBounds(300, 100, 821, 563);
-	}
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		switch(arg0.getActionCommand()){
-		case "SALIR":
-				
-			this.dispose();
+		JButton btnSalir = new JButton("SALIR");
+		btnSalir.setBounds(281, 284, 89, 23);
+		btnSalir.addActionListener(this);
+		btnSalir.setActionCommand("SALIR");
+		getContentPane().add(btnSalir);
 
-			frmAdministrador admin = new frmAdministrador();
-			admin.setVisible(true);
-			admin.toFront();
-			
-			break;
-			
+		setTitle("Quintetos");	
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);	
+		setBounds(300, 100, 644, 408);
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+			
+			
+			switch(e.getActionCommand()){
+				
+			
+			case "SALIR":
+				
+				this.dispose();
+
+				frmAdministrador admin = new frmAdministrador();
+				admin.setVisible(true);
+				admin.toFront();
+				break;
+			
+		}
 	}
 	
-	public void llenar()
+	void llenar()
+	
 	{
-		int num_j=0;
+		int num=0;
 		String apellido=null;
-		int num_cuarto=0;
-		
 		String uno=null;
 		String dos=null;
 		String tres=null;
 		String cuatro=null;
 		
-		String[] columnas = {"NUMERO","NOMBRE", "PRIMER CUARTO", "SEGUNDO CUARTO", "TERCER CUARTO", "CUARTO CUARTO"};
+		String[] columnas = {"NUMERO","APELLIDO","PRIMER CUARTO"," SEGUNDO CUARTO","TERCER CUARTO", "CUARTO CUARTO"};
 		
-		modelo = new DefaultTableModel();	
-		modelo.setColumnIdentifiers(columnas);
-		table_1.setModel(modelo);
+		modelo = new DefaultTableModel(null,columnas);		
+		table.setModel(modelo);
 		
 		BD base=new BD();
-		base.cargarQuintetos(num_j,apellido,uno,dos,tres,cuatro,modelo);
+		base.cargarQuintetos(num, apellido, uno, dos, tres, cuatro, modelo);
 		
-		 modelo.addRow( new Object[] {num_j,apellido,uno,dos,tres,cuatro} );
+		modelo.addRow( new Object[] {num, apellido, uno, dos, tres, cuatro,} );
 	}
 }
