@@ -36,8 +36,14 @@ public class frmUsuarioAsistencia extends JFrame implements ActionListener{
 		scrollPane.setBounds(6, 16, 608, 212);
 		panel.add(scrollPane);
 		
-		table = new JTable();
-		table.setRowSelectionAllowed(false);
+		table = new JTable(){
+		public boolean isCellEditable(int rowIndex, int colIndex) {
+			 
+			return false; //Las celdas no son editables.
+			 
+			}
+			};
+		
 		scrollPane.setViewportView(table);
 		
 		llenar();

@@ -36,7 +36,13 @@ private JTable table=null;
 		scrollPane.setBounds(6, 16, 608, 212);
 		panel.add(scrollPane);
 		
-		table = new JTable();
+		table = new JTable(){
+			public boolean isCellEditable(int rowIndex, int colIndex) {
+				 
+			return false; //Las celdas no son editables.
+				 
+				}
+				};
 		scrollPane.setViewportView(table);
 		
 		llenar();

@@ -396,7 +396,31 @@ public class BD
 		}	
 	
 
-
+	 public boolean leerNumero(int num_j)
+		{
+			boolean retorno = false;
+			try {
+	        	ResultSet rs = stmt.executeQuery("select num_j from jugador");
+	        	 while(rs.next() == true) {
+	        		 
+	        		 if(rs.equals(num_j))
+	        		 {
+	        			 retorno=true;
+	        			 
+	        		 }
+	        		 
+	   		
+	        	 }
+	        	 
+	        	
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				JOptionPane.showMessageDialog(null, "¡Ya existe un jugador con ese número!");
+			}
+			
+			return retorno;
+			
+		}
 
 
 

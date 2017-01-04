@@ -1,10 +1,13 @@
 package LP;
 
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -15,11 +18,14 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 import org.w3c.dom.events.MouseEvent;
 
 import LD.BD;
+
 
 public class frmEquipoGestion extends JFrame implements ActionListener, MouseListener{
 	
@@ -35,6 +41,12 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 	private JTextField textFieldLicen_ent;
 	private JTable table=null;
 	private DefaultTableModel modelo=null;
+	
+	private JButton btnNuevo=null;
+	private JButton btnGuardar=null;
+	private JButton btnModificar=null;
+	private JButton btnEliminar=null;
+	
 
 	public frmEquipoGestion()
 	{		
@@ -113,25 +125,25 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 		getContentPane().add(textFieldLicen_ent);
 		textFieldLicen_ent.setColumns(10);
 		
-		JButton btnNuevo = new JButton("NUEVO");
+		btnNuevo = new JButton("NUEVO");
 		btnNuevo.setBounds(50, 474, 102, 25);
 		btnNuevo.addActionListener(this);
 		btnNuevo.setActionCommand("NUEVO");
 		getContentPane().add(btnNuevo);
 		
-		JButton btnGuardar = new JButton("GUARDAR");
+		btnGuardar = new JButton("GUARDAR");
 		btnGuardar.setBounds(213, 474, 97, 25);
 		btnGuardar.addActionListener(this);
 		btnGuardar.setActionCommand("GUARDAR");
 		getContentPane().add(btnGuardar);
 		
-		JButton btnModificar = new JButton("MODIFICAR");
+		btnModificar = new JButton("MODIFICAR");
 		btnModificar.setBounds(365, 474, 115, 25);
 		btnModificar.addActionListener(this);
 		btnModificar.setActionCommand("MODIFICAR");
 		getContentPane().add(btnModificar);
 		
-		JButton btnEliminar = new JButton("ELIMINAR");
+		btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.setBounds(527, 474, 97, 25);
 		btnEliminar.addActionListener(this);
 		btnEliminar.setActionCommand("ELIMINAR");
@@ -156,8 +168,40 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		
+				
 		desabilitar();
 		llenar();
+		
+		table.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent e)
+			{
+				habilitar();
+				textFieldNumero.setEnabled(false);
+				limpiar();
+			    
+			    int row = table.rowAtPoint(e.getPoint());
+			// si uno de los campos de la BD esta vacio, dara un error y no mostrará el registro de la siguientes columnas, poner todos los campos a 0 o null por defecto
+			    
+			    textFieldNumero.setText(table.getValueAt(row, 0).toString());
+			    textFieldNombre.setText(table.getValueAt(row, 1).toString());
+			    textFieldApellido.setText(table.getValueAt(row, 2).toString());
+			    textFieldEquipo.setText(table.getValueAt(row, 3).toString());
+			    textFieldLicen_j.setText(table.getValueAt(row, 4).toString());
+			    textFieldAsistencia.setText(table.getValueAt(row, 5).toString());			    
+			    textFieldContraseña.setText(table.getValueAt(row, 6).toString());
+			    textFieldLicen_ent.setText(table.getValueAt(row, 7).toString());
+			    
+			    btnEliminar.setEnabled(true);
+				btnModificar.setEnabled(true);
+				btnGuardar.setEnabled(false);
+				
+			}
+			
+		});
+		
+		 
 		
 		
 		setTitle("Gestion de equipo");	
@@ -174,6 +218,9 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 			
 		case "NUEVO":
 			
+			btnGuardar.setEnabled(true);
+			btnModificar.setEnabled(false);
+			btnEliminar.setEnabled(false);
 			limpiar();
 			habilitar();
 			
@@ -206,6 +253,8 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 	}
 
 
+	
+	
 	void llenar()
 	{
 		String nombre=null;
@@ -226,6 +275,7 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 		base.cargarJugador2(num_j,nombre,apellido,equipo,licen_j,asistencia,contraseña,licen_e,modelo);
 		
 		modelo.addRow( new Object[] {num_j,nombre,apellido,equipo,licen_j,asistencia,contraseña,licen_e} );
+		
 	}
 
 	public void guardar()
@@ -242,12 +292,23 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 		
 		
 		BD base=new BD();
-		base.añadirJugador(nombre,ape1,equipo,licen_j,num_j,contraseña,licen_e);
 		
-		JOptionPane.showMessageDialog(null, "¡Jugador añadido correctamente!");
 		
-		llenar();
-		limpiar();
+		if(base.leerNumero(num_j)==true)
+		{
+			JOptionPane.showMessageDialog(null, "¡Ya existe un jugador con ese número!");
+		}
+		
+		else
+		{
+			base.añadirJugador(nombre,ape1,equipo,licen_j,num_j,contraseña,licen_e);
+			
+			JOptionPane.showMessageDialog(null, "¡Jugador añadido correctamente!");
+			
+			llenar();
+			limpiar();
+		}
+		
 		
 		
 	}
@@ -269,6 +330,7 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 	
 	public void modificar()
 	{
+		
 		int fila=table.getSelectedRow();
 		int columna=table.getSelectedColumn();
 		
@@ -293,27 +355,32 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 	}
 	public void desabilitar()
 	{
-		textFieldNombre.setEditable(false);
-		textFieldApellido.setEditable(false);
-		textFieldEquipo.setEditable(false);
-		textFieldLicen_j.setEditable(false);
-		textFieldAsistencia.setEditable(false);
-		textFieldNumero.setEditable(false);
-		textFieldContraseña.setEditable(false);
-		textFieldLicen_ent.setEditable(false);
+		
+		textFieldNombre.setEnabled(false);
+		textFieldApellido.setEnabled(false);
+		textFieldEquipo.setEnabled(false);
+		textFieldLicen_j.setEnabled(false);
+		textFieldAsistencia.setEnabled(false);
+		textFieldNumero.setEnabled(false);
+		textFieldContraseña.setEnabled(false);
+		textFieldLicen_ent.setEnabled(false);
+		btnEliminar.setEnabled(false);
+		btnGuardar.setEnabled(false);
+		btnModificar.setEnabled(false);
+		
 	}
 	
 	public void habilitar()
 	{
 		textFieldNombre.requestFocus();
-		textFieldNombre.setEditable(true);
-		textFieldApellido.setEditable(true);
-		textFieldEquipo.setEditable(true);
-		textFieldLicen_j.setEditable(true);
-		textFieldAsistencia.setEditable(true);
-		textFieldNumero.setEditable(true);
-		textFieldContraseña.setEditable(true);
-		textFieldLicen_ent.setEditable(true);
+		textFieldNombre.setEnabled(true);
+		textFieldApellido.setEnabled(true);
+		textFieldEquipo.setEnabled(true);
+		textFieldLicen_j.setEnabled(true);
+		textFieldAsistencia.setEnabled(true);
+		textFieldNumero.setEnabled(true);
+		textFieldContraseña.setEnabled(true);
+		textFieldLicen_ent.setEnabled(true);
 	}
 	
 	public void limpiar()
@@ -328,30 +395,11 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 		textFieldLicen_ent.setText("");
 	}
 
-	
-	
-	public boolean isCellEditable(int row, int col) 
-    {           
-       return false;           
-    }
-
 	@Override
 	public void mouseClicked(java.awt.event.MouseEvent e) {
 		// TODO Auto-generated method stub
 		
 		
-		
-		
-		if(e.getButton()==1){
-			
-			habilitar();
-			int fila=table.getSelectedRow();		   
-			System.out.println("ok");
-			 BD base=new BD();
-			 base.mostrarJugador(textFieldNombre,textFieldApellido, textFieldEquipo, textFieldLicen_j, textFieldAsistencia, textFieldNumero,textFieldContraseña,textFieldLicen_ent,table,fila,0);
-			 
-			 
-		}   
 	}
 
 	@Override
@@ -377,4 +425,13 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 		// TODO Auto-generated method stub
 		
 	}
+
+	
+	
+	
+	
+
+
+	
+
 }
