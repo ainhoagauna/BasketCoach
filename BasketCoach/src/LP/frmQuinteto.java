@@ -50,13 +50,9 @@ public class frmQuinteto extends JFrame implements ActionListener{
 		table=new JTable();
 		scrollPane.setViewportView(table);
 		
-		table.addMouseListener(new MouseAdapter() {
+		
 			
-			@Override
-			public void mouseClicked(java.awt.event.MouseEvent e)
-			{
-				
-			    int row = table.rowAtPoint(e.getPoint());
+			   
 		   
 			   
 			    
@@ -69,7 +65,7 @@ public class frmQuinteto extends JFrame implements ActionListener{
 				public void valueChanged(ListSelectionEvent e) {
 					// TODO Auto-generated method stub
 					
-				//	System.out.println("ok");
+					System.out.println("ok");
 					
 					int fila=table.getSelectedRow();
 					int columna=table.getSelectedColumn();
@@ -88,9 +84,7 @@ public class frmQuinteto extends JFrame implements ActionListener{
 			
 			   
 				
-			}
 			
-		});
 				
 		
 		

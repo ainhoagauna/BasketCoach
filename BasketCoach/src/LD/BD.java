@@ -83,21 +83,33 @@ public class BD
 	
 	}
 	
-	public void eliminarJugador(JTable table, int fila, int columna)
+	public void eliminarJugador(JTable table, int fila, int columna,int columna2)
 	{
+		String jugador=table.getValueAt(fila, columna).toString();
 		columna=0;
+		columna2=6;
 		try {
-			String sentencia="delete from jugador where num_j='"+table.getValueAt(fila,columna)+"'";
-			stmt.executeUpdate(sentencia);
 			
-//			String sentencia2="delete from asistencia where num_j= '"+table.getValueAt(fila,columna)+"'";
-//			stmt.executeUpdate(sentencia2);
-//			
-//			String sentencia3="insert into minutos where num_j= '"+table.getValueAt(fila,columna)+"'";
-//			stmt.executeUpdate(sentencia3);
-//			
-//			String sentencia4="insert into quinteto where num_j= '"+table.getValueAt(fila,columna)+"'";
-//			stmt.executeUpdate(sentencia4);
+			String eliminado=jugador;
+			
+			String sentencia="delete from jugador where num_j='"+table.getValueAt(fila,columna)+"'";
+			stmt.executeUpdate(sentencia);			
+			
+			String sentencia2="delete from asistencia where num_j= '"+eliminado+"'";
+			stmt.executeUpdate(sentencia2);
+			
+			String sentencia3="delete from minutos where num_j= '"+jugador+"'";
+			stmt.executeUpdate(sentencia3);
+			
+			String sentencia4="delete from quinteto where num_j= '"+jugador+"'";
+			stmt.executeUpdate(sentencia4);
+			
+			String sentencia5="delete from login where password= '"+table.getValueAt(fila,columna2)+"'";
+			stmt.executeUpdate(sentencia5);
+			
+
+			
+			
 	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -137,24 +149,31 @@ public class BD
 		
 	}
 	
-	public void modificarJugador(String nombre, String ape1, String equipo,String num_licen_j, int num_j,  String contraseña, String num_licen_e,JTable table, int fila, int columna)
+	public void modificarJugador(String nombre, String ape1, String equipo,String num_licen_j, int num_j,  String contraseña, String num_licen_e,JTable table, int fila, int columna, int columna2)
 	{
-		//columna=0;
+		columna=0;
+		columna2=6;
+		
 		try {
-			String sentencia="update jugador set nombre_j='"+nombre+"', ape1_j='"+ape1+"', equipo_j='"+equipo+"', num_licen_j='"+num_licen_j+"',asistencia_j='"+0+"',num_j='"+num_j+"', contraseina_j='"+contraseña+"',num_lincen_ent='"+num_licen_e+"' where num_j= '"+table.getValueAt(fila,columna)+"'";			
+			String sentencia="update jugador set nombre_j='"+nombre+"', ape1_j='"+ape1+"', equipo_j='"+equipo+"', num_licen_j='"+num_licen_j+"',asistencia_j='"+0+"',num_j='"+num_j+"', contraseina_j='"+contraseña+"', num_licen_ent='"+num_licen_e+"' where num_j= '"+table.getValueAt(fila,columna)+"'";			
 			stmt.executeUpdate(sentencia);
 			
-		
-//			
-//			String sentencia2="delete from asistencia where num_j= '"+table.getValueAt(fila,columna)+"'";
-//			stmt.executeUpdate(sentencia2);
-//			
-//			String sentencia3="insert into minutos where num_j= '"+table.getValueAt(fila,columna)+"'";
-//			stmt.executeUpdate(sentencia3);
-//			
-//			String sentencia4="insert into quinteto where num_j= '"+table.getValueAt(fila,columna)+"'";
-//			stmt.executeUpdate(sentencia4);
+					
+			String sentencia2="update asistencia set apellido_j='"+ape1+"' where num_j= '"+table.getValueAt(fila,columna)+"'";
+			stmt.executeUpdate(sentencia2);
+			
+			String sentencia3="update minutos set apellido_j='"+ape1+"' where num_j= '"+table.getValueAt(fila,columna)+"'";
+			stmt.executeUpdate(sentencia3);
+			
+			String sentencia4="update quinteto set apellido_j='"+ape1+"' where num_j= '"+table.getValueAt(fila,columna)+"'";
+			stmt.executeUpdate(sentencia4);
 	
+			String sentencia5="update login set password='"+contraseña+"' where password= '"+table.getValueAt(fila,columna2)+"'";
+			stmt.executeUpdate(sentencia5);
+			
+			String sentencia6="update login set username='"+nombre+"' where password= '"+table.getValueAt(fila,columna2)+"'";
+			stmt.executeUpdate(sentencia6);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -165,7 +165,13 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 		scrollPane.setBounds(6, 18, 845, 161);
 		panel.add(scrollPane);
 		
-		table = new JTable();
+		table = new JTable(){
+			public boolean isCellEditable(int rowIndex, int colIndex) {
+				 
+				return false; //Las celdas no son editables.
+				 
+				}
+				};
 		scrollPane.setViewportView(table);
 		
 				
@@ -319,7 +325,7 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 		
 		
 		BD base=new BD();
-		base.eliminarJugador(table, fila,0);
+		base.eliminarJugador(table, fila,0,6);
 		
 	   
 	        llenar();
@@ -344,7 +350,7 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 		String licen_e=textFieldLicen_ent.getText();
 		
 		BD base=new BD();
-		base.modificarJugador(nombre,ape1,equipo,licen_j,num_j,contraseña,licen_e,table, fila,columna);
+		base.modificarJugador(nombre,ape1,equipo,licen_j,num_j,contraseña,licen_e,table, fila,columna,6);
 		
 	   
 	        llenar();
