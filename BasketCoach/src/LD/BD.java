@@ -182,10 +182,35 @@ public class BD
 
 	public void modificarQuinteto(String modificado, String num, String ape, String uno, String dos,String tres, String cuatro, JTable table, int fila, int columna)
 	{
-		columna=0;
+		
+		
 		try {
-			String sentencia="update quinteto set num_j='"+num+"', apellido_j='"+ape+"', primer_cuarto='"+uno+"', segundo_cuarto='"+modificado+"', tercer_cuarto='"+tres+"', cuarto_cuarto='"+cuatro+"' where num_j='"+table.getValueAt(fila,columna)+"'";
-			stmt.executeUpdate(sentencia);
+			
+			if(columna==2)
+				
+			{
+			//String sentencia="update quinteto set num_j='"+num+"', apellido_j='"+ape+"', primer_cuarto='"+modificado+"', segundo_cuarto='"+modificado+"', tercer_cuarto='"+tres+"', cuarto_cuarto='"+cuatro+"' where num_j='"+table.getValueAt(fila,columna)+"'";
+				String sentencia="update quinteto set primer_cuarto='"+modificado+"' where num_j='"+table.getValueAt(fila,0)+"'";
+				stmt.executeUpdate(sentencia);
+			}
+			
+			else if(columna==3)
+			{
+				String sentencia="update quinteto set segundo_cuarto='"+modificado+"' where num_j='"+table.getValueAt(fila,0)+"'";
+				stmt.executeUpdate(sentencia);
+			}
+			
+			else if(columna==4)
+			{
+				String sentencia="update quinteto set tercer_cuarto='"+modificado+"' where num_j='"+table.getValueAt(fila,0)+"'";
+				stmt.executeUpdate(sentencia);
+			}
+			else if (columna==5)
+			{
+				String sentencia="update quinteto set tercer_cuarto='"+modificado+"' where num_j='"+table.getValueAt(fila,0)+"'";
+				stmt.executeUpdate(sentencia);
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

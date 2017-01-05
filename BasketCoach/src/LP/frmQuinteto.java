@@ -55,24 +55,31 @@ public class frmQuinteto extends JFrame implements ActionListener{
 		        if (DEBUG) {
 		        	
 		        	
+		        	
 		        	num=table.getValueAt(row, 0).toString();
 				    ape=table.getValueAt(row, 1).toString();
 				    uno=table.getValueAt(row, 2).toString();
 				    dos= table.getValueAt(row, 3).toString();
 				   	tres=table.getValueAt(row, 4).toString();
-				    cuatro=table.getValueAt(row, 5).toString();			    
+				    cuatro=table.getValueAt(row, 5).toString();		
 				    
-		            System.out.println("Poniendo valor en (" + row + "," + col
-		                               + ") = " + value + " (instancia de "
-		                               + value.getClass() + ")");
-		            
+				    
+				    
+//		            System.out.println("Poniendo valor en (" + row + "," + col
+//		                               + ") = " + value + " (instancia de "
+//		                               + value.getClass() + ")");
 		           
 		            String modificado=(String)value;
+		            
+		           
+		            
 		            base.modificarQuinteto(modificado, num, ape, uno, dos, tres, cuatro, table, row, col);
 		            llenar();
 		        }
-//		        table.get(row).setValor( value, col );
-//		        fireTableCellUpdated(row, col);  // Notifica a escuchadores de cambio de celda
+	        
+		    			
+			
+	        
 		    }
 		};
 		scrollPane.setViewportView(table);
