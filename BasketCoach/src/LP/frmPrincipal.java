@@ -69,6 +69,27 @@ public class frmPrincipal extends JFrame
 		
 	}
 	
+	class TimeListener2 implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			cont ++;
+			progressBar.setValue(cont);
+			if(cont==100)
+			{
+				tiempo.stop();
+				esconder();
+				JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
+				frmUsuario objUsu = new frmUsuario();
+				objUsu.setVisible(true);
+			}
+			
+		}
+		
+	}
+	
 	public void esconder(){this.setVisible(false);}
 	public void activar(){tiempo.start();}
 
@@ -161,9 +182,13 @@ public class frmPrincipal extends JFrame
 						}
 						else if (base.contraseña(nombre,contraseña)==true)
 						{	
-							JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
-							frmUsuario objUsu = new frmUsuario();
-							objUsu.setVisible(true);
+							progressBar.setVisible(true);
+							cont=-1;
+							progressBar.setValue(0);
+							progressBar.setStringPainted(true);
+							tiempo = new Timer(TWO_SECOND, new TimeListener2());
+							activar();
+							
 								
 						}
 						else if(base.contraseña(nombre,contraseña)==false)
