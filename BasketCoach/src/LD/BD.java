@@ -180,11 +180,11 @@ public class BD
 		}
 	}
 
-	public void modificarQuinteto(String num, String ape, String uno, String dos,String tres, String cuatro, JTable table, int fila, int columna)
+	public void modificarQuinteto(String modificado, String num, String ape, String uno, String dos,String tres, String cuatro, JTable table, int fila, int columna)
 	{
-		
+		columna=0;
 		try {
-			String sentencia="update quinteto set num_j='"+num+"', apellido_j='"+ape+"', primer_cuarto='"+uno+"', segundo_cuarto='"+dos+"', tercer_cuarto='"+tres+"', cuarto_cuarto='"+cuatro+"' where num_j='"+table.getValueAt(fila,columna)+"'";
+			String sentencia="update quinteto set num_j='"+num+"', apellido_j='"+ape+"', primer_cuarto='"+uno+"', segundo_cuarto='"+modificado+"', tercer_cuarto='"+tres+"', cuarto_cuarto='"+cuatro+"' where num_j='"+table.getValueAt(fila,columna)+"'";
 			stmt.executeUpdate(sentencia);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -351,19 +351,65 @@ public class BD
 	/* Ejecuta la actualizacion de la tabla persona dado los valores de actualizacion
 	 * y el ID del registro a afectar
 	 */
-	public boolean update(String valores, String num_j)
+	public static boolean update(String valores, String num_j)
 	    {
 	        boolean res = false;
 	        String q = " UPDATE quintetos SET " + valores + " WHERE num_j= " + num_j;
 	        try {
 	            PreparedStatement pstm = conn.prepareStatement(q);
 	            pstm.execute();
-	            pstm.close();
+//	            pstm.close();
 	            res=true;
 	         }catch(SQLException e){
 	            System.out.println(e);
 	        }
 	        return res;
+	    }
+	
+	/* Realiza una consulta a la base de datos, retorna un Object[][] con los
+	 * datos de la tabla persona
+	 */
+	    public Object[][] Select_Persona()
+	    {
+	     int registros = 0;
+	      String consulta = "Select * FROM quinteto ";
+	      String consulta2 = "Select count(*) as total from quinteto ";
+	      //obtenemos la cantidad de registros existentes en la tabla
+	      try{
+//	         PreparedStatement pstm = conn.prepareStatement( consulta );
+//	         ResultSet res = pstm.executeQuery();
+//	         
+	         ResultSet rs = stmt.executeQuery("select * from quinteto");
+	         ResultSet rss = stmt.executeQuery("Select count(*) as total from quinteto ");
+	         rs.next();
+//	         registros = res.getInt("total");
+//	         res.close();
+	      }catch(SQLException e){
+	         System.out.println(e);
+	      }
+	    //se crea una matriz con tantas filas y columnas que necesite
+	    Object[][] data = new String[registros][7];
+	    //realizamos la consulta sql y llenamos los datos en la matriz "Object"
+	      try{
+//	         PreparedStatement pstm = conn.prepareStatement(consulta);
+//	         ResultSet res = pstm.executeQuery();
+	    	  
+	    	  ResultSet res = stmt.executeQuery("select * from quinteto");
+	         int i = 0;
+	         while(res.next()){
+	            data[i][0] = res.getString( "num_j" );
+	            data[i][1] = res.getString( "apellido_j" );
+	            data[i][2] = res.getString( "primer_cuarto" );
+	            data[i][3] = res.getString( "segundo_cuarto" );
+	            data[i][4] = res.getString( "tercer_cuarto" );
+	            data[i][5] = res.getString( "cuarto_cuarto" );
+	            i++;
+	         }
+//	         res.close();
+	          }catch(SQLException e){
+	               System.out.println(e);
+	        }
+	    return data;
 	    }
 
 	
@@ -453,7 +499,7 @@ public class BD
 		}
 
 
-
+	 
 
 
 
