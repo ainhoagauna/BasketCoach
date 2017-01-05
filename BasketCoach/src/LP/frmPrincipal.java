@@ -29,18 +29,48 @@ public class frmPrincipal extends JFrame
 	private JLabel lblContraseña;
 	private JButton btnEntrar;
 	private JPasswordField pfContraseña;
+	private JProgressBar progressBar;
+	
+	private Timer tiempo;
+	int cont;
+	public final static int TWO_SECOND = 20;
 	
 	Connection connection = null;
+	
 		
 	public frmPrincipal()
 	{
 		setResizable(false);
 		createAndShowGUI();
 		this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
-		
+		progressBar.setVisible(false);
 		connection = BD.dbConnector();
 		
 	}
+	
+	class TimeListener implements ActionListener
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			cont ++;
+			progressBar.setValue(cont);
+			if(cont==100)
+			{
+				tiempo.stop();
+				esconder();
+				JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
+				frmAdministrador objAdmin = new frmAdministrador();
+				objAdmin.setVisible(true);
+			}
+			
+		}
+		
+	}
+	
+	public void esconder(){this.setVisible(false);}
+	public void activar(){tiempo.start();}
 
 	public void createAndShowGUI()
 	{
@@ -52,6 +82,10 @@ public class frmPrincipal extends JFrame
 		  
 		JLabel label = new JLabel(" ");  
 		label.setIcon(icon); 
+		
+		progressBar = new JProgressBar();
+		progressBar.setBounds(524, 424, 271, 23);
+		getContentPane().add(progressBar);
 				
 		lblLogin = new JLabel("Basket Coach");
 		lblLogin.setForeground(Color.WHITE);
@@ -117,9 +151,13 @@ public class frmPrincipal extends JFrame
 						
 						if(objA.LeerContraseña(nombre, contraseña)==true)
 						{
-							JOptionPane.showMessageDialog(null, "Has iniciado sesión correctamente");
-							frmAdministrador objAdmin = new frmAdministrador();
-							objAdmin.setVisible(true);						
+							progressBar.setVisible(true);
+							cont=-1;
+							progressBar.setValue(0);
+							progressBar.setStringPainted(true);
+							tiempo = new Timer(TWO_SECOND, new TimeListener());
+							activar();
+													
 						}
 						else if (base.contraseña(nombre,contraseña)==true)
 						{	
@@ -155,6 +193,7 @@ public class frmPrincipal extends JFrame
 		btnEntrar.setFont(new Font("Tahoma", Font.BOLD, 14));
 		btnEntrar.setBounds(574, 272, 100, 23);
 		getContentPane().add(btnEntrar);
+		
 		
 		JLabel lblFondo = new JLabel("");
 		lblFondo.setHorizontalAlignment(SwingConstants.LEFT);
