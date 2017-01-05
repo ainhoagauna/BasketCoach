@@ -166,6 +166,7 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 		panel.add(scrollPane);
 		
 		table = new JTable(){
+			
 			public boolean isCellEditable(int rowIndex, int colIndex) {
 				 
 				return false; //Las celdas no son editables.
