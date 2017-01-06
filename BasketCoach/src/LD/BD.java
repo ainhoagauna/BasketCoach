@@ -189,7 +189,7 @@ public class BD
 			if(columna==2)
 				
 			{
-			//String sentencia="update quinteto set num_j='"+num+"', apellido_j='"+ape+"', primer_cuarto='"+modificado+"', segundo_cuarto='"+modificado+"', tercer_cuarto='"+tres+"', cuarto_cuarto='"+cuatro+"' where num_j='"+table.getValueAt(fila,columna)+"'";
+				
 				String sentencia="update quinteto set primer_cuarto='"+modificado+"' where num_j='"+table.getValueAt(fila,0)+"'";
 				stmt.executeUpdate(sentencia);
 			}
@@ -207,7 +207,7 @@ public class BD
 			}
 			else if (columna==5)
 			{
-				String sentencia="update quinteto set tercer_cuarto='"+modificado+"' where num_j='"+table.getValueAt(fila,0)+"'";
+				String sentencia="update quinteto set cuarto_cuarto='"+modificado+"' where num_j='"+table.getValueAt(fila,0)+"'";
 				stmt.executeUpdate(sentencia);
 			}
 			
@@ -217,6 +217,73 @@ public class BD
 		}
 	}
 	
+	public void modificarMinutos(String modificado,String num, String apellido, String minutos, String partidos, String fecha,  JTable table, int fila, int columna)
+	{
+		try {
+			
+			if(columna==2)
+				
+			{
+				
+				String sentencia="update minutos set minutos_m='"+modificado+"' where num_j='"+table.getValueAt(fila,0)+"'";
+				stmt.executeUpdate(sentencia);
+			}
+			
+			else if(columna==3)
+			{
+				String sentencia="update minutos set num_part_m='"+modificado+"' where num_j='"+table.getValueAt(fila,0)+"'";
+				stmt.executeUpdate(sentencia);
+			}
+			
+			else if(columna==4)
+			{
+				String sentencia="update minutos set fecha_part_m='"+modificado+"' where num_j='"+table.getValueAt(fila,0)+"'";
+				stmt.executeUpdate(sentencia);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void modificarAsistencia(String modificado, String num, String apellido, String bonus, String asistencia, String meritos, String desconv, JTable table, int fila, int columna)
+	{
+		try {
+			
+			if(columna==2)
+				
+			{
+				
+				String sentencia="update asistencia set bonus_a='"+modificado+"' where num_j='"+table.getValueAt(fila,0)+"'";
+				stmt.executeUpdate(sentencia);
+			}
+			
+			else if(columna==3)
+			{
+				String sentencia="update asistencia set tot_asis_a='"+modificado+"' where num_j='"+table.getValueAt(fila,0)+"'";
+				stmt.executeUpdate(sentencia);
+			}
+			
+			else if(columna==4)
+			{
+				String sentencia="update asistencia set meritos_a='"+modificado+"' where num_j='"+table.getValueAt(fila,0)+"'";
+				stmt.executeUpdate(sentencia);
+			}
+			
+			else if(columna==5)
+			{
+				String sentencia="update asistencia set desconv_a='"+modificado+"' where num_j='"+table.getValueAt(fila,0)+"'";
+				stmt.executeUpdate(sentencia);
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 	public void añadirEquipo(String nombre,String ciudad, String categoria, String licencia)
@@ -376,66 +443,7 @@ public class BD
 	/* Ejecuta la actualizacion de la tabla persona dado los valores de actualizacion
 	 * y el ID del registro a afectar
 	 */
-	public static boolean update(String valores, String num_j)
-	    {
-	        boolean res = false;
-	        String q = " UPDATE quintetos SET " + valores + " WHERE num_j= " + num_j;
-	        try {
-	            PreparedStatement pstm = conn.prepareStatement(q);
-	            pstm.execute();
-//	            pstm.close();
-	            res=true;
-	         }catch(SQLException e){
-	            System.out.println(e);
-	        }
-	        return res;
-	    }
 	
-	/* Realiza una consulta a la base de datos, retorna un Object[][] con los
-	 * datos de la tabla persona
-	 */
-	    public Object[][] Select_Persona()
-	    {
-	     int registros = 0;
-	      String consulta = "Select * FROM quinteto ";
-	      String consulta2 = "Select count(*) as total from quinteto ";
-	      //obtenemos la cantidad de registros existentes en la tabla
-	      try{
-//	         PreparedStatement pstm = conn.prepareStatement( consulta );
-//	         ResultSet res = pstm.executeQuery();
-//	         
-	         ResultSet rs = stmt.executeQuery("select * from quinteto");
-	         ResultSet rss = stmt.executeQuery("Select count(*) as total from quinteto ");
-	         rs.next();
-//	         registros = res.getInt("total");
-//	         res.close();
-	      }catch(SQLException e){
-	         System.out.println(e);
-	      }
-	    //se crea una matriz con tantas filas y columnas que necesite
-	    Object[][] data = new String[registros][7];
-	    //realizamos la consulta sql y llenamos los datos en la matriz "Object"
-	      try{
-//	         PreparedStatement pstm = conn.prepareStatement(consulta);
-//	         ResultSet res = pstm.executeQuery();
-	    	  
-	    	  ResultSet res = stmt.executeQuery("select * from quinteto");
-	         int i = 0;
-	         while(res.next()){
-	            data[i][0] = res.getString( "num_j" );
-	            data[i][1] = res.getString( "apellido_j" );
-	            data[i][2] = res.getString( "primer_cuarto" );
-	            data[i][3] = res.getString( "segundo_cuarto" );
-	            data[i][4] = res.getString( "tercer_cuarto" );
-	            data[i][5] = res.getString( "cuarto_cuarto" );
-	            i++;
-	         }
-//	         res.close();
-	          }catch(SQLException e){
-	               System.out.println(e);
-	        }
-	    return data;
-	    }
 
 	
 	public static void añadirRecordatorio(JDateChooser fecha,String comentario)

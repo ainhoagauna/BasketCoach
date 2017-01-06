@@ -38,8 +38,8 @@ public class frmUsuarioAsistencia extends JFrame implements ActionListener{
 		
 		table = new JTable(){
 		public boolean isCellEditable(int rowIndex, int colIndex) {
-			 
-			return false; //Las celdas no son editables.
+			
+			return false;
 			 
 			}
 			};

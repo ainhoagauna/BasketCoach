@@ -62,16 +62,10 @@ public class frmQuinteto extends JFrame implements ActionListener{
 				    dos= table.getValueAt(row, 3).toString();
 				   	tres=table.getValueAt(row, 4).toString();
 				    cuatro=table.getValueAt(row, 5).toString();		
-				    
-				    
-				    
-//		            System.out.println("Poniendo valor en (" + row + "," + col
-//		                               + ") = " + value + " (instancia de "
-//		                               + value.getClass() + ")");
+				   
 		           
 		            String modificado=(String)value;
 		            
-		           
 		            
 		            base.modificarQuinteto(modificado, num, ape, uno, dos, tres, cuatro, table, row, col);
 		            llenar();
@@ -80,8 +74,22 @@ public class frmQuinteto extends JFrame implements ActionListener{
 		    			
 			
 	        
-		    }
-		};
+		    
+		}
+		
+		
+			public boolean isCellEditable(int rowIndex, int colIndex) {
+				
+				boolean retorno=true;
+				if(colIndex==0 || colIndex==1)
+				{
+					retorno=false; //Las celdas no son editables.
+				}
+				
+					return retorno;
+				 
+				}
+				};
 		scrollPane.setViewportView(table);
 		
 		
@@ -140,23 +148,9 @@ public class frmQuinteto extends JFrame implements ActionListener{
 		
 		modelo.addRow( new Object[] {num, apellido, uno, dos, tres, cuatro,} );
 		
-		//Actualizar_Tabla();
-//		table.getColumnModel().getColumn( 1 ).setCellEditor(new MyTableCellEditor(db,"num_j"));//Columna Nombre
-//        table.getColumnModel().getColumn( 2 ).setCellEditor(new MyTableCellEditor(db,"apellido_j"));//Columna Apellido
-//        table.getColumnModel().getColumn( 3 ).setCellEditor(new MyTableCellEditor(db,"primer_cuarto"));//Columna Edad
-//        table.getColumnModel().getColumn( 4 ).setCellEditor(new MyTableCellEditor(db,"segundo_cuarto"));//Columna Edad
-//        table.getColumnModel().getColumn( 5 ).setCellEditor(new MyTableCellEditor(db,"tercer_cuarto"));//Columna Edad
-//        table.getColumnModel().getColumn( 6 ).setCellEditor(new MyTableCellEditor(db,"cuarto_cuarto"));//Columna Edad
+	
     
 	}
 	
-	private void Actualizar_Tabla(){
-        //actualiza los datos de la tabla realizando una consulta a la base de datos
-		String[] columnas = {"NUMERO","APELLIDO","PRIMER CUARTO"," SEGUNDO CUARTO","TERCER CUARTO", "CUARTO CUARTO"};
-        dtPersona = db.Select_Persona();
-        // se colocan los datos en la tabla
-        DefaultTableModel datos = new DefaultTableModel(dtPersona,columnas);
-        table.setModel(datos);
-        
-	}
+	
 }

@@ -20,7 +20,15 @@ public class frmMinutos extends JFrame implements ActionListener{
 
 private JTable table=null;
 	
+private boolean DEBUG = true;
+private BD db = new BD();
+private Object[][] dtPersona;
 
+String minutos=null;
+String partidos=null;
+String fecha=null;
+String num=null;
+String apellido=null;
 
 private DefaultTableModel modelo=null;
 
@@ -40,7 +48,44 @@ public frmMinutos()
 	scrollPane.setBounds(6, 16, 608, 212);
 	panel.add(scrollPane);
 	
-	table = new JTable();
+	table = new JTable(){
+		public void setValueAt(Object value, int row, int col) {
+	        if (DEBUG) {
+	        	
+	        	
+	        	
+	        	num=table.getValueAt(row, 0).toString();
+			    apellido=table.getValueAt(row, 1).toString();
+			    minutos=table.getValueAt(row, 2).toString();
+			    partidos= table.getValueAt(row, 3).toString();
+			   	fecha=table.getValueAt(row, 4).toString();
+			   
+	           
+	            String modificado=(String)value;
+	            
+	            BD base=new BD();
+	            base.modificarMinutos(modificado, num, apellido, minutos, partidos, fecha,  table, row, col);
+	            llenar();
+	        }
+        
+	    			
+		
+        
+	    
+	}
+	
+	public boolean isCellEditable(int rowIndex, int colIndex) {
+		
+		boolean retorno=true;
+		if(colIndex==0 || colIndex==1)
+		{
+			retorno=false; //Las celdas no son editables.
+		}
+		
+			return retorno;
+		 
+		}
+		};
 		
 	scrollPane.setViewportView(table);
 	
@@ -85,6 +130,7 @@ void llenar()
 	Date fecha=null;
 	int num=0;
 	String apellido=null;
+	
 	
 	String[] columnas = {"NUMERO","APELLIDO","MINUTOS"," PARTIDOS","FECHA"};
 	

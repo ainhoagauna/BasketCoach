@@ -21,6 +21,18 @@ import LD.BD;
 
 public class frmAsistencia extends JFrame implements ActionListener{
 private JTable table=null;
+private boolean DEBUG = true;
+private BD db = new BD();
+private Object[][] dtPersona;
+
+
+String bonus=null;
+String asistencia=null;
+String meritos=null;
+String desconv=null;
+String num=null;
+String apellido=null;
+
 	
 	private DefaultTableModel modelo=null;
 
@@ -40,7 +52,45 @@ private JTable table=null;
 		scrollPane.setBounds(6, 16, 608, 212);
 		panel.add(scrollPane);
 		
-		table = new JTable();
+		table = new JTable(){
+			public void setValueAt(Object value, int row, int col) {
+		        if (DEBUG) {
+		        	
+		        	
+		        	
+		        	num=table.getValueAt(row, 0).toString();
+				    apellido=table.getValueAt(row, 1).toString();
+				    bonus=table.getValueAt(row, 2).toString();
+				    asistencia= table.getValueAt(row, 3).toString();
+				   	meritos=table.getValueAt(row, 4).toString();
+					desconv=table.getValueAt(row, 5).toString();
+				   
+		           
+		            String modificado=(String)value;
+		            
+		            BD base=new BD();
+		            base.modificarAsistencia(modificado, num, apellido, bonus, asistencia, meritos, desconv,  table, row, col);
+		            llenar();
+		        }
+	        
+		    			
+			
+	        
+		    
+		}
+		
+		public boolean isCellEditable(int rowIndex, int colIndex) {
+			
+			boolean retorno=true;
+			if(colIndex==0 || colIndex==1)
+			{
+				retorno=false; //Las celdas no son editables.
+			}
+			
+				return retorno;
+			 
+			}
+			};
 		
 		scrollPane.setViewportView(table);
 		
