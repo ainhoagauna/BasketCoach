@@ -555,7 +555,26 @@ public class BD
 		 	
 		}	 
 		 
+	public void eliminarRecordatorio(JList list, int index)
+	{
+		String seleccion=list.getSelectedValue().toString();
+		try {
+			
 		
+			
+			String sentencia="delete from recordatorio where coment_r='"+seleccion+"'";
+			stmt.executeUpdate(sentencia);			
+			
+			
+
+			
+			
+	
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	 
 		 
 	 

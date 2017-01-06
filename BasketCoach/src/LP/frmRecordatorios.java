@@ -65,6 +65,13 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 		
 		list = new JList();
 		scrollPane.setViewportView(list);
+		
+		JButton btnEliminar = new JButton("ELIMINAR");
+		btnEliminar.setBounds(155, 504, 89, 23);
+		btnEliminar.addActionListener(this);
+		btnEliminar.setActionCommand("ELIMINAR");
+		getContentPane().add(btnEliminar);
+		
 		this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
 		
 		llenar();
@@ -148,6 +155,10 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 			txtComent.setText(null);
 			break;
 			
+		case "eliminar":
+			this.eliminar();
+			break;
+			
 		}
 		
 		
@@ -156,9 +167,14 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 	
 	public void guardar()
 	{
+		 
+                 SimpleDateFormat formatoDeFecha = new SimpleDateFormat("dd/MM/yyyy");
+                 
+          
+		
 		
 				txtComent2=txtComent.getText();
-				BD.añadirRecordatorio(dateChooser.getDate().toString(),txtComent2, list,modeloLista);
+				BD.añadirRecordatorio( formatoDeFecha.format(dateChooser.getDate()),txtComent2, list,modeloLista);
 				txtComent.setText(null);
 				llenar();
 				
@@ -170,5 +186,16 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 	{
 		BD base=new BD();
 		base.cargarEventos(list,modeloLista);
+	}
+	
+	public void eliminar()
+	{
+		int index=list.getSelectedIndex();
+		modeloLista.remove(index);
+		
+		BD base=new BD();
+		base.eliminarRecordatorio(list,index);
+		
+		
 	}
 }
