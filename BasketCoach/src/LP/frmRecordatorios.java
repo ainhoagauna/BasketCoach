@@ -6,7 +6,9 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -17,6 +19,8 @@ import java.awt.Font;
 import com.toedter.calendar.JDateChooser;
 
 import LD.BD;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 
 public class frmRecordatorios extends JFrame implements ActionListener {
@@ -35,6 +39,9 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 	private JLabel lblFechaSeleccionada;
 	private JLabel lblRecordatorio;
 	private JDateChooser dateChooser;
+	private JList list;
+	 private DefaultListModel modeloLista=new DefaultListModel();
+	 private JScrollPane scrollPane;
 
 	
 	public frmRecordatorios()
@@ -45,8 +52,22 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 	
 		
 		createAndShowGUI();
-		BD.cargarRecordatorio(dateChooser, txtComent2);
+		
+		JLabel labelEvento = new JLabel("Eventos programados");
+		labelEvento.setHorizontalAlignment(SwingConstants.CENTER);
+		labelEvento.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
+		labelEvento.setBounds(39, 181, 169, 23);
+		getContentPane().add(labelEvento);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(49, 214, 361, 263);
+		getContentPane().add(scrollPane);
+		
+		list = new JList();
+		scrollPane.setViewportView(list);
 		this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
+		
+		llenar();
 	}
 
 	public void createAndShowGUI()
@@ -61,19 +82,19 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 		getContentPane().add(btnSalir);
 		
 		txtComent = new JTextArea();
-		txtComent.setBounds(323, 210, 393, 267);
+		txtComent.setBounds(521, 210, 393, 267);
 		getContentPane().add(txtComent);
 		
 		txtComent2 = txtComent.getText();
 		
 		btnGuardar = new JButton("GUARDAR");
-		btnGuardar.setBounds(428, 488, 89, 23);
+		btnGuardar.setBounds(641, 504, 89, 23);
 		btnGuardar.addActionListener(this);
 		btnGuardar.setActionCommand("Guardar");
 		getContentPane().add(btnGuardar);
 		
 		btnBorrar = new JButton("BORRAR");
-		btnBorrar.setBounds(540, 488, 89, 23);
+		btnBorrar.setBounds(772, 504, 89, 23);
 		btnBorrar.addActionListener(this);
 		btnBorrar.setActionCommand("Borrar");
 		getContentPane().add(btnBorrar);
@@ -81,17 +102,17 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 		lblFechaSeleccionada = new JLabel("Fecha seleccionada");
 		lblFechaSeleccionada.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
 		lblFechaSeleccionada.setHorizontalAlignment(SwingConstants.CENTER);
-		lblFechaSeleccionada.setBounds(445, 123, 169, 14);
+		lblFechaSeleccionada.setBounds(619, 119, 169, 14);
 		getContentPane().add(lblFechaSeleccionada);
 		
 		lblRecordatorio = new JLabel("Recordatorio");
 		lblRecordatorio.setFont(new Font("Tahoma", Font.BOLD | Font.ITALIC, 14));
 		lblRecordatorio.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRecordatorio.setBounds(445, 185, 169, 14);
+		lblRecordatorio.setBounds(619, 185, 169, 14);
 		getContentPane().add(lblRecordatorio);
 		
 		dateChooser = new JDateChooser();
-		dateChooser.setBounds(400, 148, 248, 30);
+		dateChooser.setBounds(578, 144, 248, 30);
 		getContentPane().add(dateChooser);
 		
 		
@@ -118,14 +139,8 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 			break;
 			
 		case "Guardar":
-			if(txtComent==null)
-			{
-				BD.añadirRecordatorio(dateChooser,txtComent2);
-			}
-			else
-			{
-				BD.actualizarRecordatorio(dateChooser, txtComent2);
-			}
+			
+			this.guardar();
 			
 			break;
 			
@@ -135,5 +150,25 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 			
 		}
 		
+		
+		
+	}
+	
+	public void guardar()
+	{
+		
+				txtComent2=txtComent.getText();
+				BD.añadirRecordatorio(dateChooser.getDate().toString(),txtComent2, list,modeloLista);
+				txtComent.setText(null);
+				llenar();
+				
+
+			
+	}
+	
+	public void llenar()
+	{
+		BD base=new BD();
+		base.cargarEventos(list,modeloLista);
 	}
 }

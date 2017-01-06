@@ -446,12 +446,14 @@ public class BD
 	
 
 	
-	public static void añadirRecordatorio(JDateChooser fecha,String comentario)
+	public static void añadirRecordatorio(String string,String comentario, JList list, DefaultListModel modeloLista)
 	{
 		try {			
 			
-			String sentencia="insert into recordatorio values('"+fecha+"', '"+comentario+"')";
+			String sentencia="insert into recordatorio values('"+string+"', '"+comentario+"')";
 			stmt.executeUpdate(sentencia);
+			
+			 list.setModel(modeloLista);
 			
 			JOptionPane.showMessageDialog(null, "¡Recordatorio añadido correctamente!");	
 		
@@ -533,7 +535,30 @@ public class BD
 
 
 	 
-
+	 public void cargarEventos(JList list, DefaultListModel modeloLista)
+	 {
+		 
+		try {
+			ResultSet rs = stmt.executeQuery("select * from recordatorio");
+			modeloLista.clear();
+			while(rs.next() == true) {
+				 modeloLista.addElement(rs.getString("fecha_r"));
+				 modeloLista.addElement(rs.getString("coment_r"));
+				 
+				 
+				 list.setModel(modeloLista);
+		} 
+		}catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 	
+		}	 
+		 
+		
+	 
+		 
+	 
 
 
 }
