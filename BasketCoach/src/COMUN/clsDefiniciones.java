@@ -16,7 +16,13 @@ public class clsDefiniciones extends Exception
 	public static final String passAdmin = "admin";
 	
 	
-
+	/**
+	 * Nombres de los ficheros que van a ser creados mediante la clase clsDatos
+	 */
+	public static enum MiEnumerado
+	{
+		FICHERO_LOGIN,
+	}
 
 	
 	

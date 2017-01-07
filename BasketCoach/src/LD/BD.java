@@ -2,6 +2,7 @@ package LD;
 
 import java.io.File;
 import java.sql.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -310,7 +311,7 @@ public class BD
 		
             
             try {
-            	ResultSet rs = stmt.executeQuery("select * from quinteto");
+            	ResultSet rs = stmt.executeQuery("select * from quinteto order by num_j");
             	 while(rs.next() == true) {
             		 numero = rs.getInt("num_j");
             		 apellido = rs.getString("apellido_j");
@@ -335,7 +336,7 @@ public class BD
 	public DefaultTableModel cargarAsistencia(int numero, String apellido, int bonus,int asistencia,int meritos, int desconvocado, DefaultTableModel modelo)
 	{
 		try {
-        	ResultSet rs = stmt.executeQuery("select * from asistencia");
+        	ResultSet rs = stmt.executeQuery("select * from asistencia order by num_j");
         	 while(rs.next() == true) {
         		 numero = rs.getInt("num_j");
         		 apellido = rs.getString("apellido_j");
@@ -360,7 +361,7 @@ public class BD
 	{
 		  
         try {
-        	ResultSet rs = stmt.executeQuery("select * from jugador");
+        	ResultSet rs = stmt.executeQuery("select * from jugador order by num_j");
         	 while(rs.next() == true) {
         		 
         		 
@@ -390,7 +391,7 @@ public class BD
 		
 
   	  try {
-        	ResultSet rs = stmt.executeQuery("select * from minutos");
+        	ResultSet rs = stmt.executeQuery("select * from minutos order by num_j");
         	 while(rs.next() == true) 
         	 {
         		 minutos = rs.getInt("minutos_m");
@@ -412,9 +413,7 @@ public class BD
 		
 	}	
 
-		
 	
-
 	public boolean contraseña(String nombre, String contraseña) {
 		// TODO Auto-generated method stub
 		
@@ -443,8 +442,6 @@ public class BD
 	/* Ejecuta la actualizacion de la tabla persona dado los valores de actualizacion
 	 * y el ID del registro a afectar
 	 */
-	
-
 	
 	public static void añadirRecordatorio(String string,String comentario, JList list, DefaultListModel modeloLista)
 	{
@@ -539,7 +536,7 @@ public class BD
 	 {
 		 
 		try {
-			ResultSet rs = stmt.executeQuery("select * from recordatorio");
+			ResultSet rs = stmt.executeQuery("select * from recordatorio order by fecha_r");
 			modeloLista.clear();
 			while(rs.next() == true) {
 				 modeloLista.addElement(rs.getString("fecha_r"));
@@ -555,18 +552,18 @@ public class BD
 		 	
 		}	 
 		 
-	public void eliminarRecordatorio(JList list, int index)
+	public void eliminarRecordatorio(JList list)
 	{
-		String seleccion=list.getSelectedValue().toString();
+
 		try {
 			
 		
 			
-			String sentencia="delete from recordatorio where coment_r='"+seleccion+"'";
-			stmt.executeUpdate(sentencia);			
+			String sentencia="delete from recordatorio where coment_r='"+list.getSelectedValue().toString()+"'";
+			stmt.executeUpdate(sentencia);	
 			
 			
-
+		
 			
 			
 	
@@ -574,13 +571,12 @@ public class BD
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 	}
 	 
-		 
+	
 	 
-
-
-}
+}	
 
 
 

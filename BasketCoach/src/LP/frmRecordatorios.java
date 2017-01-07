@@ -2,11 +2,13 @@ package LP;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -15,11 +17,17 @@ import javax.swing.JInternalFrame;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.Font;
 import com.toedter.calendar.JDateChooser;
 
 import LD.BD;
+import LN.clsGestorAdministrador;
+
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 
@@ -42,6 +50,8 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 	private JList list;
 	 private DefaultListModel modeloLista=new DefaultListModel();
 	 private JScrollPane scrollPane;
+	 
+	private JButton btnEliminar;
 
 	
 	public frmRecordatorios()
@@ -64,14 +74,46 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 		getContentPane().add(scrollPane);
 		
 		list = new JList();
+		
+		list.addMouseListener(new MouseAdapter()
+				{
+			
+			@Override
+			public void mouseClicked(java.awt.event.MouseEvent e)
+			{
+				
+				btnEliminar.setEnabled(true);
+				
+				btnEliminar.addActionListener(new ActionListener()
+				{
+			
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						
+						BD base=new BD();
+						base.eliminarRecordatorio(list);
+						
+						
+						JOptionPane.showMessageDialog(null, "¡Recordatorio eliminado");	
+						modeloLista.clear();
+						llenar();
+					}
+					
+				});
+				
+			}
+				});
+		
+
 		scrollPane.setViewportView(list);
 		
-		JButton btnEliminar = new JButton("ELIMINAR");
+		btnEliminar = new JButton("ELIMINAR");
 		btnEliminar.setBounds(155, 504, 89, 23);
 		btnEliminar.addActionListener(this);
 		btnEliminar.setActionCommand("ELIMINAR");
 		getContentPane().add(btnEliminar);
-		
+		btnEliminar.setEnabled(false);
 		this.setLocationRelativeTo(null); //Para que la ventana salga en el centro de la pantalla
 		
 		llenar();
@@ -165,6 +207,7 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 		
 	}
 	
+	
 	public void guardar()
 	{
 		 
@@ -184,17 +227,15 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 	
 	public void llenar()
 	{
+		
 		BD base=new BD();
 		base.cargarEventos(list,modeloLista);
 	}
 	
 	public void eliminar()
 	{
-		int index=list.getSelectedIndex();
-		modeloLista.remove(index);
 		
-		BD base=new BD();
-		base.eliminarRecordatorio(list,index);
+		
 		
 		
 	}

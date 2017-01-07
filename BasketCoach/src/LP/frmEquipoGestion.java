@@ -306,6 +306,11 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 			JOptionPane.showMessageDialog(null, "¡Ya existe un jugador con ese número!");
 		}
 		
+		if(textFieldAsistencia.getText()==null || textFieldNumero.getText()==null ||textFieldApellido.getText()==null || textFieldContraseña==null || textFieldEquipo.getText()==null || textFieldLicen_ent.getText()==null || textFieldLicen_j.getText()==null || textFieldNombre.getText()==null )
+		{
+			JOptionPane.showMessageDialog(null, "¡Rellene todos los campos");
+		}
+		
 		else
 		{
 			base.añadirJugador(nombre,ape1,equipo,licen_j,num_j,contraseña,licen_e);

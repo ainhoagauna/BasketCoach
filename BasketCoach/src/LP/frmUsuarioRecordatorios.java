@@ -91,10 +91,9 @@ public class frmUsuarioRecordatorios extends JFrame implements ActionListener {
 			
 			this.dispose();
 
-			frmAdministrador admin = new frmAdministrador();
-			admin.setVisible(true);
-			admin.toFront();
-			
+			frmUsuario usu = new frmUsuario();
+			usu.setVisible(true);
+			usu.toFront();
 			break;
 			
 		}
