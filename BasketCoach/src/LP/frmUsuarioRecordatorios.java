@@ -103,7 +103,7 @@ public class frmUsuarioRecordatorios extends JFrame implements ActionListener {
 	}
 	
 	
-	
+	//Carga la lista
 	public void llenar()
 	{
 		BD base=new BD();

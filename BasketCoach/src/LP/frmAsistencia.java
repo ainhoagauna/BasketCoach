@@ -52,6 +52,7 @@ String apellido=null;
 		scrollPane.setBounds(6, 16, 608, 212);
 		panel.add(scrollPane);
 		
+		//Detecta si se ha modificado alguna celda y modifica, guarda y  actualiza el valor correspondiente tanto en la tabla como en la base de datos
 		table = new JTable(){
 			public void setValueAt(Object value, int row, int col) {
 		        if (DEBUG) {
@@ -128,6 +129,7 @@ String apellido=null;
 		}
 	}
 	
+	//Metodo que llama a la base de datos para cargar la tabla
 	void llenar()
 	
 	{

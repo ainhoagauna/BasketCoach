@@ -24,11 +24,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import org.edisoncor.gui.button.ButtonIcon;
 
-
-/**
- *
- * @author jokin.zulaika
- */
+//Ventana principal del administrador
 public class frmAdministrador extends javax.swing.JFrame {
 
     /**
@@ -64,7 +60,7 @@ public class frmAdministrador extends javax.swing.JFrame {
     
     public void llamarMenu(){
         if(menu.getSelectedtitulo().equals("Gestión de Equipo")){
-//        	frmGestionEquipo frame=new frmGestionEquipo();
+;
         	frmEquipoGestion frame=new frmEquipoGestion();
         	frame.setVisible(true);        	
         	frame.toFront();

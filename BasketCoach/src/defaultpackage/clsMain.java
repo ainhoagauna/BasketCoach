@@ -30,8 +30,7 @@ public class clsMain {
 		frmPrincipal objPrincipal=new frmPrincipal();
 		objPrincipal.setVisible(true);
 		
-//		frmAdministrador admin=new frmAdministrador();
-//		admin.setVisible(true);
+
 
 	}
 

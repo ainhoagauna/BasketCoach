@@ -47,7 +47,7 @@ public class frmPrincipal extends JFrame
 		connection = BD.dbConnector();
 		
 	}
-	
+	//Carga de la barra de progreso cuando inicia sesion el adiministrador
 	class TimeListener implements ActionListener
 	{
 
@@ -69,6 +69,7 @@ public class frmPrincipal extends JFrame
 		
 	}
 	
+	//Carga de la barra de progreso cuando inicia sesion el usuario
 	class TimeListener2 implements ActionListener
 	{
 
@@ -139,6 +140,7 @@ public class frmPrincipal extends JFrame
 		
 		
 		btnEntrar = new JButton("ENTRAR");
+		//Validacion de la entrada del administrador
 		btnEntrar.addActionListener(new ActionListener()
 		{
 			@SuppressWarnings("deprecation")

@@ -75,6 +75,7 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 		
 		list = new JList();
 		
+		//Metodo que detecta si se ha seleccionado un evento de la lista y lo elimina en caso de pulsar el boton. 
 		list.addMouseListener(new MouseAdapter()
 				{
 			
@@ -91,8 +92,11 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 						// TODO Auto-generated method stub
 						
+						
 						BD base=new BD();
 						base.eliminarRecordatorio(list);
+						
+						
 						
 						
 						JOptionPane.showMessageDialog(null, "¡Recordatorio eliminado");	
@@ -103,6 +107,7 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 				});
 				
 			}
+			
 				});
 		
 
@@ -198,7 +203,7 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 			break;
 			
 		case "eliminar":
-			this.eliminar();
+			//this.eliminar();
 			break;
 			
 		}
@@ -207,7 +212,7 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 		
 	}
 	
-	
+	//Metodo que guarda los recordatorios añadidos
 	public void guardar()
 	{
 		 
@@ -225,6 +230,7 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 			
 	}
 	
+	//Metodo que carga la lista con los eventos guardados
 	public void llenar()
 	{
 		
@@ -232,11 +238,5 @@ public class frmRecordatorios extends JFrame implements ActionListener {
 		base.cargarEventos(list,modeloLista);
 	}
 	
-	public void eliminar()
-	{
-		
-		
-		
-		
-	}
+	
 }

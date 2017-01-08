@@ -122,25 +122,25 @@ public void actionPerformed(ActionEvent e) {
 	}
 }
 
+//Metodo que llama a la base de datos para cargar la tabla con los valores.
 void llenar()
 
 {
 	int minutos=0;
 	int partidos=0;
-	Date fecha=null;
 	int num=0;
 	String apellido=null;
 	
 	
-	String[] columnas = {"NUMERO","APELLIDO","MINUTOS"," PARTIDOS","FECHA"};
+	String[] columnas = {"NUMERO","APELLIDO","MINUTOS"," PARTIDOS"};
 	
 	modelo = new DefaultTableModel(null,columnas);		
 	table.setModel(modelo);
 	
 	BD base=new BD();
-	base.cargarMinutos(num,apellido,minutos,partidos,fecha,modelo);
+	base.cargarMinutos(num,apellido,minutos,partidos,modelo);
 	
-	modelo.addRow( new Object[] {num,apellido,minutos,partidos,fecha} );
+	modelo.addRow( new Object[] {num,apellido,minutos,partidos} );
 }
 
 

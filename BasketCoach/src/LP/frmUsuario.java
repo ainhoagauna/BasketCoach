@@ -25,10 +25,7 @@ import javax.swing.GroupLayout;
 import org.edisoncor.gui.button.ButtonIcon;
 
 
-/**
- *
- * @author jokin.zulaika
- */
+//Venta principal usuario
 public class frmUsuario extends javax.swing.JFrame {
 
     /**

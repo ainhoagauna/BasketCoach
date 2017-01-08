@@ -50,6 +50,7 @@ public class frmQuinteto extends JFrame implements ActionListener{
 		panel.add(scrollPane);
 		
 		BD base=new BD();
+		//Detecta la fila que se ha seleccionado en la tabla y modifica, guarda y actualiza en caso de que se hayan modificado los valores.
 		table=new JTable(){
 			public void setValueAt(Object value, int row, int col) {
 		        if (DEBUG) {
@@ -128,6 +129,7 @@ public class frmQuinteto extends JFrame implements ActionListener{
 		}
 	}
 	
+	//Metodo que llama a la base de datos para cara la tabla
 	void llenar()
 	
 	{

@@ -18,7 +18,7 @@ public class frmAñadirEquipoTest {
 		String licencia = "1k173nd73b";
 		
 		BD base=new BD();
-		base.añadirEquipo(nombre,ciudad,categoria,licencia);
+		//base.añadirEquipo(nombre,ciudad,categoria,licencia);
 		
 		assertNotNull(base);
 		

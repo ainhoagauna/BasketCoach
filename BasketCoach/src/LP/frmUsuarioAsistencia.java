@@ -80,6 +80,7 @@ public class frmUsuarioAsistencia extends JFrame implements ActionListener{
 		}
 	}
 	
+	//Carga la tabla
 	void llenar()
 	
 	{

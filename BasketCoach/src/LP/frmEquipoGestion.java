@@ -178,7 +178,7 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 				
 		desabilitar();
 		llenar();
-		
+		//Detecta si se elige un fila de la tabla mostrando sus correspondiente valores en los texfields. 
 		table.addMouseListener(new MouseAdapter() {
 			
 			@Override
@@ -261,7 +261,7 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 
 
 	
-	
+	//Llama a la base de datos para cargar la tabla con los datos de los jugadores. 
 	void llenar()
 	{
 		String nombre=null;
@@ -285,6 +285,7 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 		
 	}
 
+	//Metodo que guarda un nuevo jugador
 	public void guardar()
 	{
 		String nombre=textFieldNombre.getText();	
@@ -325,6 +326,7 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 		
 	}
 	
+	//Metodo que eliminar el jugador seleccionado de la tabla
 	public void eliminar()
 	{
 		int fila=table.getSelectedRow();
@@ -340,6 +342,7 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 	   
 	}
 	
+	//Metodo que modifica y guarda el jugador seleccionado con los nuevos valores
 	public void modificar()
 	{
 		
@@ -381,6 +384,7 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 		btnModificar.setEnabled(false);
 		
 	}
+	
 	
 	public void habilitar()
 	{

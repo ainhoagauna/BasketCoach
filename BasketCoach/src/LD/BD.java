@@ -15,6 +15,7 @@ public class BD
 	static Connection conn = null;	
 	static Statement stmt;
 	
+	//Metodo que establece conexion con la base de datos
 	public static Connection dbConnector ()
 	{
 		try
@@ -29,7 +30,7 @@ public class BD
 			stmt=conn.createStatement();
 			stmt.setQueryTimeout(30);
 
-			JOptionPane.showMessageDialog(null, "Connection Successful");
+			//JOptionPane.showMessageDialog(null, "Connection Successful");
 			return conn;
 		}catch(Exception e)
 		{
@@ -48,7 +49,7 @@ public class BD
 	    return directorioPadre;
 	}
 
-
+	//Metodo para añadir jugador en la base de datos
 	
 	public void añadirJugador(String nombre, String ape1, String equipo,String num_licen_j, int num_j,  String contraseña, String num_licen_e )
 	{	
@@ -84,6 +85,7 @@ public class BD
 	
 	}
 	
+	// Método para eliminar un jugador de la base de datos
 	public void eliminarJugador(JTable table, int fila, int columna,int columna2)
 	{
 		String jugador=table.getValueAt(fila, columna).toString();
@@ -118,6 +120,7 @@ public class BD
 		}
 	}
 	
+	//Metodo que carga los atributos de los  jugadores guardados en los texfields en la seccion de gestion de equipo
 	public void mostrarJugador(JTextField textFieldNombre,JTextField textFieldApellido, JTextField textFieldEquipo, JTextField textFieldLicen_j, JTextField textFieldAsistencia, JTextField textFieldNumero,JTextField textFieldContraseña, JTextField textFieldLicen_ent,JTable table, int fila, int columna)
 	{
 		
@@ -150,6 +153,7 @@ public class BD
 		
 	}
 	
+	//Metodo que modifica los atributos de los jugadores, actualizando la base de datos
 	public void modificarJugador(String nombre, String ape1, String equipo,String num_licen_j, int num_j,  String contraseña, String num_licen_e,JTable table, int fila, int columna, int columna2)
 	{
 		columna=0;
@@ -181,6 +185,7 @@ public class BD
 		}
 	}
 
+	//Metodo que modifica los atributos de la tabla de quintetos, actualizando la base de datos
 	public void modificarQuinteto(String modificado, String num, String ape, String uno, String dos,String tres, String cuatro, JTable table, int fila, int columna)
 	{
 		
@@ -217,7 +222,7 @@ public class BD
 			e.printStackTrace();
 		}
 	}
-	
+	//Metodo que modifica los atributos de la tabla de minutos, actualizando la base de datos
 	public void modificarMinutos(String modificado,String num, String apellido, String minutos, String partidos, String fecha,  JTable table, int fila, int columna)
 	{
 		try {
@@ -248,7 +253,7 @@ public class BD
 			e.printStackTrace();
 		}
 	}
-	
+	//Metodo que modifica los atributos de la tabla asistencia, actualizando la base de datos
 	public void modificarAsistencia(String modificado, String num, String apellido, String bonus, String asistencia, String meritos, String desconv, JTable table, int fila, int columna)
 	{
 		try {
@@ -286,24 +291,7 @@ public class BD
 		}
 	}
 	
-	
-	public void añadirEquipo(String nombre,String ciudad, String categoria, String licencia)
-	{
-		try {
-			
-			
-			String sentencia="insert into equipo values('"+nombre+"', '"+ciudad+"', '"+categoria+"', '"+licencia+"')";
-			stmt.executeUpdate(sentencia);
-			
-			JOptionPane.showMessageDialog(null, "¡Equipo añadido correctamente!");	
-		
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
-	}
-	
-	
+	//Metodo que carga los valores de la tabla de quintetos de la base de datos en la tabla de la seccion quintetos
 	
 	public DefaultTableModel cargarQuintetos(int numero, String apellido, String uno,String dos, String tres, String cuatro, DefaultTableModel modelo)
 	
@@ -332,7 +320,7 @@ public class BD
             return modelo;
         
 	}
-
+	//Metodo que carga los valores de la tabla de asistencia de la base de datos en la tabla de la seccion asistencia
 	public DefaultTableModel cargarAsistencia(int numero, String apellido, int bonus,int asistencia,int meritos, int desconvocado, DefaultTableModel modelo)
 	{
 		try {
@@ -356,7 +344,7 @@ public class BD
       
         return modelo;
 	}
-	
+	//Metodo que carga los valores de la tabla de jugador de la base de datos en la tabla de la seccion de gestion de equipo
 	public DefaultTableModel cargarJugador2(int numero,String nombre,String apellido, String equipo, String licen_j, int asistencia, String contraseña, String licen_e, DefaultTableModel modelo)
 	{
 		  
@@ -385,8 +373,8 @@ public class BD
 		}
 		return modelo;
 	}   
-   
-    public DefaultTableModel cargarMinutos(int numJugador, String apellido,int minutos, int numPartido, Date fecha, DefaultTableModel modelo)
+	//Metodo que carga los valores de la tabla de minutos de la base de datos en la tabla de la seccion minutos
+    public DefaultTableModel cargarMinutos(int numJugador, String apellido,int minutos, int numPartido, DefaultTableModel modelo)
 	{
 		
 
@@ -396,11 +384,11 @@ public class BD
         	 {
         		 minutos = rs.getInt("minutos_m");
         		 numPartido = rs.getInt("num_part_m");
-        		 fecha= rs.getDate("fecha_part_m");
+        		 
         		 numJugador=rs.getInt("num_j");
         		 apellido = rs.getString("apellido_j");
         		
-        		 modelo.addRow( new Object[] {numJugador,apellido,minutos,numPartido,fecha} );
+        		 modelo.addRow( new Object[] {numJugador,apellido,minutos,numPartido} );
         	 }    
         	 
 		} catch (SQLException e) {
@@ -413,7 +401,7 @@ public class BD
 		
 	}	
 
-	
+	//Metodo que valida la entrada de los jugadores
 	public boolean contraseña(String nombre, String contraseña) {
 		// TODO Auto-generated method stub
 		
@@ -463,47 +451,24 @@ public class BD
 	/* 
 	 * Ejecuta la actualizacion de la tabla recordatorio dado los valores de actualizacion	 *
 	 */
-	public static boolean actualizarRecordatorio(JDateChooser fecha,String comentario)
-	    {
-	        boolean res = false;
-	        String q = " UPDATE recordatorio SET " + fecha + " WHERE coment_r= " + comentario;
-	        try {
-	            PreparedStatement pstm = conn.prepareStatement(q);
-	            pstm.execute();
-	            pstm.close();
-	            res=true;
-	         }catch(SQLException e){
-	            System.out.println(e);
-	        }
-	        return res;
-	    }
+//	public static boolean actualizarRecordatorio(JDateChooser fecha,String comentario)
+//	    {
+//	        boolean res = false;
+//	        String q = " UPDATE recordatorio SET " + fecha + " WHERE coment_r= " + comentario;
+//	        try {
+//	            PreparedStatement pstm = conn.prepareStatement(q);
+//	            pstm.execute();
+//	            pstm.close();
+//	            res=true;
+//	         }catch(SQLException e){
+//	            System.out.println(e);
+//	        }
+//	        return res;
+//	    }
 
-	/*
-	 *Cargar el recordatorio que este guardado en una fecha. 
-	 */
-	 public static String cargarRecordatorio(JDateChooser fecha,String comentario)
-		{
-			
 
-	  	  try {
-	        	ResultSet rs = stmt.executeQuery("select * from recordatorio WHERE fecha_r=" + fecha);
-	        	 while(rs.next() == true) 
-	        	 {	        		 
-	        		 comentario = rs.getString("coment_r");      		
-	        		 
-	        	 }    
-	        	 
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		
-	  	  return comentario;
-								
-			
-		}	
-	
 
+	 //Metodo que comprueba si el numero de jugador introducido para un nuevo jugador existe anteriormente.
 	 public boolean leerNumero(int num_j)
 		{
 			boolean retorno = false;
@@ -531,7 +496,7 @@ public class BD
 		}
 
 
-	 
+	 //Metodo que cargar los recordatorios guardados en la base de datos
 	 public void cargarEventos(JList list, DefaultListModel modeloLista)
 	 {
 		 
@@ -551,7 +516,8 @@ public class BD
 		}
 		 	
 		}	 
-		 
+	
+	 //Metodo que elimina los recordatorios.
 	public void eliminarRecordatorio(JList list)
 	{
 
