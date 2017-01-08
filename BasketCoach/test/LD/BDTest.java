@@ -44,7 +44,7 @@ public class BDTest
 	 * 
 	 */
 	@Test
-	public void testMostrarJugador() 
+	public void test() 
 	{
 		assertEquals(num,11);
 	}

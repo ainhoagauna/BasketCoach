@@ -40,16 +40,16 @@ public class frmUsuario extends javax.swing.JFrame {
         llenarMenu();
     }
     
-    public void llenarMenu(){
-    	
-        ArrayList<Avatar> avatars=new ArrayList<Avatar>();
-        
-        
+    public void llenarMenu()
+    {    	
+        List<Avatar> avatars=new ArrayList<Avatar>();
+        avatars.add(new Avatar("BasketCoach", loadImage("/Image/info.png")));
         avatars.add(new Avatar("Asistencia", loadImage("/Image/assist.png")));       
         avatars.add(new Avatar("Gestión de Minutos", loadImage("/Image/minutos.png")));
         avatars.add(new Avatar("Recordatorios", loadImage("/Image/recordatorio.png")));
-       
+        avatars.add(new Avatar("BasketCoach", loadImage("/Image/info.png")));
         menu.setAvatars(avatars);
+    	
     }
     
     public static Image loadImage(String fileName){
@@ -63,6 +63,10 @@ public class frmUsuario extends javax.swing.JFrame {
     
     public void llamarMenu(){
         
+    	if(menu.getSelectedtitulo().equals("BasketCoach")){
+    		JOptionPane.showMessageDialog(null, "BasketCoach v1.0");
+        }
+    	
         if(menu.getSelectedtitulo().equals("Asistencia")){
         	frmUsuarioAsistencia frame=new frmUsuarioAsistencia();
         	frame.setVisible(true);
