@@ -153,6 +153,33 @@ public class BD
 		
 	}
 	
+	public int testMostrarJugador()
+	{
+		int rowCount = 0;
+		
+		try 
+		{
+			ResultSet rs = stmt.executeQuery("select * from jugador");
+			rs = stmt.executeQuery("select count * from jugador");
+			
+       	 while(rs.next() == true) 
+       	 {
+       		rowCount = rs.getInt(1);        		
+       		 
+       	 } 
+		 }catch (SQLException e) 
+		 {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		 }
+		
+		return rowCount;
+		
+		
+		
+	}
+	
 	//Metodo que modifica los atributos de los jugadores, actualizando la base de datos
 	public void modificarJugador(String nombre, String ape1, String equipo,String num_licen_j, int num_j,  String contraseña, String num_licen_e,JTable table, int fila, int columna, int columna2)
 	{
