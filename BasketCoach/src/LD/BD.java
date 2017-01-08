@@ -223,7 +223,7 @@ public class BD
 		}
 	}
 	//Metodo que modifica los atributos de la tabla de minutos, actualizando la base de datos
-	public void modificarMinutos(String modificado,String num, String apellido, String minutos, String partidos, String fecha,  JTable table, int fila, int columna)
+	public void modificarMinutos(String modificado,String num, String apellido, String minutos, String partidos,   JTable table, int fila, int columna)
 	{
 		try {
 			
@@ -468,19 +468,21 @@ public class BD
 
 
 
-	 //Metodo que comprueba si el numero de jugador introducido para un nuevo jugador existe anteriormente.
+	 //Metodo que comprueba si el numero de jugador introducido para un nuevo jugador ya existe
 	 public boolean leerNumero(int num_j)
 		{
+		
 			boolean retorno = false;
 			try {
-	        	ResultSet rs = stmt.executeQuery("select num_j from jugador");
+	        	ResultSet rs = stmt.executeQuery("select num_j from jugador where num_j= '"+num_j+"'");
 	        	 while(rs.next() == true) {
 	        		 
-	        		 if(rs.equals(num_j))
+	        		 if(rs!=null)
 	        		 {
 	        			 retorno=true;
-	        			 
+	        			
 	        		 }
+	        		
 	        		 
 	   		
 	        	 }
@@ -488,7 +490,7 @@ public class BD
 	        	
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				JOptionPane.showMessageDialog(null, "¡Ya existe un jugador con ese número!");
+				
 			}
 			
 			return retorno;

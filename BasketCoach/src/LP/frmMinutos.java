@@ -58,13 +58,13 @@ public frmMinutos()
 			    apellido=table.getValueAt(row, 1).toString();
 			    minutos=table.getValueAt(row, 2).toString();
 			    partidos= table.getValueAt(row, 3).toString();
-			   	fecha=table.getValueAt(row, 4).toString();
+			   
 			   
 	           
 	            String modificado=(String)value;
 	            
 	            BD base=new BD();
-	            base.modificarMinutos(modificado, num, apellido, minutos, partidos, fecha,  table, row, col);
+	            base.modificarMinutos(modificado, num, apellido, minutos, partidos,   table, row, col);
 	            llenar();
 	        }
         

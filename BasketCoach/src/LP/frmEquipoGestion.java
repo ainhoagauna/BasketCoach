@@ -288,32 +288,33 @@ public class frmEquipoGestion extends JFrame implements ActionListener, MouseLis
 	//Metodo que guarda un nuevo jugador
 	public void guardar()
 	{
-		String nombre=textFieldNombre.getText();	
-		String ape1=textFieldApellido.getText();
-		String equipo=textFieldEquipo.getText();
-		String licen_j=textFieldLicen_j.getText();		
-		int asistencia=Integer.parseInt(textFieldAsistencia.getText());
-		int num_j=Integer.parseInt(textFieldNumero.getText());
-		String contraseña=textFieldContraseña.getText();
-		String licen_e=textFieldLicen_ent.getText();
 		
 		
-		
+		int num_j=Integer.parseInt(textFieldNumero.getText().toString());
+	
 		BD base=new BD();
-		
 		
 		if(base.leerNumero(num_j)==true)
 		{
 			JOptionPane.showMessageDialog(null, "¡Ya existe un jugador con ese número!");
 		}
 		
-		if(textFieldAsistencia.getText()==null || textFieldNumero.getText()==null ||textFieldApellido.getText()==null || textFieldContraseña==null || textFieldEquipo.getText()==null || textFieldLicen_ent.getText()==null || textFieldLicen_j.getText()==null || textFieldNombre.getText()==null )
+		else if(textFieldAsistencia.getText().toString().isEmpty() || textFieldNumero.getText().isEmpty() ||textFieldApellido.getText().isEmpty() || textFieldContraseña.getText().isEmpty() || textFieldEquipo.getText().isEmpty()|| textFieldLicen_ent.getText().isEmpty() || textFieldLicen_j.getText().isEmpty() || textFieldNombre.getText().isEmpty() )
 		{
 			JOptionPane.showMessageDialog(null, "¡Rellene todos los campos");
 		}
 		
 		else
 		{
+			String nombre=textFieldNombre.getText();	
+			String ape1=textFieldApellido.getText();
+			String equipo=textFieldEquipo.getText();
+			String licen_j=textFieldLicen_j.getText();		
+			int asistencia=Integer.parseInt(textFieldAsistencia.getText().toString());
+			
+			String contraseña=textFieldContraseña.getText();
+			String licen_e=textFieldLicen_ent.getText();
+			
 			base.añadirJugador(nombre,ape1,equipo,licen_j,num_j,contraseña,licen_e);
 			
 			JOptionPane.showMessageDialog(null, "¡Jugador añadido correctamente!");
